@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/entity-model-explorer.html", "destination": "/", "permanent": true }
+  ]
+}

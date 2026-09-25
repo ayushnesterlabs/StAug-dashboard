@@ -32,7 +32,7 @@ svg{flex-shrink:0}
 /* Sidebar */
 .side{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:18px 14px;display:flex;flex-direction:column;gap:4px;box-shadow:var(--shadow-sm);overflow:auto}
 .brand{display:flex;align-items:center;gap:11px;padding:4px 8px 20px}
-.brand-mark{width:36px;height:36px;border-radius:6px;background:var(--primary);color:var(--on-primary);display:grid;place-items:center;font:600 14px var(--f-head)}
+.brand-mark{width:36px;height:36px;object-fit:contain;display:block}
 .brand b{font:600 14px/1.2 var(--f-head);display:block}
 .brand span{font-size:12px;color:var(--ink-2)}
 .nav-label{font-size:12px;color:var(--ink-2);padding:16px 12px 6px}
@@ -399,7 +399,7 @@ table.grid{font-size:13px}.grid td.c-auto,.grid tbody tr:hover td.c-auto{color:v
 @media(max-width:1000px){.task-row{grid-template-columns:minmax(150px,1fr) 100px 28px 140px 24px;gap:10px}.task-expanded{flex-wrap:wrap}}
 @media(max-width:640px){.task-controls{padding:0 16px 16px}.task-content .todo-add{margin:0 16px 16px;flex-wrap:wrap;gap:8px}.task-content .todo-add input[type=text]{flex:1;min-width:160px}.task-content .todo-add input[type=date],.task-content .todo-add input.dtext{max-width:128px}.new-hires-row{padding:12px 16px 24px;gap:12px}.new-hires-row>div{display:block}.new-hires-row div>span{display:block;margin-top:4px;font-size:12px}.task-group>h2{padding:8px 16px}.task-row{padding:14px 16px;grid-template-columns:1fr 88px 24px;gap:10px}.task-person{grid-column:1}.task-progress{grid-column:2;grid-row:2;text-align:right}.next-action{grid-column:1;grid-row:2}.expand-task{grid-column:3;grid-row:1/3}.task-expanded{padding:0 16px 16px;gap:12px}.task-content .todo{padding:12px 16px;gap:8px}.todo .due{max-width:90px}.sheet{width:calc(100vw - 8px);right:4px;top:4px;bottom:4px}.sheet-h,.sheet-b,.modal-h,.modal-b{padding:20px 16px}.sheet-f,.modal-f{padding:12px 16px;gap:8px}.sheet-f .grow{font-size:12px}.sheet-f .btn{padding:0 10px}.fgrid .field.span2{grid-column:auto}.create-tabs button{font-size:12px}.glossary-list{padding:0 16px 24px}.cv-header{flex-wrap:wrap}}
 
-b,strong{font-weight:600}.record-fields th{font-weight:400}.record-fields .c-auto{cursor:default}.grid td.editing .flu-ed{min-width:270px}.record-fields td.editing{vertical-align:middle}.brand-mark{color:var(--on-primary)!important}.grid th{z-index:3}.grid th.stk{z-index:4}.grid .selcol{background:var(--surface)}.grid th.selcol{background:var(--surface-2)}.grid tr:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}.task-person .lnk{max-width:100%}.sheet .drop:focus-within,.cv-section label.btn:focus-within{outline:2px solid var(--focus);outline-offset:2px}
+b,strong{font-weight:600}.record-fields th{font-weight:400}.record-fields .c-auto{cursor:default}.grid td.editing .flu-ed{min-width:270px}.record-fields td.editing{vertical-align:middle}.grid th{z-index:3}.grid th.stk{z-index:4}.grid .selcol{background:var(--surface)}.grid th.selcol{background:var(--surface-2)}.grid tr:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}.task-person .lnk{max-width:100%}.sheet .drop:focus-within,.cv-section label.btn:focus-within{outline:2px solid var(--focus);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 .record-fields td.email-cell{overflow-wrap:normal;word-break:normal;white-space:nowrap;overflow-x:auto}.reveal{display:inline-flex;align-items:center;vertical-align:middle;text-decoration:none}.reveal[aria-pressed=true]{color:var(--ink)}
@@ -858,7 +858,7 @@ function openTaskCount(){ return ninetyList().filter(x=>!x.done).length+(pending
 function navBtn(p,label,icon,count,hot){ const on=S.page===p||(p==='employees'&&S.page==='profile')||(p==='applicants'&&S.page==='applicant'); return `<button class="nav ${on?'on':''}" data-a="nav" data-p="${p}" title="${label}" aria-label="${label}" ${on?'aria-current="page"':''}>${ic(icon)}<span class="lbl">${label}</span>${count!=null?`<span class="cnt ${hot?'hot':''}">${count}</span>`:''}</button>`; }
 function sidebar(){
   return `<nav class="side" aria-label="Main">
-    <div class="brand"><span class="brand-mark">SA</span><div><b>St. Augustine</b><span>HR workspace</span></div></div>
+    <div class="brand"><img class="brand-mark" src="logo.webp" alt="St. Augustine logo"><div><b>St. Augustine</b><span>HR workspace</span></div></div>
     ${navBtn('tasks','Tasks','tasks',openTaskCount(),true)}
     ${navBtn('employees','Employees','users')}
     ${navBtn('leaves','Leaves','calendar')}

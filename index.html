@@ -15,16 +15,6 @@
 --panel:var(--surface);--sheet:var(--surface);--auto-bg:var(--surface);--row-hover:var(--surface-2);--hover:var(--surface-3);
 --shadow-sm:none;--shadow:none;--shadow-lg:0 12px 40px rgba(18,22,30,.16);--scrim:rgba(28,32,40,.26);
 --f-head:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;--f-body:var(--f-head);color-scheme:light;}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1114;--surface:#16181C;--surface-2:#1C1F24;--surface-3:#252930;
---ink:#ECEEF1;--ink-2:#A3A9B3;--ink-3:#6B717B;--line:#262A30;--line-2:#343941;
---primary:#ECEEF1;--on-primary:#16181C;--primary-hover:#FFFFFF;--focus:#ECEEF1;
---red:#F28B80;--red-bg:#3A1F1D;--amber:#E7B55F;--amber-bg:#382B15;--blue:#93B2FF;--blue-bg:#1C2A47;--green:#80D3A1;--green-bg:#173325;
---scrim:rgba(0,0,0,.5);color-scheme:dark;}}
-:root[data-theme="dark"]{--bg:#0F1114;--surface:#16181C;--surface-2:#1C1F24;--surface-3:#252930;
---ink:#ECEEF1;--ink-2:#A3A9B3;--ink-3:#6B717B;--line:#262A30;--line-2:#343941;
---primary:#ECEEF1;--on-primary:#16181C;--primary-hover:#FFFFFF;--focus:#ECEEF1;
---red:#F28B80;--red-bg:#3A1F1D;--amber:#E7B55F;--amber-bg:#382B15;--blue:#93B2FF;--blue-bg:#1C2A47;--green:#80D3A1;--green-bg:#173325;
---scrim:rgba(0,0,0,.5);color-scheme:dark;}
 *{box-sizing:border-box}
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
@@ -104,7 +94,7 @@ svg{flex-shrink:0}
 .search:focus-within{border-color:var(--ink-2);box-shadow:0 0 0 3px var(--surface-3)}
 .search input[type=text]{border:0;box-shadow:none;outline:0;background:none;flex:1;font:inherit;color:var(--ink);min-width:0;height:auto;padding:0}
 .inl{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2)}
-select,input[type=text],input[type=date],input[type=number],input[type=email],input[type=tel],textarea{font:inherit;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--line-2);border-radius:6px;height:40px;padding:0 12px}
+select,input[type=text],input[type=date],input[type=number],input[type=email],input[type=tel],textarea,input.dtext{font:inherit;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--line-2);border-radius:6px;height:40px;padding:0 12px}
 select:hover,input:hover,textarea:hover{border-color:var(--ink-2)}
 select:focus,input:focus,textarea:focus{outline:0;border-color:var(--ink-2);box-shadow:0 0 0 3px var(--surface-3)}
 select{appearance:none;-webkit-appearance:none;padding-right:34px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23858B96' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;cursor:pointer}
@@ -335,7 +325,6 @@ textarea{height:auto;min-height:84px;padding:10px 12px;resize:vertical;line-heig
 #toasts{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:80;display:flex;flex-direction:column;gap:8px;align-items:center}
 .toast{display:flex;align-items:center;gap:10px;padding:10px 12px 10px 14px;border-radius:6px;background:var(--primary);color:var(--on-primary);box-shadow:var(--shadow-lg);font-size:13px;animation:fade .2s}
 .toast-btn{border:1px solid rgba(255,255,255,.35);background:none;color:inherit;height:28px;padding:0 10px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:500}
-:root[data-theme="dark"] .toast-btn{border-color:rgba(0,0,0,.25)}
 
 @media (max-width:1000px){
   .shell{grid-template-columns:76px minmax(0,1fr)}
@@ -361,7 +350,7 @@ textarea{height:auto;min-height:84px;padding:10px 12px;resize:vertical;line-heig
 .nav{height:36px;border:0;font-size:13px;gap:10px}.nav.on{border:0;background:var(--surface-3);box-shadow:none}.nav .cnt.hot{background:none;color:var(--ink-2);border-radius:6px;padding:0 4px}
 .main{border-radius:10px;background:var(--surface);box-shadow:none;position:relative}.topbar{height:48px;padding:0 24px}.topbar .crumbs{flex:1}.crumbs .cur{display:none}.crumbs>span{display:none}.crumbs button{text-decoration:none}
 .phead{align-items:center;padding:24px;min-height:80px}.phead h1,.prof-head h1{font-size:22px;font-weight:600;letter-spacing:-.5px}.phead-actions{gap:8px;align-items:center}.btn,.icon-btn{height:32px;border-radius:6px;font-size:13px;box-shadow:none}.icon-btn{width:32px}.btn{padding:0 12px}
-input[type=text],input[type=date],input[type=number],input[type=email],input[type=tel],select{height:32px;border-radius:6px;font-size:13px}.search{height:32px;border-radius:6px}.tab{font-size:13px;height:40px}.tab.on::after{height:2px;border-radius:0}
+input[type=text],input[type=date],input[type=number],input[type=email],input[type=tel],select,input.dtext{height:32px;border-radius:6px;font-size:13px}.search{height:32px;border-radius:6px}.tab{font-size:13px;height:40px}.tab.on::after{height:2px;border-radius:0}
 .pad{padding:0 24px 32px}.toolbar{padding:12px 24px;gap:8px}.grid{font-variant-numeric:tabular-nums}.grid td{height:40px;font-size:13px}.grid th{height:36px;font-size:12px}
 .pop,.view-menu-pop{border-radius:8px;background:var(--surface)}.sheet,.modal{border-radius:10px;background:var(--surface)}.sheet-h h2,.modal-h h2{font-size:22px;font-weight:600}.sheet-h,.modal-h{padding:24px}.sheet-b,.modal-b{padding:24px}
 .chip{background:none!important;padding:0;color:var(--ink-2)!important;font-weight:400;height:auto}.chip::before{color:var(--ink-2)}.chip.green::before{color:var(--green)}.chip.red::before{color:var(--red)}.chip.amber::before{color:var(--amber)}.chip.blue::before{color:var(--blue)}
@@ -371,6 +360,13 @@ input[type=text],input[type=date],input[type=number],input[type=email],input[typ
 .view-menu{position:relative}.view-menu summary{list-style:none;cursor:pointer}.view-menu summary::-webkit-details-marker{display:none}.view-menu-pop{position:absolute;right:0;top:38px;padding:6px;z-index:20;border:1px solid var(--line);box-shadow:var(--shadow-lg);white-space:nowrap}
 @media(max-width:1000px){.shell{grid-template-columns:64px minmax(0,1fr)}.side{padding:12px 6px}.brand{padding:4px 0 24px;justify-content:center}}
 @media(max-width:640px){.shell{grid-template-columns:minmax(0,1fr);padding:8px;grid-template-rows:48px minmax(0,1fr)}.side{display:flex;flex-direction:row;padding:0;gap:4px;align-items:center}.brand,.side-foot{display:none}.nav{flex:1;width:auto}.nav span.lbl{display:inline;font-size:12px}.nav svg{display:none}.main{border-radius:10px}.phead{padding:20px 16px;flex-direction:row;flex-wrap:wrap}.toolbar{padding:12px 16px}.pad{padding:0 16px 24px}.phead-actions{flex-wrap:wrap}.topbar{padding:0 16px}}
+
+/* Sidebar bottom group */
+.side-bottom{margin-top:auto;display:flex;flex-direction:column;gap:4px;padding-bottom:8px}
+.side-bottom+.side-foot{margin-top:0}
+@media(max-width:640px){.side-bottom{display:contents}}
+.wip-list{margin:14px 0 0;padding:0;list-style:none;text-align:left;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--ink-2)}
+.wip-list li{display:flex;gap:8px}.wip-list li::before{content:'·';color:var(--ink-3)}
 
 /* Tables — one surface, compact controls */
 .content.tp{overflow:auto}.tw{flex:0 1 auto;overflow:auto;margin:0;border:0;border-radius:0;min-height:90px;max-height:calc(100% - 200px)}
@@ -395,20 +391,37 @@ table.grid{font-size:13px}.grid td.c-auto,.grid tbody tr:hover td.c-auto{color:v
 @media(max-width:640px){.prof-head{padding:20px 16px}.record-layout{grid-template-columns:1fr}.summary-rail{border-left:0;border-top:1px solid var(--line);padding:20px 16px}.summary-rail dl{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.record-body{padding:20px 16px}.record-primary .tabs{padding:0 16px}.record-fields th{width:125px;font-size:12px}.record-fields td{font-size:13px;padding:8px 6px}.prof-actions{margin-left:0;flex-wrap:wrap}.app-grid{padding:0 16px 24px;gap:24px}.record-pagination{margin-right:auto}.meta-line{font-size:12px}.timeline-entry{grid-template-columns:20px 1fr;gap:8px}.timeline-entry time{grid-column:2}.code-checklist{gap:0 8px}.code-checklist label{font-size:12px}.cv-page{padding:20px}.topbar .icon-btn{flex-shrink:0}}
 
 /* Tasks and creation — actionable rows, progressive disclosure */
-.task-controls{padding:0 24px 20px;display:flex;align-items:center;gap:16px}.task-controls .seg{background:none;padding:0}.task-controls .seg button{height:28px}.task-count{font-size:12px;color:var(--ink-2)}.task-content .todo-add{margin:0 24px 20px;padding:0 0 12px;background:none;align-items:center;border-bottom:1px solid var(--line);gap:12px}.task-content .todo-add input[type=text]{border:0;background:none;padding:0;box-shadow:none}.task-content .todo-add input[type=date]{font-size:12px;color:var(--ink-2);max-width:138px;border-color:transparent}.task-content .todo-add input:focus{outline:2px solid var(--focus);outline-offset:2px}
+.task-controls{padding:0 24px 20px;display:flex;align-items:center;gap:16px}.task-controls .seg{background:none;padding:0}.task-controls .seg button{height:28px}.task-count{font-size:12px;color:var(--ink-2)}.task-content .todo-add{margin:0 24px 20px;padding:0 0 12px;background:none;align-items:center;border-bottom:1px solid var(--line);gap:12px}.task-content .todo-add input[type=text]{border:0;background:none;padding:0;box-shadow:none}.task-content .todo-add input[type=date],.task-content .todo-add input.dtext{font-size:12px;color:var(--ink-2);max-width:138px;border-color:transparent}.task-content .todo-add input:focus{outline:2px solid var(--focus);outline-offset:2px}
 .new-hires-row{display:flex;align-items:center;gap:16px;padding:16px 24px 24px;font-size:13px}.new-hires-row>span{color:var(--ink-2)}.new-hires-row>div{display:flex;gap:12px;align-items:center;flex-wrap:wrap;flex:1}.new-hires-row strong{font-weight:500}.new-hires-row div>span{color:var(--ink-2)}
 .task-group{margin-bottom:24px}.task-group>h2{display:flex;gap:10px;align-items:center;font-size:12px;font-weight:500;background:var(--surface-2);padding:8px 24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.task-group>h2 span{color:var(--ink-2)}.task-row{display:grid;grid-template-columns:minmax(200px,1fr) 108px 32px 148px 28px;align-items:center;gap:16px;padding:14px 24px;font-size:13px;min-height:64px}.task-person{display:flex;gap:4px;flex-direction:column;min-width:0}.task-person .lnk{font-weight:500}.task-person>span{font-size:12px;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.task-progress{font-size:12px;color:var(--ink-2)}.next-action{padding:0;border:0;background:none;font-size:12px;text-align:left;cursor:pointer;color:var(--ink)}.next-action:hover{text-decoration:underline;text-underline-offset:3px}.due{font-size:12px;white-space:nowrap;text-align:right;color:var(--ink-2)}.red-text{color:var(--red)}.amber-text{color:var(--amber)}.checkin-task{border-bottom:1px solid var(--line)}.checkin-task:hover,.todo:hover{background:var(--surface-2)}.expand-task{border:0;background:none}.expand-task[aria-expanded=true] svg{transform:rotate(180deg)}.task-expanded{display:flex;align-items:center;gap:20px;padding:0 24px 16px;font-size:12px;color:var(--ink-2)}.task-content .todo{min-height:56px;padding:12px 24px;font-size:13px}.todo input[type=checkbox]{width:15px;height:15px}.todo .icon-btn{border:0;background:none}.todo .icon-btn svg{width:14px;height:14px}
 .glossary-list{padding:0 24px 32px;max-width:900px}.glossary-list section{padding:20px 0;border-bottom:1px solid var(--line)}.glossary-list section:first-child{padding-top:0}.glossary-list h2{font-size:16px;font-weight:600}.glossary-list p{font-size:13px;color:var(--ink-2);margin:6px 0 12px}.glossary-list section>div{font-size:13px;line-height:1.8}.glossary-list section>span{font-size:12px}
 .create-tabs{margin-bottom:28px;display:flex;gap:4px;background:var(--surface-2);padding:4px}.create-tabs button{flex:1;padding:0 8px}.create-tabs button.on{background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.07)}.optional-fields{margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}.optional-fields summary{display:flex;gap:8px;align-items:center;font-size:13px;font-weight:500;list-style:none;cursor:pointer;margin-bottom:20px}.optional-fields summary::-webkit-details-marker{display:none}.optional-fields:not([open]) summary{margin-bottom:0}.optional-fields:not([open]) summary svg{transform:rotate(-90deg)}.optional-fields summary .muted{margin-left:auto;font-size:12px;font-weight:400}.select-all{display:flex;align-items:center;gap:12px;font-size:13px;padding:10px 0 14px;border-bottom:1px solid var(--line)}.select-all span{margin-left:auto;font-size:12px;color:var(--ink-2)}.select-all input,.check-row input{width:15px;height:15px;accent-color:var(--primary)}.check-row{border:0;border-bottom:1px solid var(--line);border-radius:0;padding:16px 0;gap:12px}.check-row:has(input:checked){box-shadow:none;background:var(--surface-2);border-color:var(--line)}.check-row:hover{background:var(--surface-2);border-color:var(--line)}.cr-main strong{font-size:13px}.cr-main span,.cr-meta{font-size:12px}.cr-meta{white-space:nowrap}.fgrid{gap:20px 16px}.field input,.field select{height:36px;font-size:14px}.field label{font-size:13px;font-weight:400}.field textarea{font-size:14px}.sheet-f,.modal-f{padding:16px 24px}.sheet .fsec{font-size:13px;font-weight:500;margin:24px 0 12px}.drop{border:1px dashed var(--line-2);background:none;border-radius:6px;padding:24px}.file-pill{border:0;padding:0;border-radius:0}.file-pill .fi{background:none}.sheet-h,.modal-h{align-items:center}.sheet-h .icon-btn,.modal-h .icon-btn{border:0;background:none}.sheet{width:min(580px,calc(100vw - 16px));top:8px;right:8px;bottom:8px}.modal{max-height:calc(100vh - 32px)}
 @media(max-width:1000px){.task-row{grid-template-columns:minmax(150px,1fr) 100px 28px 140px 24px;gap:10px}.task-expanded{flex-wrap:wrap}}
-@media(max-width:640px){.task-controls{padding:0 16px 16px}.task-content .todo-add{margin:0 16px 16px;flex-wrap:wrap;gap:8px}.task-content .todo-add input[type=text]{flex:1;min-width:160px}.task-content .todo-add input[type=date]{max-width:128px}.new-hires-row{padding:12px 16px 24px;gap:12px}.new-hires-row>div{display:block}.new-hires-row div>span{display:block;margin-top:4px;font-size:12px}.task-group>h2{padding:8px 16px}.task-row{padding:14px 16px;grid-template-columns:1fr 88px 24px;gap:10px}.task-person{grid-column:1}.task-progress{grid-column:2;grid-row:2;text-align:right}.next-action{grid-column:1;grid-row:2}.expand-task{grid-column:3;grid-row:1/3}.task-expanded{padding:0 16px 16px;gap:12px}.task-content .todo{padding:12px 16px;gap:8px}.todo .due{max-width:90px}.sheet{width:calc(100vw - 8px);right:4px;top:4px;bottom:4px}.sheet-h,.sheet-b,.modal-h,.modal-b{padding:20px 16px}.sheet-f,.modal-f{padding:12px 16px;gap:8px}.sheet-f .grow{font-size:12px}.sheet-f .btn{padding:0 10px}.fgrid .field.span2{grid-column:auto}.create-tabs button{font-size:12px}.glossary-list{padding:0 16px 24px}.cv-header{flex-wrap:wrap}}
+@media(max-width:640px){.task-controls{padding:0 16px 16px}.task-content .todo-add{margin:0 16px 16px;flex-wrap:wrap;gap:8px}.task-content .todo-add input[type=text]{flex:1;min-width:160px}.task-content .todo-add input[type=date],.task-content .todo-add input.dtext{max-width:128px}.new-hires-row{padding:12px 16px 24px;gap:12px}.new-hires-row>div{display:block}.new-hires-row div>span{display:block;margin-top:4px;font-size:12px}.task-group>h2{padding:8px 16px}.task-row{padding:14px 16px;grid-template-columns:1fr 88px 24px;gap:10px}.task-person{grid-column:1}.task-progress{grid-column:2;grid-row:2;text-align:right}.next-action{grid-column:1;grid-row:2}.expand-task{grid-column:3;grid-row:1/3}.task-expanded{padding:0 16px 16px;gap:12px}.task-content .todo{padding:12px 16px;gap:8px}.todo .due{max-width:90px}.sheet{width:calc(100vw - 8px);right:4px;top:4px;bottom:4px}.sheet-h,.sheet-b,.modal-h,.modal-b{padding:20px 16px}.sheet-f,.modal-f{padding:12px 16px;gap:8px}.sheet-f .grow{font-size:12px}.sheet-f .btn{padding:0 10px}.fgrid .field.span2{grid-column:auto}.create-tabs button{font-size:12px}.glossary-list{padding:0 16px 24px}.cv-header{flex-wrap:wrap}}
 
 b,strong{font-weight:600}.record-fields th{font-weight:400}.record-fields .c-auto{cursor:default}.grid td.editing .flu-ed{min-width:270px}.record-fields td.editing{vertical-align:middle}.brand-mark{color:var(--on-primary)!important}.grid th{z-index:3}.grid th.stk{z-index:4}.grid .selcol{background:var(--surface)}.grid th.selcol{background:var(--surface-2)}.grid tr:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}.task-person .lnk{max-width:100%}.sheet .drop:focus-within,.cv-section label.btn:focus-within{outline:2px solid var(--focus);outline-offset:2px}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .toast-btn{border-color:rgba(0,0,0,.25)}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 .record-fields td.email-cell{overflow-wrap:normal;word-break:normal;white-space:nowrap;overflow-x:auto}.reveal{display:inline-flex;align-items:center;vertical-align:middle;text-decoration:none}.reveal[aria-pressed=true]{color:var(--ink)}
 @media(max-width:640px){.record-fields:has(.email-cell) th{width:110px}.record-fields td.email-cell{font-size:12px}}
+
+/* Disposition codes multi-select */
+.ms{position:relative}
+.ms-trigger{list-style:none;display:flex;align-items:center;height:32px;padding:0 34px 0 12px;border:1px solid var(--line-2);border-radius:6px;background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23858B96' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 11px center;font-size:13px;color:var(--ink);cursor:pointer;white-space:nowrap;overflow:hidden}
+.ms-trigger::-webkit-details-marker{display:none}
+.ms-val{overflow:hidden;text-overflow:ellipsis}.ms-val.ph{color:var(--ink-3)}
+.ms[open] .ms-trigger{border-color:var(--focus)}
+.ms-pop{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:30;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow-lg);padding:8px 12px;max-height:280px;overflow:auto}
+
+/* mm/dd/yyyy date fields */
+.dwrap{position:relative;display:inline-flex;align-items:center;width:100%;min-width:0;vertical-align:middle}
+.dwrap input.dtext{width:100%;padding-right:34px;font-variant-numeric:tabular-nums}
+.dwrap input.dnative{position:absolute;right:8px;bottom:0;width:1px;height:1px;opacity:0;pointer-events:none;border:0;padding:0}
+.dwrap .dpick{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:26px;height:26px;border:0;background:none;border-radius:4px;display:grid;place-items:center;color:var(--ink-2);cursor:pointer;padding:0}
+.dwrap .dpick:hover{background:var(--surface-3);color:var(--ink)}
+.dwrap .dpick:disabled{cursor:default;opacity:.5}
+.task-content .todo-add .dwrap{width:150px;flex:none}.task-content .todo-add input.dtext{max-width:none}
+@media(max-width:640px){.task-content .todo-add .dwrap{width:128px}}
 </style>
 </head>
 <body>
@@ -434,7 +447,7 @@ b,strong{font-weight:600}.record-fields th{font-weight:400}.record-fields .c-aut
    Browser screenshot and responsive visual QA could not be completed because
    the cloud browser could not access this local file. CSS includes the required
    1000px / 640px breakpoints, light/dark tokens and reduced-motion handling.
-   Disposition-code definitions were not supplied, so labels use Interview code A–S.
+   Disposition-code definitions were not supplied, so labels use Disposition code A–S.
    Data remains in-memory, matching the original prototype; reload resets it.
 */
 
@@ -450,14 +463,13 @@ const addDays=(s,n)=>{const d=Dt(s);d.setUTCDate(d.getUTCDate()+n);return iso(d)
 const addMonths=(s,n)=>{const d=Dt(s);d.setUTCMonth(d.getUTCMonth()+n);return iso(d);};
 const addYears=(s,n)=>addMonths(s,12*n);
 const diff=(a,b)=>Math.round((Dt(b)-Dt(a))/864e5);
-const fd=s=>{if(!s)return '';const [y,m,d]=s.split('-');return `${+m}/${+d}/${y}`;};
+const fd=s=>{if(!s)return '';const [y,m,d]=s.split('-');return `${m.padStart(2,'0')}/${d.padStart(2,'0')}/${y}`;};
 const money=v=>(v===''||v==null||isNaN(v))?'':'$'+Number(v).toFixed(2);
 const chip=(t,c='')=>{if((c==='blue'&&/^Due/.test(t))||t==='Due today')c='amber';return t?`<span class="chip ${c}">${esc(t)}</span>`:'';};
 
 const IC={
 eye:'<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',
 
-circleTheme:'<circle cx="12" cy="12" r="9"/><path d="M12 3v18"/>',
 more:'<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
 
 tasks:'<path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/>',
@@ -490,7 +502,7 @@ trash:'<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>'
 const ic=(n,s=18)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n]}</svg>`;
 
 /* ---------- Reference lists ---------- */
-const ENTITIES=['St. Augustine','Home Health Care','Holy Family Home','Holy Family Hospice'];
+const ENTITIES=['St. Augustine Manor','St. Augustine Towers','Holy Family Home','Holy Family Hospice','Home Health Care'];
 const DEPTS=['Nursing','SAT','NTRN SVC','H/L','Pharmacy','Rehab Speech','Life Enrich','Transportation','HR','CEC','Soc Svc','Admin','HHC','CAH','Hospice'];
 const SHIFTS=['1st (7a–3:30p)','2nd (3p–11:30p)','3rd (11p–7:30a)','12-hr day (7a–7p)','12-hr day (7a–7:30p)','12-hr day (7:15a–7:30p)','12-hr night (7p–7a)','12-hr night (7p–7:30a)','12-hr night (7:15p–7:30a)','16-hr (7a–11:30p)','16-hr (3p–7:30a)','Other (see notes)'];
 const YN=['Yes','No'];
@@ -508,30 +520,30 @@ const FMLA_REASONS=['Own serious health condition','Care for spouse','Care for p
 const SEP_REASONS=[['Resignation',[['a','Retired'],['b','Relocating'],['c','Returning to school'],['d','Marriage'],['e','Illness'],['f','Pregnancy'],['g','Personal reasons'],['h','No reason'],['i','New job'],['j','Without notice'],['k','Inability to cope/work'],['l','Other'],['m','No call/No show x2']]],['Termination',[['n','Attendance'],['o','Insubordination'],['p','Poor job performance'],['q','Walking off the job'],['r','Progressive disciplinary procedure'],['s','Disqualifying criminal record'],['t','Failure to provide necessary documentation'],['u','Other']]]];
 
 /* ---------- Seed data (all invented) ---------- */
-const BLANK={empNo:'',entity:'St. Augustine',dept:'',title:'',type:'FT',hours:'',benefits:'Yes',shift:'',weekend:'None',schedNotes:'',unit:'',rate:'',doh:'',dob:'',ssn:'',phone:'',notes:'',virtus:'',custSvc:'',abuse:'',tb:'',flu:'',fluDate:'',termDate:'',termType:'',efr:'',insLetter:'',medPlan:'',medCov:'',dentPlan:'',dentCov:'',vision:'',waiver:'',cashInLieu:'',inLieu:'',aca:{},k401Letter:'',k401Enrolled:'',k401Pct:'',tuition:'',bonusType:'',bonusAmt:'',bonusPaid:[false,false,false,false],bonusStatus:'',evalEff:'',evalDone:'',timeline:[],incomplete:false,archived:false};
+const BLANK={empNo:'',entity:'St. Augustine Manor',dept:'',title:'',type:'FT',hours:'',benefits:'Yes',shift:'',weekend:'None',schedNotes:'',unit:'',rate:'',doh:'',dob:'',ssn:'',phone:'',notes:'',virtus:'',custSvc:'',abuse:'',tb:'',flu:'',fluDate:'',termDate:'',termType:'',efr:'',insLetter:'',medPlan:'',medCov:'',dentPlan:'',dentCov:'',vision:'',waiver:'',cashInLieu:'',inLieu:'',aca:{},k401Letter:'',k401Enrolled:'',k401Pct:'',tuition:'',bonusType:'',bonusAmt:'',bonusPaid:[false,false,false,false],bonusStatus:'',evalEff:'',evalDone:'',timeline:[],incomplete:false,archived:false};
 let seq=1;
 const S1=SHIFTS[0],S2=SHIFTS[1],S3=SHIFTS[2],D7=SHIFTS[3],D730=SHIFTS[4],N7=SHIFTS[6],N730=SHIFTS[7],H16=SHIFTS[9],OTH=SHIFTS[11];
 const ROWS=[
-['Aldridge','Monique','68584','St. Augustine','Nursing','CNA','PT',30,'No',S2,'2',24.21,'2022-04-04','1984-07-02'],
-['Baptiste','Renard','84009','St. Augustine','Nursing','LPN','FT',36,'Yes',N730,'3',42.28,'2025-01-20','1971-01-31'],
-['Castellano','Irene','63485','St. Augustine','Nursing','RN – Unit manager','FT',40,'Yes',S1,'2',51.30,'2007-08-20','1969-03-14'],
-['Dunmore','Keisha','650091','St. Augustine','Nursing','CNA','PT',32,'No',D730,'4',24.21,'2026-06-15','1999-10-02'],
-['Ekwueme','Chidi','5319','St. Augustine','SAT','Cook','FT',40,'Yes',OTH,'',17.76,'2024-02-19','1990-05-19'],
-['Faraday','Lorna','78065','St. Augustine','Life Enrich','Activities assistant','FT',40,'Yes',S1,'1',16.98,'2019-04-01','1971-07-24'],
-['Galloway','Trent','54362','St. Augustine','H/L','Housekeeping aide','FT',40,'No',S1,'',16.13,'2026-07-13','2004-02-11'],
-['Hargrove','Denise','72059','St. Augustine','Pharmacy','Pharmacist','PT',32,'Yes',S1,'',67.44,'2019-04-15','1984-07-25'],
-['Iverson','Paula','68991','St. Augustine','Nursing','CNA / Med tech','PT',30,'No',S1,'4',23.00,'2026-08-24','1999-09-12'],
-['Jablonski','Mark','49131','St. Augustine','Transportation','Senior driver','FT',40,'Yes',S1,'',22.06,'2023-04-17','1962-10-28'],
-['Kouyaté','Aminata','63690','St. Augustine','Nursing','RN','FT',36,'No',D730,'4',47.54,'2026-06-29','1988-05-09'],
-['Lindqvist','Sara','79016','St. Augustine','Rehab Speech','SLP','PRN','','No','','5',55.00,'2016-05-31','1978-12-01'],
-['Moreland','Tasha','6870','St. Augustine','SAT','PA','FT',40,'Yes',S1,'',17.76,'2020-11-23','1993-08-08'],
-['Nakamura','Evan','52879','St. Augustine','NTRN SVC','Dietitian','FT',40,'Yes',S1,'',31.77,'2022-03-14','1996-09-26'],
-['Okafor','Blessing','84061','St. Augustine','Nursing','LPN','FT',36,'Yes',N7,'4',41.45,'2026-08-03','1985-10-04'],
-['Pruitt','Janelle','55171','St. Augustine','H/L','Laundry aide','PT',20,'No',S1,'',19.66,'2026-09-08','1964-06-11'],
-['Quintero','Luis','40049','St. Augustine','HR','HR assistant','FT',40,'Yes',S1,'',26.01,'2018-06-11','1982-12-19'],
-['Rourke','Delia','42128','St. Augustine','CEC','Teacher – float','PRN','','No',S1,'',17.34,'2025-06-16','2003-11-22'],
-['Sandoval','Marisol','68575','St. Augustine','Nursing','CNA','PT',30,'No',H16,'2',23.75,'2022-03-14','1997-11-26'],
-['Thibodeaux','Grant','63332','St. Augustine','Nursing','RN – Director of nursing','FT',40,'Yes',S1,'',75.43,'2001-05-23','1975-05-28'],
+['Aldridge','Monique','68584','St. Augustine Manor','Nursing','CNA','PT',30,'No',S2,'2',24.21,'2022-04-04','1984-07-02'],
+['Baptiste','Renard','84009','St. Augustine Manor','Nursing','LPN','FT',36,'Yes',N730,'3',42.28,'2025-01-20','1971-01-31'],
+['Castellano','Irene','63485','St. Augustine Manor','Nursing','RN – Unit manager','FT',40,'Yes',S1,'2',51.30,'2007-08-20','1969-03-14'],
+['Dunmore','Keisha','650091','St. Augustine Manor','Nursing','CNA','PT',32,'No',D730,'4',24.21,'2026-06-15','1999-10-02'],
+['Ekwueme','Chidi','5319','St. Augustine Towers','SAT','Cook','FT',40,'Yes',OTH,'',17.76,'2024-02-19','1990-05-19'],
+['Faraday','Lorna','78065','St. Augustine Towers','Life Enrich','Activities assistant','FT',40,'Yes',S1,'1',16.98,'2019-04-01','1971-07-24'],
+['Galloway','Trent','54362','St. Augustine Manor','H/L','Housekeeping aide','FT',40,'No',S1,'',16.13,'2026-07-13','2004-02-11'],
+['Hargrove','Denise','72059','St. Augustine Manor','Pharmacy','Pharmacist','PT',32,'Yes',S1,'',67.44,'2019-04-15','1984-07-25'],
+['Iverson','Paula','68991','St. Augustine Manor','Nursing','CNA / Med tech','PT',30,'No',S1,'4',23.00,'2026-08-24','1999-09-12'],
+['Jablonski','Mark','49131','St. Augustine Manor','Transportation','Senior driver','FT',40,'Yes',S1,'',22.06,'2023-04-17','1962-10-28'],
+['Kouyaté','Aminata','63690','St. Augustine Manor','Nursing','RN','FT',36,'No',D730,'4',47.54,'2026-06-29','1988-05-09'],
+['Lindqvist','Sara','79016','St. Augustine Manor','Rehab Speech','SLP','PRN','','No','','5',55.00,'2016-05-31','1978-12-01'],
+['Moreland','Tasha','6870','St. Augustine Towers','SAT','PA','FT',40,'Yes',S1,'',17.76,'2020-11-23','1993-08-08'],
+['Nakamura','Evan','52879','St. Augustine Manor','NTRN SVC','Dietitian','FT',40,'Yes',S1,'',31.77,'2022-03-14','1996-09-26'],
+['Okafor','Blessing','84061','St. Augustine Towers','Nursing','LPN','FT',36,'Yes',N7,'4',41.45,'2026-08-03','1985-10-04'],
+['Pruitt','Janelle','55171','St. Augustine Towers','H/L','Laundry aide','PT',20,'No',S1,'',19.66,'2026-09-08','1964-06-11'],
+['Quintero','Luis','40049','St. Augustine Manor','HR','HR assistant','FT',40,'Yes',S1,'',26.01,'2018-06-11','1982-12-19'],
+['Rourke','Delia','42128','St. Augustine Manor','CEC','Teacher – float','PRN','','No',S1,'',17.34,'2025-06-16','2003-11-22'],
+['Sandoval','Marisol','68575','St. Augustine Manor','Nursing','CNA','PT',30,'No',H16,'2',23.75,'2022-03-14','1997-11-26'],
+['Thibodeaux','Grant','63332','St. Augustine Manor','Nursing','RN – Director of nursing','FT',40,'Yes',S1,'',75.43,'2001-05-23','1975-05-28'],
 ['Uzoma','Grace','363050','Home Health Care','HHC','RN','FT',40,'Yes','','',39.78,'2025-01-14','1990-02-02'],
 ['Vance','Ellery','376026','Home Health Care','HHC','Physical therapist','PRN','','No','','',46.82,'2024-02-26','1987-04-17'],
 ['Whitlock','Nora','376020','Home Health Care','HHC','LPTA','PT',32,'Yes','','',34.68,'2019-11-12','1981-08-30'],
@@ -616,18 +628,18 @@ DB.leaves=[
 ];
 const A_=(id,first,last,position,shift,dept,entity,applied,source,assigned,gender,race,codes,comments,status,hiredOn,email,phone)=>({id:String(id),first,last,position,shift,dept,entity,applied,source,assigned,gender,race,codes,comments,status,hiredOn,converted:false,empId:null,email,phone,cv:{sample:true}});
 DB.apps=[
- A_(19888,'Nia','Fairbanks','CNA','Any shift','Nursing','St. Augustine','2026-09-02','Indeed','mb','Female','Black or African American',['A','B','D','F','K'],'Can start 10/1','Hired','2026-09-21','nia.fairbanks@example.com','216-555-0341'),
- A_(19889,'Arturo','Belmonte','Housekeeping aide','1st (7a–3:30p)','H/L','St. Augustine','2026-09-03','Website','tt','Male','Hispanic or Latino',['A','C','D'],'','Hired','2026-09-22','a.belmonte@example.com','216-555-0388'),
- A_(19890,'Dana','Whitfield','RN supervisor','12-hr night (7p–7:30a)','Nursing','St. Augustine','2026-09-08','Indeed','mb','Female','White',['A','B'],'Wants nights only','New','','dwhitfield@example.com','440-555-0112'),
- A_(19891,'Marcus','Oyelaran','LPN (Towers)','12-hr day (7a–7:30p)','Nursing','St. Augustine','2026-09-10','Website','ls','Male','Black or African American',[],'','New','','m.oyelaran@example.com','216-555-0190'),
- A_(19892,'Priya','Raman','Unit secretary','1st (7a–3:30p)','Nursing','St. Augustine','2026-09-11','LinkedIn','bb','Female','Asian',['A'],'','New','','priya.raman@example.com','440-555-0177'),
- A_(19893,'Jolene','Marsh','Cook','Other (see notes)','NTRN SVC','St. Augustine','2026-09-14','Walk-in','jc','Female','White',['A','D','E'],'Available weekends','New','','jolene.m@example.com','216-555-0225'),
- A_(19894,'Terrence','Bale','Driver','1st (7a–3:30p)','Transportation','St. Augustine','2026-09-15','Job fair','cp','Male','Two or more races',[],'','New','','tbale@example.com','216-555-0263'),
+ A_(19888,'Nia','Fairbanks','CNA','Any shift','Nursing','St. Augustine Manor','2026-09-02','Indeed','mb','Female','Black or African American',['A','B','D','F','K'],'Can start 10/1','Hired','2026-09-21','nia.fairbanks@example.com','216-555-0341'),
+ A_(19889,'Arturo','Belmonte','Housekeeping aide','1st (7a–3:30p)','H/L','St. Augustine Manor','2026-09-03','Website','tt','Male','Hispanic or Latino',['A','C','D'],'','Hired','2026-09-22','a.belmonte@example.com','216-555-0388'),
+ A_(19890,'Dana','Whitfield','RN supervisor','12-hr night (7p–7:30a)','Nursing','St. Augustine Manor','2026-09-08','Indeed','mb','Female','White',['A','B'],'Wants nights only','New','','dwhitfield@example.com','440-555-0112'),
+ A_(19891,'Marcus','Oyelaran','LPN (Towers)','12-hr day (7a–7:30p)','Nursing','St. Augustine Towers','2026-09-10','Website','ls','Male','Black or African American',[],'','New','','m.oyelaran@example.com','216-555-0190'),
+ A_(19892,'Priya','Raman','Unit secretary','1st (7a–3:30p)','Nursing','St. Augustine Manor','2026-09-11','LinkedIn','bb','Female','Asian',['A'],'','New','','priya.raman@example.com','440-555-0177'),
+ A_(19893,'Jolene','Marsh','Cook','Other (see notes)','NTRN SVC','St. Augustine Towers','2026-09-14','Walk-in','jc','Female','White',['A','D','E'],'Available weekends','New','','jolene.m@example.com','216-555-0225'),
+ A_(19894,'Terrence','Bale','Driver','1st (7a–3:30p)','Transportation','St. Augustine Manor','2026-09-15','Job fair','cp','Male','Two or more races',[],'','New','','tbale@example.com','216-555-0263'),
  A_(19895,'Hollis','Grant','PRN LPN/RN','Any shift','HHC','Home Health Care','2026-09-16','Indeed','bn','Male','White',['A','B','G'],'','New','','hollis.grant@example.com','440-555-0132'),
  A_(19896,'Ruth','Adeyemi','HHA','1st (7a–3:30p)','Hospice','Holy Family Hospice','2026-09-17','Referral','at','Female','Black or African American',['A','C'],'Referred by Rafael Cardenas','New','','ruth.adeyemi@example.com','216-555-0299'),
  A_(19897,'Simone','Clarke','CNA','2nd (3p–11:30p)','Nursing','Holy Family Home','2026-09-18','Indeed','ls','Female','Not stated',['A','B','D'],'','New','','simone.clarke@example.com','216-555-0314'),
- A_(19898,'Kyle','Denton','Housekeeping aide','Any shift','H/L','St. Augustine','2026-09-05','Indeed','tt','Male','White',['A'],'Did not attend interview','Rejected','','kdenton@example.com','216-555-0355'),
- A_(19899,'Camila','Ortega','Patient billing','1st (7a–3:30p)','Admin','St. Augustine','2026-09-19','Website','ts','Female','Hispanic or Latino',['A','B','C'],'','New','','c.ortega@example.com','440-555-0158')
+ A_(19898,'Kyle','Denton','Housekeeping aide','Any shift','H/L','St. Augustine Manor','2026-09-05','Indeed','tt','Male','White',['A'],'Did not attend interview','Rejected','','kdenton@example.com','216-555-0355'),
+ A_(19899,'Camila','Ortega','Patient billing','1st (7a–3:30p)','Admin','St. Augustine Manor','2026-09-19','Website','ts','Female','Hispanic or Latino',['A','B','C'],'','New','','c.ortega@example.com','440-555-0158')
 ];
 DB.lics=[
  {id:'m1',group:'August',name:'Evan Nakamura',ldept:'Nutrition Svc',license:'RD #704512',expires:'2027-08-31',cycle:'1 yr',checked:'R. Ellis'},
@@ -843,7 +855,7 @@ const legend=()=>'';
 
 /* ---------- Shell ---------- */
 function openTaskCount(){ return ninetyList().filter(x=>!x.done).length+(pendingHires().length?1:0)+DB.todos.filter(t=>!t.done).length; }
-function navBtn(p,label,icon,count,hot){ const on=S.page===p||(p==='employees'&&['profile','archived'].includes(S.page))||(p==='applicants'&&S.page==='applicant'); return `<button class="nav ${on?'on':''}" data-a="nav" data-p="${p}" ${on?'aria-current="page"':''}>${ic(icon)}<span class="lbl">${label}</span>${count!=null?`<span class="cnt ${hot?'hot':''}">${count}</span>`:''}</button>`; }
+function navBtn(p,label,icon,count,hot){ const on=S.page===p||(p==='employees'&&S.page==='profile')||(p==='applicants'&&S.page==='applicant'); return `<button class="nav ${on?'on':''}" data-a="nav" data-p="${p}" title="${label}" aria-label="${label}" ${on?'aria-current="page"':''}>${ic(icon)}<span class="lbl">${label}</span>${count!=null?`<span class="cnt ${hot?'hot':''}">${count}</span>`:''}</button>`; }
 function sidebar(){
   return `<nav class="side" aria-label="Main">
     <div class="brand"><span class="brand-mark">SA</span><div><b>St. Augustine</b><span>HR workspace</span></div></div>
@@ -851,6 +863,10 @@ function sidebar(){
     ${navBtn('employees','Employees','users')}
     ${navBtn('leaves','Leaves','calendar')}
     ${navBtn('applicants','Applicants','userPlus')}
+    <div class="side-bottom">
+      ${navBtn('reports','Reports','chart')}
+      ${navBtn('archived','Archived employees','archive')}
+    </div>
     <div class="side-foot"><span class="avatar">HR</span><span>Human Resources</span></div>
   </nav>`;
 }
@@ -866,12 +882,12 @@ function crumbs(){
     case 'applicants': return cur('Applicants');
     case 'applicant': { const a=DB.apps.find(x=>x.id===S.applicantId); return c('Applicants','applicants')+sep+cur(a.first+' '+a.last); }
     case 'glossary': return cur('Codes & glossary');
-    case 'reports': return tasksPage();
+    case 'reports': return cur('Reports');
     case 'archived': return cur('Archived employees');
     default: return cur('Tasks');
   }
 }
-function utilityHTML(){return `<button class="icon-btn sm" data-a="theme" aria-label="Change colour theme" title="Change colour theme">${ic('circleTheme',16)}</button><button class="icon-btn sm gloss-btn" data-a="nav" data-p="glossary" aria-label="Codes & glossary" title="Codes & glossary">${ic('book',16)}</button>`;}
+function utilityHTML(){return `<button class="icon-btn sm gloss-btn" data-a="nav" data-p="glossary" aria-label="Codes & glossary" title="Codes & glossary">${ic('book',16)}</button>`;}
 function topbar(){return ['profile','applicant'].includes(S.page)?`<header class="topbar"><div class="crumbs">${crumbs()}</div>${utilityHTML()}</header>`:'';}
 function pageKey(){ return `${S.page}-${S.empTab}-${S.leaveTab}-${S.profileId}-${S.applicantId}`; }
 function page(){
@@ -882,7 +898,7 @@ function page(){
     case 'applicants': return applicantsPage();
     case 'applicant': return applicantPage();
     case 'glossary': return glossaryPage();
-    case 'reports': return tasksPage();
+    case 'reports': return reportsPage();
     case 'archived': return archivedPage();
     default: return tasksPage();
   }
@@ -919,7 +935,7 @@ function taskItemHTML(item,done){
 const EMP_TABS=()=>[['all','All',active().length],['insurance','Insurance'],['bonus','Bonus'],['benefits','Benefits'],['evaluations','Evaluations'],['licences','Licences']];
 function empKeys(){
   const t=S.empTab, base=['name','empNo','entity'];
-  if(t==='all'){ let k=[...base,'workStatus']; const G=S.groups;
+  if(t==='all'){ let k=[...base]; const G=S.groups;
     if(G.job) k.push('dept','title','type','hours','benefits','shift','weekend','schedNotes','unit','rate','doh','lastChange');
     if(G.personal) k.push('dob','ssn','phone','notes');
     if(G.inservice) k.push('virtus','custSvc','abuse','tb','flu');
@@ -962,6 +978,10 @@ const SECTIONS=[
  ['evaluations','Evaluations',['evalEff','evalDone','nextEval','evalState']],
  ['separation','Separation',['termDate','termType','efr']]
 ];
+function codesDropHTML(sel){
+ const val=sel.length?sel.slice().sort().join(', '):'Choose…';
+ return `<div class="field span2"><label id="ov-codes-l">Disposition codes</label><details class="ms"><summary class="ms-trigger" aria-labelledby="ov-codes-l"><span class="ms-val ${sel.length?'':'ph'}">${val}</span></summary><div class="ms-pop code-checklist">${CODES.map(c=>`<label><input type="checkbox" data-chk="ovCode" value="${c}" ${sel.includes(c)?'checked':''}>${c} · Disposition code ${c}</label>`).join('')}</div></details></div>`;
+}
 function fieldHTML(scope,name,label,type,val,o={}){
   const id=`${scope}-${name}`; let input;
   if(type==='select') input=`<select id="${id}" data-f="${name}" data-scope="${scope}" ${o.rr?'data-rr':''}><option value="">${o.ph||'Choose…'}</option>${o.groups?o.groups.map(([g,items])=>`<optgroup label="${g}">${items.map(([v,l])=>`<option value="${v}" ${v===val?'selected':''}>${v}. ${esc(l)}</option>`).join('')}</optgroup>`).join(''):o.opts.map(x=>`<option ${String(x)===String(val)?'selected':''}>${esc(x)}</option>`).join('')}</select>`;
@@ -1028,7 +1048,7 @@ function leavesPage(){
 /* ---------- Applicants ---------- */
 function applicantRows(){let rows=filtered(DB.apps,a=>a.first+' '+a.last+' '+a.position+' '+a.id,a=>a.entity);if(S.appFilter!=='all')rows=rows.filter(a=>a.status===S.appFilter);return sorted(rows,a=>a.last+', '+a.first,a=>a.applied);}
 function applicantsPage(){
- const rows=applicantRows();const keys=['aname','position','entity','astatus','applied','shift','dept','source','assigned','gender','race','codes','comments','appId'];
+ const rows=applicantRows();const keys=['appId','aname','position','entity','astatus','applied','shift','dept','source','assigned','gender','race','codes','comments'];
  return `<div class="content tp">${phead('Applicants','',`<button class="btn btn-primary" data-a="newApp">${ic('plus',16)} Create applicant</button>`)}<div class="toolbar">${searchHTML('Search applicants')}${entityHTML()}${segHTML('appFilter',[['all','All'],['New','New'],['Hired','Hired'],['Rejected','Rejected']],'Applicant status')}${tableTools('app',keys)}</div>${tableHTML('app',keys,rows,{sticky:false})}</div>`;
 }
 
@@ -1059,13 +1079,17 @@ function applicantPage(){
  const nav=`<div class="record-pagination"><button class="icon-btn sm" data-a="appPrevNext" data-step="-1" aria-label="Previous applicant" ${i<=0?'disabled':''}>‹</button><span>${i+1} of ${order.length}</span><button class="icon-btn sm" data-a="appPrevNext" data-step="1" aria-label="Next applicant" ${i>=order.length-1?'disabled':''}>›</button></div>`;
  const actions=a.status==='New'?`<button class="btn" data-a="reject" data-id="${a.id}">Reject</button><button class="btn btn-primary" data-a="hire" data-id="${a.id}">Hire</button>`:decisionHTML(a);
  const file=a.cv?.url?a.cv.name:a.cv?.sample?`${a.last}_${a.first}_CV.pdf`:'';
- return `<div class="content record-content" data-scroll-key="c-${pageKey()}"><div class="prof-head applicant-head"><div class="record-heading"><h1>${esc(a.first+' '+a.last)}</h1><div class="meta-line">#${a.id}<span>·</span>${esc(a.position)}<span>·</span>${esc(a.entity)}<span>·</span>Applied ${fd(a.applied)}<span>·</span>${chip(a.status,{Hired:'green',Rejected:'red'}[a.status]||'')}</div></div><div class="prof-actions">${nav}${actions}</div></div><div class="app-grid"><div><h2 class="section-label">Application details</h2>${recordFields('app',a,['position','shift','dept','entity','applied','source','assigned','email','phone','gender','race','comments'])}<div class="codes-section"><h2 class="section-label">Disposition codes <span class="muted">${a.codes.length}/${CODES.length}</span></h2><div class="code-checklist">${CODES.map(c=>`<label><input type="checkbox" data-chk="appCode" data-id="${a.id}" value="${c}" ${a.codes.includes(c)?'checked':''}><span>${c} · Interview code ${c}</span></label>`).join('')}</div></div></div><section class="cv-section"><div class="cv-header"><div><h2 class="section-label">CV</h2>${file?`<p>${esc(file)}</p>`:''}</div>${a.cv?`<label class="btn btn-sm" style="position:relative">${ic('upload',14)} Replace CV<input type="file" accept="application/pdf" data-file="app" data-id="${a.id}" style="position:absolute;inset:0;opacity:0;cursor:pointer" aria-label="Replace CV"></label>`:''}</div><div class="cv-view">${cvHTML(a)}</div></section></div></div>`;
+ return `<div class="content record-content" data-scroll-key="c-${pageKey()}"><div class="prof-head applicant-head"><div class="record-heading"><h1>${esc(a.first+' '+a.last)}</h1><div class="meta-line">#${a.id}<span>·</span>${esc(a.position)}<span>·</span>${esc(a.entity)}<span>·</span>Applied ${fd(a.applied)}<span>·</span>${chip(a.status,{Hired:'green',Rejected:'red'}[a.status]||'')}</div></div><div class="prof-actions">${nav}${actions}</div></div><div class="app-grid"><div><h2 class="section-label">Application details</h2>${recordFields('app',a,['position','shift','dept','entity','applied','source','assigned','email','phone','gender','race','comments'])}<div class="codes-section"><h2 class="section-label">Disposition codes <span class="muted">${a.codes.length}/${CODES.length}</span></h2><div class="code-checklist">${CODES.map(c=>`<label><input type="checkbox" data-chk="appCode" data-id="${a.id}" value="${c}" ${a.codes.includes(c)?'checked':''}><span>${c} · Disposition code ${c}</span></label>`).join('')}</div></div></div><section class="cv-section"><div class="cv-header"><div><h2 class="section-label">CV</h2>${file?`<p>${esc(file)}</p>`:''}</div>${a.cv?`<label class="btn btn-sm" style="position:relative">${ic('upload',14)} Replace CV<input type="file" accept="application/pdf" data-file="app" data-id="${a.id}" style="position:absolute;inset:0;opacity:0;cursor:pointer" aria-label="Replace CV"></label>`:''}</div><div class="cv-view">${cvHTML(a)}</div></section></div></div>`;
 }
 
 /* ---------- Glossary, Archived ---------- */
 function glossaryPage(){
  const groups=[['Employment status','Employment type, hours per week and benefit eligibility','FT · Full-time &nbsp; · &nbsp; PT · Part-time &nbsp; · &nbsp; PRN · As needed'],['Shift codes','Start and end times, including weekend programs',SHIFTS.filter(x=>x!=='Other (see notes)').map(esc).join(' · ')],['Separation reasons','Codes from the Separation from Service form',SEP_REASONS.flatMap(g=>g[1]).map(([k,v])=>esc(k+' · '+v)).join(' / ')],['Applicant disposition codes','Codes A–S used during interviews',''],['ACA monthly codes','Monthly IRS 1095-C reporting codes',''],['Leave types','Continuous and intermittent employee leave',LEAVE_TYPES.map(esc).join(' · ')]];
  return `<div class="content">${phead('Codes &amp; glossary','')}<div class="glossary-list">${groups.map(([t,d,v])=>`<section><h2>${t}</h2><p>${d}</p>${v?`<div>${v}</div>`:'<span class="muted">Empty</span>'}</section>`).join('')}</div></div>`;
+}
+function reportsPage(){
+ const items=['Build reports from the data already in the system: headcount, turnover, retention, leaves, applicants and benefits eligibility','Edit a report\'s filters, columns and date range, and see the results update here','Save reports to re-run each month, and export them to share'];
+ return `<div class="content">${phead('Reports','')}${wip('chart','Reports','Making reports from existing data, editable and visible here.','Coming soon').replace('</p></div>',`</p><ul class="wip-list">${items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`)}</div>`;
 }
 function archivedPage(){
  const rows=DB.emps.filter(e=>e.archived);
@@ -1078,9 +1102,9 @@ function archivedPage(){
 /* ---------- Overlays ---------- */
 function openOverlay(kind,init={}){
   S.popover=null; S.editCell=null;
-  if(kind==='newEmp') S.overlay={kind,mode:pendingHires().length?'hires':'manual',sel:[],form:{doh:TODAY,entity:'St. Augustine',type:'FT',benefits:'Yes',weekend:'None'},hireDoh:TODAY,errs:{}};
+  if(kind==='newEmp') S.overlay={kind,mode:pendingHires().length?'hires':'manual',sel:[],form:{doh:TODAY,entity:'',type:'FT',benefits:'Yes',weekend:'None'},hireDoh:TODAY,errs:{}};
   if(kind==='newLeave') S.overlay={kind,form:{empId:init.empId||'',ltype:'',from:'',to:'',lnotes:'',reason:'',mode:'Continuous',shiftsWk:'',freq:''},errs:{}};
-  if(kind==='newApp') S.overlay={kind,form:{entity:'St. Augustine',applied:TODAY,shift:'Any shift'},codes:[],cv:null,errs:{}};
+  if(kind==='newApp') S.overlay={kind,form:{entity:'St. Augustine Manor',applied:TODAY,shift:'Any shift'},codes:[],cv:null,errs:{}};
   S.overlay.fresh=true; S.focusFirst=true; render();
 }
 function sheet(title,sub,body,foot){ const f=S.overlay.fresh; return `<div class="scrim ${f?'enter':''}" data-a="closeOv"></div><aside class="sheet ${f?'enter':''}" role="dialog" aria-modal="true" aria-labelledby="sheet-t"><header class="sheet-h"><div><h2 id="sheet-t">${title}</h2></div><button class="icon-btn" data-a="closeOv" aria-label="Close">${ic('x')}</button></header><div class="sheet-b" data-scroll-key="sheet-${S.overlay.kind}">${body}</div><footer class="sheet-f">${foot}</footer></aside>`; }
@@ -1093,7 +1117,7 @@ function overlayHTML(){
    const body=seg+(hires.length?`<div class="hire-list"><label class="select-all"><input type="checkbox" data-chk="hireAll" ${o.sel.length===hires.length?'checked':''}>Select all<span>${hires.length} applicants</span></label>${hires.map(a=>`<label class="check-row"><input type="checkbox" data-chk="hireSel" value="${a.id}" ${o.sel.includes(a.id)?'checked':''}><span class="cr-main"><strong>${esc(a.first+' '+a.last)}</strong><span>${esc(a.position)} · ${esc(a.entity)}</span></span><span class="cr-meta">${fd(a.hiredOn)}</span></label>`).join('')}</div><div style="margin-top:24px">${fieldHTML('ov','hireDoh','Date of hire','date',o.hireDoh,{req:true,err:er.hireDoh})}</div>`:'<p class="empty-state">No hired applicants to set up</p>');
    return sheet('Create employee','',body,`<span class="grow">${o.sel.length} selected</span>${cancel}<button class="btn btn-primary" data-a="convertHires" ${o.sel.length?'':'disabled'}>Create ${o.sel.length||''} employee${o.sel.length===1?'':'s'}</button>`);
   }
-  const body=seg+`<div class="fgrid">${fieldHTML('ov','first','First name','text',f.first,{req:true,err:er.first})}${fieldHTML('ov','last','Last name','text',f.last,{req:true,err:er.last})}${fieldHTML('ov','entity','Entity','select',f.entity,{opts:ENTITIES,req:true,err:er.entity})}${fieldHTML('ov','dept','Department','select',f.dept,{opts:DEPTS,req:true,err:er.dept})}${fieldHTML('ov','title','Job title','text',f.title,{req:true,err:er.title})}${fieldHTML('ov','doh','Date of hire','date',f.doh,{req:true,err:er.doh})}</div>
+  const body=seg+`<div class="fgrid">${fieldHTML('ov','first','First name','text',f.first,{req:true,err:er.first})}${fieldHTML('ov','last','Last name','text',f.last,{req:true,err:er.last})}${fieldHTML('ov','entity','Entity','select',f.entity,{opts:ENTITIES.filter(e=>!/Manor|Towers/.test(e)),req:true,err:er.entity})}${fieldHTML('ov','dept','Department','select',f.dept,{opts:DEPTS,req:true,err:er.dept})}${fieldHTML('ov','title','Job title','text',f.title,{req:true,err:er.title})}${fieldHTML('ov','doh','Date of hire','date',f.doh,{req:true,err:er.doh})}</div>
   <details class="optional-fields" data-create-details="manual" ${o.moreOpen?'open':''}><summary>${ic('chev',14)} More details</summary><div class="fgrid">${fieldHTML('ov','empNo','Employee #','text',f.empNo,{ph:'Assigned by payroll'})}${fieldHTML('ov','type','Employment type','select',f.type,{opts:['FT','PT','PRN']})}${fieldHTML('ov','hours','Hours/week','number',f.hours)}${fieldHTML('ov','rate','Rate ($/hour)','money',f.rate)}${fieldHTML('ov','benefits','Benefits','select',f.benefits,{opts:YN})}${fieldHTML('ov','shift','Shift','select',f.shift,{opts:SHIFTS})}${fieldHTML('ov','weekend','Weekend program','select',f.weekend,{opts:['None','8-hour','16-hour']})}${fieldHTML('ov','schedNotes','Schedule notes','text',f.schedNotes)}${fieldHTML('ov','dob','Date of birth','date',f.dob)}${fieldHTML('ov','ssn','SSN','text',f.ssn)}${fieldHTML('ov','phone','Phone','tel',f.phone)}</div></details>`;
   return sheet('Create employee','',body,cancel+'<button class="btn" data-a="saveEmp">Create</button><button class="btn btn-primary" data-a="createAndOpen">Create and open</button>');
  }
@@ -1105,9 +1129,8 @@ function overlayHTML(){
   return sheet('Record leave','',body,cancel+'<button class="btn btn-primary" data-a="saveLeave">Record leave</button>');
  }
  if(o.kind==='newApp'){
-  const cv=o.cv;const body=`<div class="fgrid">${fieldHTML('ov','first','First name','text',f.first,{req:true,err:er.first})}${fieldHTML('ov','last','Last name','text',f.last,{req:true,err:er.last})}${fieldHTML('ov','email','Email','email',f.email)}${fieldHTML('ov','phone','Phone','tel',f.phone)}${fieldHTML('ov','position','Position applied for','text',f.position,{req:true,err:er.position,span:true})}${fieldHTML('ov','entity','Entity','select',f.entity,{opts:ENTITIES})}${fieldHTML('ov','dept','Department','select',f.dept,{opts:DEPTS})}${fieldHTML('ov','shift','Shift','select',f.shift,{opts:['Any shift',...SHIFTS]})}${fieldHTML('ov','applied','Date applied','date',f.applied)}${fieldHTML('ov','source','Source','select',f.source,{opts:SOURCES})}${fieldHTML('ov','assigned','Assigned to','select',f.assigned,{opts:INITIALS})}</div>
+  const cv=o.cv;const body=`<div class="fgrid">${fieldHTML('ov','first','First name','text',f.first,{req:true,err:er.first})}${fieldHTML('ov','last','Last name','text',f.last,{req:true,err:er.last})}${fieldHTML('ov','email','Email','email',f.email)}${fieldHTML('ov','phone','Phone','tel',f.phone)}${fieldHTML('ov','position','Position applied for','text',f.position,{req:true,err:er.position,span:true})}${fieldHTML('ov','entity','Entity','select',f.entity,{opts:ENTITIES})}${fieldHTML('ov','dept','Department','select',f.dept,{opts:DEPTS})}${fieldHTML('ov','shift','Shift','select',f.shift,{opts:['Any shift',...SHIFTS]})}${fieldHTML('ov','applied','Date applied','date',f.applied)}${fieldHTML('ov','source','Source','select',f.source,{opts:SOURCES})}${fieldHTML('ov','assigned','Assigned to','select',f.assigned,{opts:INITIALS})}${codesDropHTML(o.codes)}</div>
   <h3 class="fsec">CV</h3>${cv?`<div class="file-pill"><span class="fi">${ic('file')}</span><div><b>${esc(cv.name)}</b><span>${(cv.size/1024).toFixed(0)} KB · PDF</span></div><button class="btn btn-sm" data-a="removeCv">Remove</button></div>`:`<label class="drop" style="position:relative">${ic('upload',24)}<strong>Upload a CV</strong><span class="help">PDF</span><input type="file" accept="application/pdf" data-file="ov" aria-label="Upload CV"></label>`}
-  <details class="optional-fields" data-create-details="codes" ${o.codesOpen?'open':''}><summary>${ic('chev',14)} Interview codes</summary><div class="code-checklist">${CODES.map(c=>`<label><input type="checkbox" data-chk="ovCode" value="${c}" ${o.codes.includes(c)?'checked':''}>${c} · Interview code ${c}</label>`).join('')}</div></details>
   <details class="optional-fields" data-create-details="eeo" ${o.eeoOpen?'open':''}><summary>${ic('chev',14)} EEO <span class="muted">Optional</span></summary><div class="fgrid">${fieldHTML('ov','gender','Gender','select',f.gender,{opts:['Female','Male','Not stated']})}${fieldHTML('ov','race','Race / ethnicity','select',f.race,{opts:RACES})}${fieldHTML('ov','comments','Comments','textarea',f.comments,{span:true})}</div></details>`;
   return sheet('Create applicant','',body,cancel+'<button class="btn btn-primary" data-a="saveApp2">Create applicant</button>');
  }
@@ -1162,7 +1185,7 @@ function popHTML(){
 }
 
 /* ---------- Render ---------- */
-function capture(){ const a=document.activeElement; const st={}; document.querySelectorAll('[data-scroll-key]').forEach(el=>st[el.dataset.scrollKey]=[el.scrollLeft,el.scrollTop]); let s=null,e=null; try{s=a.selectionStart;e=a.selectionEnd;}catch(_){} return {id:a&&a.id,s,e,st}; }
+function capture(){ const a=document.activeElement; const st={}; document.querySelectorAll('[data-scroll-key]').forEach(el=>st[el.dataset.scrollKey]=[el.scrollLeft,el.scrollTop]); let s=null,e=null; try{s=a.selectionStart;e=a.selectionEnd;}catch(_){} return {id:a&&(a.dataset&&a.dataset.for||a.id),s,e,st}; }
 function restore(k){
   Object.entries(k.st).forEach(([key,[l,t]])=>{const el=document.querySelector(`[data-scroll-key="${CSS.escape(key)}"]`); if(el){el.scrollLeft=l;el.scrollTop=t;}});
   const pop=document.getElementById('pop');
@@ -1211,7 +1234,6 @@ const A={
    const old=S.selected.map(id=>({id,data:JSON.stringify(empById(id))}));
    S.selected.forEach(id=>{const e=empById(id);if(sep){e.archived=true;e.termDate=f.eff;e.termType=f.reason;e.timeline.push({date:f.eff,kind:'status',text:`Separated: ${f.reason}`});}else ['dept','entity','type'].forEach(k=>{if(f[k]&&f[k]!==e[k]){logChange(e,k,e[k],f[k],f.eff);e[k]=f[k];}});});
    S.selected=[];S.modal=null;toast(`${old.length} employees updated`,{label:'Undo',fn:()=>{old.forEach(x=>Object.assign(empById(x.id),JSON.parse(x.data)));render();}});render();},
-  theme:()=>{ const d=document.documentElement; d.dataset.theme=(d.dataset.theme|| (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'))==='dark'?'light':'dark'; },
   nav:t=>{ S.selected=[];S.search='';S.entity='all';S.deptFilter='all';S.typeFilter='all'; S.page=t.dataset.p; S.editCell=null; S.profileEdit=null; S.appEdit=null; S.popover=null; render(); },
   setS:t=>{ S[t.dataset.g]=t.dataset.v; S.editCell=null; render(); },
   tog:t=>{ S.groups[t.dataset.v]=!S.groups[t.dataset.v]; render(); },
@@ -1262,7 +1284,7 @@ const A={
     DB.leaves.push(l); const e=empById(f.empId); e.timeline.push({date:TODAY,kind:'leave',text:`${l.ltype} leave recorded, ${fd(l.from)} to ${fd(l.to)}.`}); S.overlay=null;
     toast(workStatus(e)==='On leave'?`Leave created. ${e.first} ${e.last} now shows as On leave.`:'Leave created.'); render(); },
   saveApp2:()=>{ const o=S.overlay,f=o.form,er={}; ['first','last','position'].forEach(k=>{ if(!String(f[k]||'').trim()) er[k]='Required'; }); o.errs=er; if(Object.keys(er).length){ render(); return; }
-    const id=String(Math.max(...DB.apps.map(a=>+a.id))+1); const a={id,first:f.first.trim(),last:f.last.trim(),position:f.position.trim(),shift:f.shift||'Any shift',dept:f.dept||'',entity:f.entity||'St. Augustine',applied:f.applied||TODAY,source:f.source||'',assigned:f.assigned||'',gender:f.gender||'',race:f.race||'',codes:[...o.codes].sort(),comments:f.comments||'',status:'New',hiredOn:'',converted:false,empId:null,email:f.email||'',phone:f.phone||'',cv:o.cv};
+    const id=String(Math.max(...DB.apps.map(a=>+a.id))+1); const a={id,first:f.first.trim(),last:f.last.trim(),position:f.position.trim(),shift:f.shift||'Any shift',dept:f.dept||'',entity:f.entity||'St. Augustine Manor',applied:f.applied||TODAY,source:f.source||'',assigned:f.assigned||'',gender:f.gender||'',race:f.race||'',codes:[...o.codes].sort(),comments:f.comments||'',status:'New',hiredOn:'',converted:false,empId:null,email:f.email||'',phone:f.phone||'',cv:o.cv};
     DB.apps.push(a); S.overlay=null; S.page='applicants'; S.appFilter='all'; toast(`${a.first} ${a.last} added as applicant #${a.id}.`,{label:'Open profile',fn:()=>A.openApp({dataset:{id:a.id}})}); render(); },
   saveStatus:()=>{
    const md=S.modal,f=md.form,e=empById(md.id);if(!f.eff){md.errs={eff:'Required'};render();return;}
@@ -1315,7 +1337,7 @@ document.addEventListener('change',e=>{
 
   if(c==='hireAll'){A.selAll();return;}
   if(c==='hireSel'){ const o=S.overlay; o.sel=t.checked?[...o.sel,t.value]:o.sel.filter(x=>x!==t.value); render(); return; }
-  if(c==='ovCode'){ const o=S.overlay; o.codes=t.checked?[...o.codes,t.value]:o.codes.filter(x=>x!==t.value); return; }
+  if(c==='ovCode'){ const o=S.overlay; o.codes=t.checked?[...o.codes,t.value]:o.codes.filter(x=>x!==t.value); const v=t.closest('.ms')?.querySelector('.ms-val'); if(v){ v.textContent=o.codes.length?o.codes.slice().sort().join(', '):'Choose…'; v.classList.toggle('ph',!o.codes.length);} return; }
   if(c==='appCode'){ const a=DB.apps.find(x=>x.id===t.dataset.id); a.codes=t.checked?[...a.codes,t.value].sort():a.codes.filter(x=>x!==t.value); render(); return; }
   if(c==='todo'){ const x=DB.todos.find(y=>y.id===t.value); x.done=t.checked; toast(x.done?'Task completed':'Task reopened'); render(); return; }
   if(t.dataset.file){ const file=t.files&&t.files[0]; if(!file) return; if(file.type&&file.type!=='application/pdf'){ toast('Please choose a PDF file'); return; }
@@ -1339,6 +1361,44 @@ document.addEventListener('keydown',e=>{
 document.addEventListener('scroll',e=>{ if(S.popover&&Date.now()-(S.popover.at||0)>400&&!(e.target.closest&&e.target.closest('#pop'))){ S.popover=null; render(); } },true);
 
 render();
+
+/* ---------- mm/dd/yyyy date fields ----------
+   Browsers show <input type=date> in the viewer's locale (e.g. dd/mm/yyyy).
+   Each one is kept (hidden) as the source of truth and fronted by a text field in mm/dd/yyyy. */
+(function(){
+  const iso2us=v=>{ if(!v) return ''; const [y,m,d]=v.split('-'); return `${m}/${d}/${y}`; };
+  const mask=v=>{ const d=v.replace(/\D/g,'').slice(0,8); return d.length>4?`${d.slice(0,2)}/${d.slice(2,4)}/${d.slice(4)}`:d.length>2?`${d.slice(0,2)}/${d.slice(2)}`:d; };
+  const us2iso=v=>{ const m=/^(\d{2})\/(\d{2})\/(\d{4})$/.exec(v); if(!m) return null; const [_,mm,dd,yy]=m; const dt=new Date(Date.UTC(+yy,+mm-1,+dd)); if(dt.getUTCMonth()!==+mm-1||dt.getUTCDate()!==+dd) return null; return `${yy}-${mm}-${dd}`; };
+  const CAL='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>';
+  function push(n,v){ if(n.value===v) return; n.value=v; n.dispatchEvent(new Event('input',{bubbles:true})); n.dispatchEvent(new Event('change',{bubbles:true})); }
+  function enhance(n){
+    if(n.dataset.dx) return; n.dataset.dx='1';
+    const w=document.createElement('span'); w.className='dwrap';
+    const t=document.createElement('input');
+    t.className=('dtext '+n.className).trim(); if(n.getAttribute('style')) t.setAttribute('style',n.getAttribute('style'));
+    t.inputMode='numeric'; t.autocomplete='off'; t.placeholder='mm/dd/yyyy'; t.maxLength=10; t.value=iso2us(n.value);
+    t.disabled=n.disabled; t.readOnly=n.readOnly; if(n.required) t.required=true;
+    ['aria-label','aria-invalid','aria-describedby','title'].forEach(a=>{ if(n.hasAttribute(a)) t.setAttribute(a,n.getAttribute(a)); });
+    if(n.id){ t.dataset.for=n.id; const lab=document.querySelector(`label[for="${CSS.escape(n.id)}"]`); if(lab&&!t.hasAttribute('aria-label')) t.setAttribute('aria-label',lab.textContent.replace('*','').trim()); }
+    const b=document.createElement('button'); b.type='button'; b.className='dpick'; b.innerHTML=CAL; b.setAttribute('aria-label','Open calendar'); b.tabIndex=-1; b.disabled=n.disabled||n.readOnly;
+    n.parentNode.insertBefore(w,n); w.append(n,t,b);          // native stays first so existing code finds it
+    n.classList.add('dnative'); n.tabIndex=-1; n.setAttribute('aria-hidden','true');
+    t.addEventListener('input',e=>{ e.stopPropagation(); const pos=t.selectionStart, before=t.value.length; t.value=mask(t.value); try{ const p=pos+(t.value.length-before); t.setSelectionRange(p,p);}catch(_){}
+      if(!t.value) return push(n,''); const iso=us2iso(t.value); if(iso){ t.removeAttribute('aria-invalid'); push(n,iso); } });
+    t.addEventListener('change',e=>e.stopPropagation());
+    t.addEventListener('blur',()=>{ if(t.value&&!us2iso(t.value)) t.value=iso2us(n.value); });
+    n.addEventListener('change',()=>{ const v=iso2us(n.value); if(t.value!==v&&document.activeElement!==t) t.value=v; });
+    n.addEventListener('focus',()=>{ t.focus({preventScroll:true}); try{ t.setSelectionRange(t.value.length,t.value.length);}catch(_){} });
+    b.addEventListener('mousedown',e=>e.preventDefault());
+    b.addEventListener('click',e=>{ e.stopPropagation(); try{ n.showPicker(); }catch(_){ n.focus(); n.click(); } });
+  }
+  const scan=root=>{ (root.querySelectorAll?root:document).querySelectorAll('input[type=date]:not([data-dx])').forEach(enhance); };
+  new MutationObserver(ms=>{ for(const m of ms) for(const x of m.addedNodes) if(x.nodeType===1){ if(x.matches('input[type=date]')) enhance(x); else scan(x); } }).observe(document.body,{childList:true,subtree:true});
+  scan(document);
+})();
+
+document.addEventListener('mousedown',e=>{ document.querySelectorAll('details.ms[open]').forEach(d=>{ if(!d.contains(e.target)) d.open=false; }); },true);
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ const d=document.querySelector('details.ms[open]'); if(d){ d.open=false; d.querySelector('summary').focus(); e.stopImmediatePropagation(); } } },true);
 </script>
 </body>
 </html>

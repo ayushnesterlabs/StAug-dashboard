@@ -431,6 +431,58 @@ b,strong{font-weight:600}.record-fields th{font-weight:400}.record-fields .c-aut
 .dwrap .dpick:disabled{cursor:default;opacity:.5}
 .task-content .todo-add .dwrap{width:150px;flex:none}.task-content .todo-add input.dtext{max-width:none}
 @media(max-width:640px){.task-content .todo-add .dwrap{width:128px}}
+/* ===== High-level design page ===== */
+.hd-wrap{padding:0 28px 60px;max-width:1180px}
+.hd-lede{color:var(--ink-2);font-size:14.5px;line-height:1.6;max-width:72ch;margin:0 0 4px}
+.hd-band{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin:32px 0 13px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+.hd-canvas{background:var(--surface-2);background-image:radial-gradient(var(--line-2) 1px,transparent 1px);background-size:17px 17px;border:1px solid var(--line);border-radius:10px;padding:16px}
+.hd-tier{border:1px solid var(--line-2);border-radius:9px;background:var(--surface)}
+.hd-tt{display:flex;align-items:center;gap:9px;padding:10px 14px;background:var(--surface-2);border-bottom:1px solid var(--line);border-radius:9px 9px 0 0}
+.hd-tt .ti{color:var(--ink-3);display:flex}
+.hd-tt b{font-size:13px;font-weight:600}
+.hd-tt .s{font-size:11.5px;color:var(--ink-3);margin-left:auto}
+.hd-row{display:flex;gap:9px;flex-wrap:wrap;padding:13px 14px}
+.hd-box{flex:1 1 185px;min-width:0;background:var(--surface-2);border:1px solid var(--line);border-radius:7px;padding:10px 12px}
+.hd-box b{display:block;font-size:12.5px;font-weight:600;margin-bottom:3px;color:var(--ink)}
+.hd-box small{font-size:11.5px;color:var(--ink-2);line-height:1.4;display:block}
+.hd-box.key{border-color:#b9ccf6;background:var(--blue-bg)}
+.hd-box.key b{color:#163a9e}
+.hd-box.sec{border-color:#bfe0cc;background:var(--green-bg)}
+.hd-box.sec b{color:#145a32}
+.hd-flow{display:flex;justify-content:center;color:var(--ink-3);padding:4px 0}
+.hd-g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.hd-g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.hd-g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:960px){.hd-g2,.hd-g3,.hd-g4{grid-template-columns:1fr}}
+.hd-panel{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:16px 18px}
+.hd-panel h3{font-size:13.5px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.hd-panel h3 .pi{color:var(--ink-3);display:flex}
+.hd-chain{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.hd-ent{font-size:12px;font-weight:600;border:1px solid var(--line-2);border-radius:20px;padding:7px 12px;background:var(--surface-2);color:var(--ink-2);text-align:center;line-height:1.25}
+.hd-ent .g{display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-3);margin-top:2px}
+.hd-ent.k{border-color:var(--ink);background:var(--ink);color:#fff}
+.hd-ent.k .g{color:#c7ccd4}
+.hd-ar{color:var(--ink-3);font-size:14px}
+.hd-li{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.hd-li li{display:flex;gap:9px;font-size:12.5px;color:var(--ink-2);line-height:1.45}
+.hd-li li .ck{color:var(--green);flex:none;margin-top:1px;display:flex}
+.hd-li li b{color:var(--ink);font-weight:600}
+.hd-note{font-size:12px;color:var(--ink-3);line-height:1.55;margin-top:12px;background:var(--surface-2);border:1px solid var(--line);border-radius:7px;padding:10px 12px}
+.hd-note b{color:var(--ink-2)}
+.hd-ph{flex:1 1 210px;border:1px solid var(--line);border-top:3px solid var(--c);border-radius:8px;padding:12px 14px;background:var(--surface)}
+.hd-ph .pt{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--c);margin-bottom:5px}
+.hd-ph b{font-size:13px;display:block;margin-bottom:4px}
+.hd-ph small{font-size:11.5px;color:var(--ink-2);line-height:1.5;display:block}
+.hd-step{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.hd-step .s{font-size:11.5px;font-weight:600;border:1px solid var(--line-2);border-radius:6px;padding:7px 11px;background:var(--surface-2);color:var(--ink-2)}
+.hd-step .s.d{border-color:#b9ccf6;background:var(--blue-bg);color:#163a9e}
+.hd-step .s.e{border-color:#e4c7a0;background:var(--amber-bg);color:#7a4a00}
+.hd-risk{display:flex;gap:10px;font-size:12.5px;color:var(--ink-2);line-height:1.5;padding:10px 0;border-bottom:1px solid var(--line)}
+.hd-risk:last-child{border-bottom:0}
+.hd-risk b{color:var(--ink);font-weight:600}
+.hd-risk .rk{flex:none;width:7px;height:7px;border-radius:50%;margin-top:5px;background:var(--amber)}
+.hd-link{color:#163a9e;font-weight:600;text-decoration:none;border-bottom:1px solid #b9ccf6}
+.hd-link:hover{border-bottom-color:#163a9e}
 </style>
 </head>
 <body>
@@ -477,6 +529,13 @@ const money=v=>(v===''||v==null||isNaN(v))?'':'$'+Number(v).toFixed(2);
 const chip=(t,c='')=>{if((c==='blue'&&/^Due/.test(t))||t==='Due today')c='amber';return t?`<span class="chip ${c}">${esc(t)}</span>`:'';};
 
 const IC={
+layers:'<path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/>',
+shield:'<path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z"/>',
+server:'<rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="13" width="18" height="7" rx="1.5"/><path d="M7 7.5h.01M7 16.5h.01"/>',
+dbase:'<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 12c0 1.7 4 3 9 3s9-1.3 9-3"/>',
+link2:'<path d="M9 12h6"/><path d="M10 7H7a5 5 0 0 0 0 10h3"/><path d="M14 7h3a5 5 0 0 1 0 10h-3"/>',
+cloud:'<path d="M17.5 19a4.5 4.5 0 0 0 .5-9 6 6 0 0 0-11.7-1.3A4 4 0 0 0 6 19Z"/>',
+floww:'<path d="M4 4h6v6H4zM14 14h6v6h-6z"/><path d="M10 7h4a2 2 0 0 1 2 2v5"/>',
 eye:'<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',
 
 more:'<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
@@ -880,6 +939,7 @@ function sidebar(){
       ${navBtn('reports','Reports','chart')}
       ${navBtn('archived','Archived employees','archive')}
       <div class="nav-label">Design &amp; artifacts</div>
+      ${navBtn('hld','High-level design','layers')}
       ${navBtn('diagram','ER model','diagram')}
     </div>
     <div class="side-foot"><span class="avatar">HR</span><span>Human Resources</span></div>
@@ -899,6 +959,7 @@ function crumbs(){
     case 'glossary': return cur('Codes & glossary');
     case 'reports': return cur('Reports');
     case 'archived': return cur('Archived employees');
+    case 'hld': return cur('Design & artifacts')+sep+cur('High-level design');
     case 'diagram': return cur('Design & artifacts')+sep+cur('ER model');
     default: return cur('Tasks');
   }
@@ -916,6 +977,7 @@ function page(){
     case 'glossary': return glossaryPage();
     case 'reports': return reportsPage();
     case 'archived': return archivedPage();
+    case 'hld': return hldPage();
     case 'diagram': return diagramPage();
     default: return tasksPage();
   }
@@ -1120,6 +1182,173 @@ function archivedPage(){
 let diagramSVG=null;
 const diaView={scale:1,x:0,y:0,fitted:false};
 const DIA_W=2892, DIA_H=3538, DIA_SRC='StAug-ER-Model-Full.svg';
+function hldPage(){
+ const flow=`<div class="hd-flow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>`;
+ const tt=(icon,title,sub)=>`<div class="hd-tt"><span class="ti">${ic(icon,16)}</span><b>${title}</b><span class="s">${sub}</span></div>`;
+ const box=(t,d,cls='')=>`<div class="hd-box ${cls}"><b>${t}</b><small>${d}</small></div>`;
+ return `<div class="content"><div class="hd-wrap">
+   ${phead('High-level design','')}
+   <p class="hd-lede">The St.&nbsp;Augustine HR platform on Microsoft Power Platform &amp; Dataverse — a hybrid of a focused <b>code app</b> for the HR team's daily work and a <b>model-driven app</b> for administration, over one shared data model and security model. Phase&nbsp;1 delivers the full workflow and migrates the legacy records; later phases layer in automation and reporting on the same foundation — no rebuild.</p>
+
+   <div class="hd-band">Solution architecture · logical tiers</div>
+   <div class="hd-canvas">
+     <div class="hd-tier">${tt('users','Client · front-end','responsive web · desktop &amp; mobile browser')}
+       <div class="hd-row">
+         ${box('Code app','The HR team&rsquo;s daily workspace — Tasks dashboard, Employees grid, profile timeline, Leaves, Applicants','key')}
+         ${box('Model-driven app','Admin layer — reference-list maintenance, bulk corrections, form-based entry the client can customize')}
+         ${box('Power BI','Turnover, headcount &amp; retention dashboards (incl. Indeed-vs-referral analysis)')}
+       </div>
+     </div>
+     ${flow}
+     <div class="hd-tier">${tt('shield','Identity &amp; access','St. Augustine Microsoft 365 tenant')}
+       <div class="hd-row">
+         ${box('Microsoft Entra ID','Staff sign in with their own St.&nbsp;Augustine accounts — no separate logins')}
+         ${box('Security roles','Recruiting · Records · Benefits · Director · Scheduler — each scoped to its own slice')}
+         ${box('FMLA Case role','Separate role so medical/FMLA records stay apart from the personnel file','sec')}
+         ${box('Column security','SSN · date of birth · gender · race locked at the field level','sec')}
+       </div>
+     </div>
+     ${flow}
+     <div class="hd-tier">${tt('server','Platform &amp; logic · back-end','Dataverse · hosted in the client tenant')}
+       <div class="hd-row">
+         ${box('Dataverse','Tables, relationships, business rules, alternate keys &amp; duplicate detection — the core of the system')}
+         ${box('Power Automate flows','60/30/7-day reminders, payroll-change notices, nightly status recalculation')}
+         ${box('Managed solution','One packaged, versioned deliverable promoted Dev → Test → Prod')}
+       </div>
+     </div>
+     ${flow}
+     <div class="hd-tier">${tt('dbase','Data · the normalized model','33 tables · one row per real-world thing')}
+       <div class="hd-row">
+         ${box('Core spine','Person → Employment (one job stint); everything hangs off Employment','key')}
+         ${box('Typed history','Status Change · Pay Rate · Separation — append-only, void-not-delete')}
+         ${box('Hiring','Applicant · Disposition · Onboarding')}
+         ${box('Benefits &amp; comp','Benefit Enrollment · ACA Monthly · Bonus · Bonus Payment')}
+         ${box('Leave','Leave · FMLA Case · FMLA Entitlement (pooled 12-week clock)')}
+         ${box('Compliance','License · Training · Evaluation · Background Check · Discipline')}
+         ${box('Reference lists','Entity · Department · Job Title · Shift · Plans · Reasons — HR-maintained')}
+         ${box('Audit log','Every change recorded; history never deleted')}
+       </div>
+     </div>
+     ${flow}
+     <div class="hd-tier">${tt('link2','External systems · interface boundary','out of scope for phase 1 · interface only')}
+       <div class="hd-row">
+         ${box('Kronos / OnShift','Timekeeping &amp; scheduling — referenced, not replaced')}
+         ${box('Principal · Sun Life · WageWorks','401(k), STD/life, benefits admin — handled in their own systems')}
+         ${box('Diocese spreadsheet','Diocese-owned template — stays a separate document; system can help populate it')}
+         ${box('Microsoft 365 / Outlook','Email reminders &amp; notices via the tenant&rsquo;s own mail')}
+       </div>
+     </div>
+   </div>
+
+   <div class="hd-g2" style="margin-top:14px">
+     <div class="hd-panel">
+       <h3><span class="pi">${ic('dbase',16)}</span> Conceptual data model</h3>
+       <div class="hd-chain">
+         <span class="hd-ent k">Person<span class="g">one per human</span></span><span class="hd-ar">→</span>
+         <span class="hd-ent k">Employment<span class="g">one per job stint</span></span><span class="hd-ar">→</span>
+         <span class="hd-ent">Pay · Status · Leave · Benefits · Discipline<span class="g">all link to Employment</span></span>
+       </div>
+       <div class="hd-note"><b>Why decomposed:</b> the client's spreadsheets keep one messy row per person per year. We split that into connected tables so nothing is retyped, history is never lost, and reports can span years. A rehire or transfer adds a new Employment row linked to the prior one.</div>
+       <p style="margin-top:12px"><a class="hd-link" data-a="nav" data-p="diagram" href="#">Open the full ER model →</a></p>
+     </div>
+     <div class="hd-panel">
+       <h3><span class="pi">${ic('floww',16)}</span> Employment lifecycle</h3>
+       <div class="hd-step">
+         <span class="s">Applicant</span><span class="hd-ar">→</span>
+         <span class="s d">Hire</span><span class="hd-ar">→</span>
+         <span class="s">Onboard</span><span class="hd-ar">→</span>
+         <span class="s">Status changes</span><span class="hd-ar">→</span>
+         <span class="s e">Leave / FMLA</span><span class="hd-ar">→</span>
+         <span class="s">Separation</span>
+       </div>
+       <div class="hd-note"><b>Undo never deletes:</b> correcting a history record marks it voided (with who &amp; when) and links a replacement — the timeline stays complete and auditable. Terminations follow the 7-step checklist; a letter is legally required except for resignations.</div>
+     </div>
+   </div>
+
+   <div class="hd-band">Security &amp; compliance</div>
+   <div class="hd-g3">
+     <div class="hd-panel"><h3><span class="pi">${ic('lock',16)}</span> Field-level protection</h3>
+       <ul class="hd-li">
+         <li><span class="ck">${ic('check',14)}</span><span><b>Column security</b> on SSN, DOB, gender &amp; race — visible only to roles that need them.</span></li>
+         <li><span class="ck">${ic('check',14)}</span><span><b>Role-scoped access</b> — each of the 5 roles sees exactly its slice of data.</span></li>
+       </ul></div>
+     <div class="hd-panel"><h3><span class="pi">${ic('shield',16)}</span> FMLA / medical isolation</h3>
+       <ul class="hd-li">
+         <li><span class="ck">${ic('check',14)}</span><span><b>Separate FMLA Case role</b> — medical records are legally kept apart from the personnel file.</span></li>
+         <li><span class="ck">${ic('check',14)}</span><span><b>Pooled 12-week entitlement</b> tracked per person, drawn down by concurrent certifications.</span></li>
+       </ul></div>
+     <div class="hd-panel"><h3><span class="pi">${ic('archive',16)}</span> Audit &amp; integrity</h3>
+       <ul class="hd-li">
+         <li><span class="ck">${ic('check',14)}</span><span><b>Append-only history</b> grids (create + read, no edit/delete) on the typed history tables.</span></li>
+         <li><span class="ck">${ic('check',14)}</span><span><b>Auditing</b> on Employment &amp; Pay Rate captures every other change.</span></li>
+       </ul></div>
+   </div>
+
+   <div class="hd-band">Migration &amp; data onboarding</div>
+   <div class="hd-panel">
+     <div class="hd-step" style="margin-bottom:12px">
+       <span class="s">Legacy Access DB + spreadsheets</span><span class="hd-ar">→</span>
+       <span class="s d">Transform &amp; decode</span><span class="hd-ar">→</span>
+       <span class="s d">Dedup on LAST+FIRST+DOB</span><span class="hd-ar">→</span>
+       <span class="s">Load reference lists → Person → Employment</span><span class="hd-ar">→</span>
+       <span class="s e">Parallel run → cutover</span>
+     </div>
+     <div class="hd-g3" style="margin-top:4px">
+       ${box('Decode the codes','"FT36 NB" → Type FT · 36 hrs · not benefits-eligible. The files spell these 30+ ways — splitting them is the cleanup.')}
+       ${box('Split &amp; clean','"Last, First" → two columns · strip "$" from amounts · one-tab-per-year collapses into Year + Month columns.')}
+       ${box('Safe by rehearsal','Everything is rehearsed on a practice environment with invented data first; real data loads once, in the client tenant.')}
+     </div>
+     <div class="hd-note"><b>Dedup rule:</b> a within-year department change can leave one person with two employee numbers in a single year-sheet — matched and merged on name + date of birth.</div>
+   </div>
+
+   <div class="hd-g2" style="margin-top:14px">
+     <div class="hd-panel"><h3><span class="pi">${ic('chart',16)}</span> Non-functional targets</h3>
+       <div class="hd-chain" style="display:block">
+         <div class="hd-step" style="gap:8px">
+           ${box('Scale','~160–500 employees · 4–5 concurrent HR users')}
+           ${box('Availability','Production SLA with automatic backups + point-in-time restore')}
+         </div>
+         <div class="hd-step" style="gap:8px;margin-top:8px">
+           ${box('Residency','US region · data stays in St.&nbsp;Augustine&rsquo;s own tenant')}
+           ${box('Recovery','Managed-solution redeploy + restore — the scripts rebuild the schema in minutes')}
+         </div>
+       </div>
+     </div>
+     <div class="hd-panel"><h3><span class="pi">${ic('layers',16)}</span> Delivery in phases</h3>
+       <div class="hd-step" style="gap:10px">
+         <div class="hd-ph" style="--c:var(--blue)"><div class="pt">Phase 1 · now</div><b>Core HR + migration</b><small>The full workflow, the normalized model, security, and the legacy data migrated. A complete standalone win.</small></div>
+         <div class="hd-ph" style="--c:var(--amber)"><div class="pt">Phase 2 · next</div><b>Automation + reporting</b><small>Reminder/notice flows and Power BI maturity on the same foundation.</small></div>
+       </div>
+     </div>
+   </div>
+
+   <div class="hd-band">Deployment · Power Platform ALM</div>
+   <div class="hd-canvas">
+     <div class="hd-step" style="justify-content:center;gap:10px">
+       <span class="s d">Dev</span><span class="hd-ar">→</span>
+       <span class="s d">Test</span><span class="hd-ar">→</span>
+       <span class="s d">Prod</span>
+       <span style="margin-left:12px;font-size:11.5px;color:var(--ink-3)">managed-solution pipeline · repeatable from scripts</span>
+     </div>
+   </div>
+   <div class="hd-g4" style="margin-top:12px">
+     ${box('Ownership','Everything runs in St.&nbsp;Augustine&rsquo;s own Power Platform tenant — they own the app and the data.')}
+     ${box('Backups','Production environment: automatic backups + PITR. The script library rebuilds the schema anytime.')}
+     ${box('Delivery','Schema &amp; app shipped as versioned scripts + a managed solution — the same assets replay into the client tenant.')}
+     ${box('Licensing','Power Apps (per-user or pay-as-you-go) + Power BI Pro for viewers; no Dynamics 365 apps needed.')}
+   </div>
+
+   <div class="hd-band">Assumptions, dependencies &amp; risks</div>
+   <div class="hd-panel">
+     <div class="hd-risk"><span class="rk"></span><span><b>Tenant access &amp; licensing</b> — the real build depends on St.&nbsp;Augustine provisioning environments + licenses (admin-owned).</span></div>
+     <div class="hd-risk"><span class="rk"></span><span><b>External systems are interface-only</b> — Kronos, OnShift, WageWorks, Principal, Sun Life and the diocese spreadsheet stay in their own systems in phase 1.</span></div>
+     <div class="hd-risk"><span class="rk"></span><span><b>Legacy data quality</b> — codes are spelled many ways and employee numbers can collide within a year; migration rules handle this but the source files drive the edge cases.</span></div>
+     <div class="hd-risk"><span class="rk"></span><span><b>A few open discovery items</b> — EEO-1 race/ethnicity list, final disposition-code legend, and evaluation cadence to be confirmed with the client.</span></div>
+   </div>
+
+   <p class="hd-note" style="margin-top:20px;background:none;border:0;padding:0;color:var(--ink-3)">Concept prototype with sample data — the architecture is the deliverable, not this preview.</p>
+ </div></div>`;
+}
 function diagramPage(){
  const controls=`<div class="dia-controls">
    <button class="icon-btn sm" data-a="diaZoom" data-d="out" aria-label="Zoom out" title="Zoom out">${ic('zout',16)}</button>

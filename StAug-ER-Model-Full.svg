@@ -1,0 +1,2123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2892" height="3538" viewBox="0 0 2892 3538" role="img" aria-labelledby="t">
+<title id="t">St. Augustine HR Ops Platform ER model, steps 2 to 8</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@87,600;87,700&amp;family=IBM+Plex+Sans:wght@400;500&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap');
+.bgr{fill:#ffffff} .canvas{fill:#f8f9f7} .frame{fill:none;stroke:#d7dcd4;stroke-width:1}
+.edge{fill:none;stroke:#6d7684;stroke-width:1.4} .edge.dash{stroke-dasharray:5 4} .mk{fill:none;stroke:#6d7684;stroke-width:1.4} .mkc{fill:#f8f9f7}
+.elab{font:italic 400 10.5px 'IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif;fill:#586170} .body{fill:#ffffff;stroke:#b9c0b6;stroke-width:1} .hdrline{stroke:#b9c0b6;stroke-width:1} .rowline{stroke:#d7dcd4;stroke-width:.6}
+.ttl{font:600 12.5px 'IBM Plex Mono',Menlo,Consolas,'Liberation Mono',monospace;fill:#1b2230} .sub{font:italic 400 10.5px 'IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif;fill:#586170} .key{font:600 9.5px 'IBM Plex Mono',Menlo,Consolas,'Liberation Mono',monospace;fill:#9a7224;letter-spacing:.03em}
+.col{font:400 11px 'IBM Plex Mono',Menlo,Consolas,'Liberation Mono',monospace;fill:#1b2230} .ghost .col{font-size:10.5px} .col.rest{fill:#b42318} .typ{font:400 10px 'IBM Plex Mono',Menlo,Consolas,'Liberation Mono',monospace;fill:#586170}
+.g-org .hdr,.g-emp .hdr{fill:#e5f1e7} .g-disc .hdr{fill:#fbe9e7} .g-code .hdr,.g-app .hdr{fill:#f3ead6} .g-id .hdr{fill:#e6ecf5} .g-terms .hdr{fill:#efe6f2}
+.g-view .body{stroke-dasharray:2 3} .ghost .hdr{fill:transparent} .ghost .body{fill:transparent;stroke-dasharray:5 4} .ghost .ttl,.ghost .col{fill:#586170}
+.h1{font:700 46px Archivo,'Arial Narrow','Segoe UI',Helvetica,Arial,sans-serif;fill:#1b2230} .h2{font:400 19px 'IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif;fill:#586170} .eb{font:500 14px 'IBM Plex Mono',Menlo,Consolas,'Liberation Mono',monospace;fill:#9a7224;letter-spacing:.1em}
+.pt{font:700 21px Archivo,'Arial Narrow','Segoe UI',Helvetica,Arial,sans-serif;fill:#1b2230} .pr{font:500 12.5px 'IBM Plex Mono',Menlo,Consolas,'Liberation Mono',monospace;fill:#9a7224} .pn{font:400 12.5px 'IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif;fill:#586170} .kl{font:400 13.5px 'IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif;fill:#1b2230} .ft{font:400 13px 'IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif;fill:#586170}</style>
+<defs><marker id="k-one" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="12" y1="4" x2="12" y2="18"/><line class="mk" x1="16" y1="4" x2="16" y2="18"/></marker><marker id="k-zone" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><circle class="mk mkc" cx="8" cy="11" r="4"/><line class="mk" x1="16" y1="4" x2="16" y2="18"/></marker><marker id="k-zmany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><circle class="mk mkc" cx="5" cy="11" r="4"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker><marker id="k-omany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="9" y1="4" x2="9" y2="18"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker></defs>
+<rect class="bgr" x="0" y="0" width="2892" height="3538"/>
+<text class="eb" x="48" y="62">ST. AUGUSTINE HR OPS PLATFORM · DATA MODEL · MICROSOFT DATAVERSE</text>
+<text class="h1" x="48" y="118">Entity-relationship model, steps 2 to 8</text>
+<text class="h2" x="48" y="152">For technical review. Revised 2026-10-07 by Nester Labs. Each panel is one design step; column details, decisions and open questions are in the accompanying model document.</text>
+<g transform="translate(48,190)">
+<text class="pt" x="0" y="22">Step 2 · Person, Application, Employment</text>
+<text class="pr" x="1500" y="22" text-anchor="end">revision 12</text>
+<text class="pn" x="0" y="44">Crow's-foot notation. Header colour marks the area; dashed boxes are tables from other steps. Reference and code tables are foreign-key targets and aren't drawn. Every dated-terms row also carries produced_by_event_id back to</text>
+<text class="pn" x="0" y="62">the event that created it.</text>
+<rect class="frame" x="-1" y="79" width="1502" height="1112" rx="4"/>
+<svg x="0" y="80" width="1500" height="1110" viewBox="0 0 1500 1110">
+
+<defs>
+<marker id="s2-m-one" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="12" y1="4" x2="12" y2="18"/><line class="mk" x1="16" y1="4" x2="16" y2="18"/></marker>
+<marker id="s2-m-zone" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><circle class="mk mkc" cx="8" cy="11" r="4"/><line class="mk" x1="16" y1="4" x2="16" y2="18"/></marker>
+<marker id="s2-m-zmany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><circle class="mk mkc" cx="5" cy="11" r="4"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker>
+<marker id="s2-m-omany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="9" y1="4" x2="9" y2="18"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker>
+</defs>
+<rect class="canvas" x="0" y="0" width="1500" height="1110"/>
+<path class="edge" d="M520,300 V240 H620" marker-start="url(#s2-m-zone)" marker-end="url(#s2-m-zmany)"/>
+<path class="edge" d="M620,109 H560" marker-start="url(#s2-m-one)" marker-end="url(#s2-m-omany)"/>
+<path class="edge" d="M860,109 H920" marker-start="url(#s2-m-one)" marker-end="url(#s2-m-zone)"/>
+<path class="edge" d="M1000,178 V400" marker-start="url(#s2-m-zmany)" marker-end="url(#s2-m-one)"/>
+<path class="edge" d="M860,290 H890 V430 H920" marker-start="url(#s2-m-zone)" marker-end="url(#s2-m-zone)"/>
+<path class="edge" d="M560,470 H920" marker-start="url(#s2-m-one)" marker-end="url(#s2-m-zmany)"/>
+<path class="edge dash" d="M560,680 H900 V540 H920" marker-start="url(#s2-m-zmany)" marker-end="url(#s2-m-one)"/>
+<path class="edge" d="M1080,400 V372 H1120 V400" marker-start="url(#s2-m-zmany)" marker-end="url(#s2-m-zone)"/>
+<path class="edge" d="M1040,558 V620" marker-start="url(#s2-m-one)" marker-end="url(#s2-m-omany)"/>
+<path class="edge" d="M1160,690 H1190 V760 H1160" marker-start="url(#s2-m-zone)" marker-end="url(#s2-m-zone)"/>
+<path class="edge" d="M920,760 H860" marker-start="url(#s2-m-one)" marker-end="url(#s2-m-zone)"/>
+<path class="edge" d="M1040,838 V900" marker-start="url(#s2-m-one)" marker-end="url(#s2-m-zone)"/>
+<path class="edge" d="M1160,410 H1190 V110 H1220" marker-start="url(#s2-m-one)" marker-end="url(#s2-m-zmany)"/>
+<path class="edge" d="M1160,440 H1220" marker-start="url(#s2-m-one)" marker-end="url(#s2-m-zmany)"/>
+<path class="edge" d="M1160,548 H1220" marker-start="url(#s2-m-one)" marker-end="url(#s2-m-zmany)"/>
+<text class="elab" transform="translate(1206,725) rotate(90)" text-anchor="middle">reverses · supersedes</text>
+<text class="elab" transform="translate(1206,260) rotate(90)" text-anchor="middle">number history</text>
+<text class="elab" x="512" y="272" text-anchor="end">matched or hired</text>
+<text class="elab" x="590" y="101" text-anchor="middle">codes</text>
+<text class="elab" x="890" y="101" text-anchor="middle">rehire</text>
+<text class="elab" x="1008" y="292" text-anchor="start">matched to</text>
+<text class="elab" x="869" y="282" text-anchor="start">hired as</text>
+<text class="elab" x="740" y="462" text-anchor="middle">holds</text>
+<text class="elab" x="740" y="672" text-anchor="middle">discipline (step 4)</text>
+<text class="elab" x="1100" y="364" text-anchor="middle">rehire of</text>
+<text class="elab" x="1048" y="592" text-anchor="start">append-only</text>
+<text class="elab" x="1048" y="872" text-anchor="start">SEPARATION</text>
+<g class="ent g-ghost ghost" id="s2-e-ref">
+<rect class="body" x="40" y="640" width="240" height="118" rx="4"/>
+<path class="hdr" d="M40,670 V644 Q40,640 44,640 H276 Q280,640 280,644 V670 Z"/>
+<line class="hdrline" x1="40" y1="670" x2="280" y2="670"/>
+<text class="ttl" x="50" y="660">lookup targets</text>
+<text class="sub" x="270" y="660" text-anchor="end">not drawn</text>
+<text class="col" x="50" y="685">step 3: company &#183; facility &#183; department</text>
+<text class="typ" x="270" y="685" text-anchor="end"></text>
+<line class="rowline" x1="48" y1="690" x2="272" y2="690"/>
+<text class="col" x="50" y="705">step 3: position &#183; unit</text>
+<text class="typ" x="270" y="705" text-anchor="end"></text>
+<line class="rowline" x1="48" y1="710" x2="272" y2="710"/>
+<text class="col" x="50" y="725">codes: separation_reason &#183; subreason</text>
+<text class="typ" x="270" y="725" text-anchor="end"></text>
+<line class="rowline" x1="48" y1="730" x2="272" y2="730"/>
+<text class="col" x="50" y="745">codes: disposition_code &#183; source_channel</text>
+<text class="typ" x="270" y="745" text-anchor="end"></text>
+</g>
+<g class="ent g-app" id="s2-e-adis">
+<rect class="body" x="320" y="60" width="240" height="98" rx="4"/>
+<path class="hdr" d="M320,90 V64 Q320,60 324,60 H556 Q560,60 560,64 V90 Z"/>
+<line class="hdrline" x1="320" y1="90" x2="560" y2="90"/>
+<text class="ttl" x="330" y="80">application_disposition</text>
+<text class="key" x="330" y="105">PK FK</text>
+<text class="col" x="372" y="105">application_id</text>
+<text class="typ" x="550" y="105" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="110" x2="552" y2="110"/>
+<text class="key" x="330" y="125">PK FK</text>
+<text class="col" x="372" y="125">disposition_code</text>
+<text class="typ" x="550" y="125" text-anchor="end">code</text>
+<line class="rowline" x1="328" y1="130" x2="552" y2="130"/>
+<text class="col" x="330" y="145">recorded_on</text>
+<text class="typ" x="550" y="145" text-anchor="end">date</text>
+</g>
+<g class="ent g-id" id="s2-e-per">
+<rect class="body" x="320" y="300" width="240" height="338" rx="4"/>
+<path class="hdr" d="M320,330 V304 Q320,300 324,300 H556 Q560,300 560,304 V330 Z"/>
+<line class="hdrline" x1="320" y1="330" x2="560" y2="330"/>
+<text class="ttl" x="330" y="320">person</text>
+<text class="key" x="330" y="345">PK</text>
+<text class="col" x="356" y="345">person_id</text>
+<text class="typ" x="550" y="345" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="350" x2="552" y2="350"/>
+<text class="col" x="330" y="365">legal_last &#183; first &#183; middle</text>
+<text class="typ" x="550" y="365" text-anchor="end">text</text>
+<line class="rowline" x1="328" y1="370" x2="552" y2="370"/>
+<text class="col" x="330" y="385">former_last_name</text>
+<text class="typ" x="550" y="385" text-anchor="end">text?</text>
+<line class="rowline" x1="328" y1="390" x2="552" y2="390"/>
+<text class="col" x="330" y="405">preferred_name</text>
+<text class="typ" x="550" y="405" text-anchor="end">text?</text>
+<line class="rowline" x1="328" y1="410" x2="552" y2="410"/>
+<text class="col" x="330" y="425">date_of_birth</text>
+<text class="typ" x="550" y="425" text-anchor="end">date?</text>
+<line class="rowline" x1="328" y1="430" x2="552" y2="430"/>
+<text class="col rest" x="330" y="445">sex &#183; race_code &#183; hispanic</text>
+<text class="typ" x="550" y="445" text-anchor="end">enum?</text>
+<line class="rowline" x1="328" y1="450" x2="552" y2="450"/>
+<text class="col rest" x="330" y="465">religion</text>
+<text class="typ" x="550" y="465" text-anchor="end">text?</text>
+<line class="rowline" x1="328" y1="470" x2="552" y2="470"/>
+<text class="col rest" x="330" y="485">ssn &#183; ssn_last4</text>
+<text class="typ" x="550" y="485" text-anchor="end">text?</text>
+<line class="rowline" x1="328" y1="490" x2="552" y2="490"/>
+<text class="col" x="330" y="505">address_line1 &#8230; postal_code</text>
+<text class="typ" x="550" y="505" text-anchor="end">text?</text>
+<line class="rowline" x1="328" y1="510" x2="552" y2="510"/>
+<text class="col" x="330" y="525">phone &#183; email</text>
+<text class="typ" x="550" y="525" text-anchor="end">text?</text>
+<line class="rowline" x1="328" y1="530" x2="552" y2="530"/>
+<text class="col" x="330" y="545">ec_name &#183; ec_relationship</text>
+<text class="typ" x="550" y="545" text-anchor="end">text?</text>
+<line class="rowline" x1="328" y1="550" x2="552" y2="550"/>
+<text class="col" x="330" y="565">ec_phone</text>
+<text class="typ" x="550" y="565" text-anchor="end">text?</text>
+<line class="rowline" x1="328" y1="570" x2="552" y2="570"/>
+<text class="col" x="330" y="585">ec_share_with_supervisor</text>
+<text class="typ" x="550" y="585" text-anchor="end">bool</text>
+<line class="rowline" x1="328" y1="590" x2="552" y2="590"/>
+<text class="col" x="330" y="605">ec_consent_on</text>
+<text class="typ" x="550" y="605" text-anchor="end">date?</text>
+<line class="rowline" x1="328" y1="610" x2="552" y2="610"/>
+<text class="key" x="330" y="625">FK</text>
+<text class="col" x="356" y="625">merged_into_person_id</text>
+<text class="typ" x="550" y="625" text-anchor="end">uuid?</text>
+</g>
+<g class="ent g-ghost ghost" id="s2-e-disc">
+<rect class="body" x="320" y="660" width="240" height="138" rx="4"/>
+<path class="hdr" d="M320,690 V664 Q320,660 324,660 H556 Q560,660 560,664 V690 Z"/>
+<line class="hdrline" x1="320" y1="690" x2="560" y2="690"/>
+<text class="ttl" x="330" y="680">discipline_record</text>
+<text class="sub" x="550" y="680" text-anchor="end">step 4</text>
+<text class="key" x="330" y="705">PK</text>
+<text class="col" x="356" y="705">discipline_id</text>
+<text class="typ" x="550" y="705" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="710" x2="552" y2="710"/>
+<text class="key" x="330" y="725">FK</text>
+<text class="col" x="356" y="725">employment_id</text>
+<text class="typ" x="550" y="725" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="730" x2="552" y2="730"/>
+<text class="key" x="330" y="745">FK</text>
+<text class="col" x="356" y="745">level_code</text>
+<text class="typ" x="550" y="745" text-anchor="end">code</text>
+<line class="rowline" x1="328" y1="750" x2="552" y2="750"/>
+<text class="key" x="330" y="765">FK</text>
+<text class="col" x="356" y="765">policy_rule_code</text>
+<text class="typ" x="550" y="765" text-anchor="end">code?</text>
+<line class="rowline" x1="328" y1="770" x2="552" y2="770"/>
+<text class="col" x="330" y="785">issued_on</text>
+<text class="typ" x="550" y="785" text-anchor="end">date</text>
+</g>
+<g class="ent g-app" id="s2-e-app">
+<rect class="body" x="620" y="40" width="240" height="278" rx="4"/>
+<path class="hdr" d="M620,70 V44 Q620,40 624,40 H856 Q860,40 860,44 V70 Z"/>
+<line class="hdrline" x1="620" y1="70" x2="860" y2="70"/>
+<text class="ttl" x="630" y="60">application</text>
+<text class="key" x="630" y="85">PK</text>
+<text class="col" x="656" y="85">application_id</text>
+<text class="typ" x="850" y="85" text-anchor="end">uuid</text>
+<line class="rowline" x1="628" y1="90" x2="852" y2="90"/>
+<text class="key" x="630" y="105">FK</text>
+<text class="col" x="656" y="105">person_id</text>
+<text class="typ" x="850" y="105" text-anchor="end">uuid?</text>
+<line class="rowline" x1="628" y1="110" x2="852" y2="110"/>
+<text class="key" x="630" y="125">FK</text>
+<text class="col" x="656" y="125">department_id</text>
+<text class="typ" x="850" y="125" text-anchor="end">uuid</text>
+<line class="rowline" x1="628" y1="130" x2="852" y2="130"/>
+<text class="key" x="630" y="145">FK</text>
+<text class="col" x="656" y="145">position_id</text>
+<text class="typ" x="850" y="145" text-anchor="end">uuid?</text>
+<line class="rowline" x1="628" y1="150" x2="852" y2="150"/>
+<text class="key" x="630" y="165">FK</text>
+<text class="col" x="656" y="165">source_channel</text>
+<text class="typ" x="850" y="165" text-anchor="end">code</text>
+<line class="rowline" x1="628" y1="170" x2="852" y2="170"/>
+<text class="key" x="630" y="185">FK</text>
+<text class="col" x="656" y="185">referred_by_person_id</text>
+<text class="typ" x="850" y="185" text-anchor="end">uuid?</text>
+<line class="rowline" x1="628" y1="190" x2="852" y2="190"/>
+<text class="key" x="630" y="205">FK</text>
+<text class="col" x="656" y="205">routed_to_person_id</text>
+<text class="typ" x="850" y="205" text-anchor="end">uuid?</text>
+<line class="rowline" x1="628" y1="210" x2="852" y2="210"/>
+<text class="col" x="630" y="225">received_on</text>
+<text class="typ" x="850" y="225" text-anchor="end">date</text>
+<line class="rowline" x1="628" y1="230" x2="852" y2="230"/>
+<text class="col" x="630" y="245">status</text>
+<text class="typ" x="850" y="245" text-anchor="end">enum</text>
+<line class="rowline" x1="628" y1="250" x2="852" y2="250"/>
+<text class="col" x="630" y="265">hire: position &#183; unit &#183; shift_text</text>
+<text class="typ" x="850" y="265" text-anchor="end">?</text>
+<line class="rowline" x1="628" y1="270" x2="852" y2="270"/>
+<text class="col" x="630" y="285">hire: rate &#183; hours &#183; pay_program</text>
+<text class="typ" x="850" y="285" text-anchor="end">?</text>
+<line class="rowline" x1="628" y1="290" x2="852" y2="290"/>
+<text class="col" x="630" y="305">hire: physical_on &#183; orientation_on</text>
+<text class="typ" x="850" y="305" text-anchor="end">date?</text>
+</g>
+<g class="ent g-app" id="s2-e-rhr">
+<rect class="body" x="920" y="40" width="240" height="138" rx="4"/>
+<path class="hdr" d="M920,70 V44 Q920,40 924,40 H1156 Q1160,40 1160,44 V70 Z"/>
+<line class="hdrline" x1="920" y1="70" x2="1160" y2="70"/>
+<text class="ttl" x="930" y="60">rehire_review</text>
+<text class="key" x="930" y="85">PK FK</text>
+<text class="col" x="972" y="85">application_id</text>
+<text class="typ" x="1150" y="85" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="90" x2="1152" y2="90"/>
+<text class="key" x="930" y="105">FK</text>
+<text class="col" x="956" y="105">matched_employment_id</text>
+<text class="typ" x="1150" y="105" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="110" x2="1152" y2="110"/>
+<text class="col" x="930" y="125">eligibility_on_record</text>
+<text class="typ" x="1150" y="125" text-anchor="end">enum</text>
+<line class="rowline" x1="928" y1="130" x2="1152" y2="130"/>
+<text class="col" x="930" y="145">director_decision</text>
+<text class="typ" x="1150" y="145" text-anchor="end">enum</text>
+<line class="rowline" x1="928" y1="150" x2="1152" y2="150"/>
+<text class="key" x="930" y="165">FK</text>
+<text class="col" x="956" y="165">decided_by_person_id</text>
+<text class="typ" x="1150" y="165" text-anchor="end">uuid?</text>
+</g>
+<g class="ent g-emp" id="s2-e-rein">
+<rect class="body" x="620" y="700" width="240" height="118" rx="4"/>
+<path class="hdr" d="M620,730 V704 Q620,700 624,700 H856 Q860,700 860,704 V730 Z"/>
+<line class="hdrline" x1="620" y1="730" x2="860" y2="730"/>
+<text class="ttl" x="630" y="720">reinstatement_detail</text>
+<text class="key" x="630" y="745">PK FK</text>
+<text class="col" x="672" y="745">event_id</text>
+<text class="typ" x="850" y="745" text-anchor="end">uuid</text>
+<line class="rowline" x1="628" y1="750" x2="852" y2="750"/>
+<text class="col" x="630" y="765">days_since_separation</text>
+<text class="typ" x="850" y="765" text-anchor="end">int</text>
+<line class="rowline" x1="628" y1="770" x2="852" y2="770"/>
+<text class="col" x="630" y="785">terms_changed</text>
+<text class="typ" x="850" y="785" text-anchor="end">bool</text>
+<line class="rowline" x1="628" y1="790" x2="852" y2="790"/>
+<text class="col" x="630" y="805">agreement_signed_on</text>
+<text class="typ" x="850" y="805" text-anchor="end">date</text>
+</g>
+<g class="ent g-emp" id="s2-e-empl">
+<rect class="body" x="920" y="400" width="240" height="178" rx="4"/>
+<path class="hdr" d="M920,430 V404 Q920,400 924,400 H1156 Q1160,400 1160,404 V430 Z"/>
+<line class="hdrline" x1="920" y1="430" x2="1160" y2="430"/>
+<text class="ttl" x="930" y="420">employment</text>
+<text class="key" x="930" y="445">PK</text>
+<text class="col" x="956" y="445">employment_id</text>
+<text class="typ" x="1150" y="445" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="450" x2="1152" y2="450"/>
+<text class="key" x="930" y="465">FK</text>
+<text class="col" x="956" y="465">person_id</text>
+<text class="typ" x="1150" y="465" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="470" x2="1152" y2="470"/>
+<text class="key" x="930" y="485">FK</text>
+<text class="col" x="956" y="485">origin_application_id</text>
+<text class="typ" x="1150" y="485" text-anchor="end">uuid?</text>
+<line class="rowline" x1="928" y1="490" x2="1152" y2="490"/>
+<text class="key" x="930" y="505">FK</text>
+<text class="col" x="956" y="505">rehire_of_employment_id</text>
+<text class="typ" x="1150" y="505" text-anchor="end">uuid?</text>
+<line class="rowline" x1="928" y1="510" x2="1152" y2="510"/>
+<text class="col" x="930" y="525">original_hire_date</text>
+<text class="typ" x="1150" y="525" text-anchor="end">date</text>
+<line class="rowline" x1="928" y1="530" x2="1152" y2="530"/>
+<text class="col" x="930" y="545">lifecycle_state</text>
+<text class="typ" x="1150" y="545" text-anchor="end">enum</text>
+<line class="rowline" x1="928" y1="550" x2="1152" y2="550"/>
+<text class="col" x="930" y="565">current_* (synced)</text>
+<text class="typ" x="1150" y="565" text-anchor="end"></text>
+</g>
+<g class="ent g-emp" id="s2-e-evt">
+<rect class="body" x="920" y="620" width="240" height="198" rx="4"/>
+<path class="hdr" d="M920,650 V624 Q920,620 924,620 H1156 Q1160,620 1160,624 V650 Z"/>
+<line class="hdrline" x1="920" y1="650" x2="1160" y2="650"/>
+<text class="ttl" x="930" y="640">employment_event</text>
+<text class="key" x="930" y="665">PK</text>
+<text class="col" x="956" y="665">event_id</text>
+<text class="typ" x="1150" y="665" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="670" x2="1152" y2="670"/>
+<text class="key" x="930" y="685">FK</text>
+<text class="col" x="956" y="685">employment_id</text>
+<text class="typ" x="1150" y="685" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="690" x2="1152" y2="690"/>
+<text class="col" x="930" y="705">event_type</text>
+<text class="typ" x="1150" y="705" text-anchor="end">enum</text>
+<line class="rowline" x1="928" y1="710" x2="1152" y2="710"/>
+<text class="col" x="930" y="725">change_kinds</text>
+<text class="typ" x="1150" y="725" text-anchor="end">set?</text>
+<line class="rowline" x1="928" y1="730" x2="1152" y2="730"/>
+<text class="col" x="930" y="745">effective_date</text>
+<text class="typ" x="1150" y="745" text-anchor="end">date</text>
+<line class="rowline" x1="928" y1="750" x2="1152" y2="750"/>
+<text class="key" x="930" y="765">FK</text>
+<text class="col" x="956" y="765">reverses_event_id</text>
+<text class="typ" x="1150" y="765" text-anchor="end">uuid?</text>
+<line class="rowline" x1="928" y1="770" x2="1152" y2="770"/>
+<text class="key" x="930" y="785">FK</text>
+<text class="col" x="956" y="785">supersedes_event_id</text>
+<text class="typ" x="1150" y="785" text-anchor="end">uuid?</text>
+<line class="rowline" x1="928" y1="790" x2="1152" y2="790"/>
+<text class="col" x="930" y="805">batch_label</text>
+<text class="typ" x="1150" y="805" text-anchor="end">text?</text>
+</g>
+<g class="ent g-emp" id="s2-e-sep">
+<rect class="body" x="920" y="900" width="240" height="198" rx="4"/>
+<path class="hdr" d="M920,930 V904 Q920,900 924,900 H1156 Q1160,900 1160,904 V930 Z"/>
+<line class="hdrline" x1="920" y1="930" x2="1160" y2="930"/>
+<text class="ttl" x="930" y="920">separation_detail</text>
+<text class="key" x="930" y="945">PK FK</text>
+<text class="col" x="972" y="945">event_id</text>
+<text class="typ" x="1150" y="945" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="950" x2="1152" y2="950"/>
+<text class="col" x="930" y="965">last_day_worked</text>
+<text class="typ" x="1150" y="965" text-anchor="end">date</text>
+<line class="rowline" x1="928" y1="970" x2="1152" y2="970"/>
+<text class="key" x="930" y="985">FK</text>
+<text class="col" x="956" y="985">reason_code</text>
+<text class="typ" x="1150" y="985" text-anchor="end">code</text>
+<line class="rowline" x1="928" y1="990" x2="1152" y2="990"/>
+<text class="key" x="930" y="1005">FK</text>
+<text class="col" x="956" y="1005">reason_subcode</text>
+<text class="typ" x="1150" y="1005" text-anchor="end">code?</text>
+<line class="rowline" x1="928" y1="1010" x2="1152" y2="1010"/>
+<text class="key" x="930" y="1025">FK</text>
+<text class="col" x="956" y="1025">policy_rule_code</text>
+<text class="typ" x="1150" y="1025" text-anchor="end">code?</text>
+<line class="rowline" x1="928" y1="1030" x2="1152" y2="1030"/>
+<text class="col" x="930" y="1045">rehire_eligibility</text>
+<text class="typ" x="1150" y="1045" text-anchor="end">enum</text>
+<line class="rowline" x1="928" y1="1050" x2="1152" y2="1050"/>
+<text class="col" x="930" y="1065">appeal_deadline</text>
+<text class="typ" x="1150" y="1065" text-anchor="end">date?</text>
+<line class="rowline" x1="928" y1="1070" x2="1152" y2="1070"/>
+<text class="col" x="930" y="1085">rescinded_on</text>
+<text class="typ" x="1150" y="1085" text-anchor="end">date?</text>
+</g>
+<g class="ent g-terms" id="s2-e-eno">
+<rect class="body" x="1220" y="40" width="240" height="158" rx="4"/>
+<path class="hdr" d="M1220,70 V44 Q1220,40 1224,40 H1456 Q1460,40 1460,44 V70 Z"/>
+<line class="hdrline" x1="1220" y1="70" x2="1460" y2="70"/>
+<text class="ttl" x="1230" y="60">employee_number</text>
+<text class="key" x="1230" y="85">PK</text>
+<text class="col" x="1256" y="85">employee_number_id</text>
+<text class="typ" x="1450" y="85" text-anchor="end">uuid</text>
+<line class="rowline" x1="1228" y1="90" x2="1452" y2="90"/>
+<text class="key" x="1230" y="105">FK</text>
+<text class="col" x="1256" y="105">employment_id</text>
+<text class="typ" x="1450" y="105" text-anchor="end">uuid</text>
+<line class="rowline" x1="1228" y1="110" x2="1452" y2="110"/>
+<text class="key" x="1230" y="125">FK</text>
+<text class="col" x="1256" y="125">department_id</text>
+<text class="typ" x="1450" y="125" text-anchor="end">uuid</text>
+<line class="rowline" x1="1228" y1="130" x2="1452" y2="130"/>
+<text class="key" x="1230" y="145">FK</text>
+<text class="col" x="1256" y="145">produced_by_event_id</text>
+<text class="typ" x="1450" y="145" text-anchor="end">uuid?</text>
+<line class="rowline" x1="1228" y1="150" x2="1452" y2="150"/>
+<text class="col" x="1230" y="165">number</text>
+<text class="typ" x="1450" y="165" text-anchor="end">text</text>
+<line class="rowline" x1="1228" y1="170" x2="1452" y2="170"/>
+<text class="col" x="1230" y="185">effective_from &#183; to</text>
+<text class="typ" x="1450" y="185" text-anchor="end">date</text>
+</g>
+<g class="ent g-terms" id="s2-e-job">
+<rect class="body" x="1220" y="210" width="240" height="298" rx="4"/>
+<path class="hdr" d="M1220,240 V214 Q1220,210 1224,210 H1456 Q1460,210 1460,214 V240 Z"/>
+<line class="hdrline" x1="1220" y1="240" x2="1460" y2="240"/>
+<text class="ttl" x="1230" y="230">job_assignment</text>
+<text class="key" x="1230" y="255">PK</text>
+<text class="col" x="1256" y="255">job_assignment_id</text>
+<text class="typ" x="1450" y="255" text-anchor="end">uuid</text>
+<line class="rowline" x1="1228" y1="260" x2="1452" y2="260"/>
+<text class="key" x="1230" y="275">FK</text>
+<text class="col" x="1256" y="275">employment_id</text>
+<text class="typ" x="1450" y="275" text-anchor="end">uuid</text>
+<line class="rowline" x1="1228" y1="280" x2="1452" y2="280"/>
+<text class="key" x="1230" y="295">FK</text>
+<text class="col" x="1256" y="295">produced_by_event_id</text>
+<text class="typ" x="1450" y="295" text-anchor="end">uuid</text>
+<line class="rowline" x1="1228" y1="300" x2="1452" y2="300"/>
+<text class="key" x="1230" y="315">FK</text>
+<text class="col" x="1256" y="315">company_id</text>
+<text class="typ" x="1450" y="315" text-anchor="end">uuid</text>
+<line class="rowline" x1="1228" y1="320" x2="1452" y2="320"/>
+<text class="key" x="1230" y="335">FK</text>
+<text class="col" x="1256" y="335">facility_id</text>
+<text class="typ" x="1450" y="335" text-anchor="end">uuid?</text>
+<line class="rowline" x1="1228" y1="340" x2="1452" y2="340"/>
+<text class="key" x="1230" y="355">FK</text>
+<text class="col" x="1256" y="355">department_id</text>
+<text class="typ" x="1450" y="355" text-anchor="end">uuid</text>
+<line class="rowline" x1="1228" y1="360" x2="1452" y2="360"/>
+<text class="key" x="1230" y="375">FK</text>
+<text class="col" x="1256" y="375">position_id</text>
+<text class="typ" x="1450" y="375" text-anchor="end">uuid</text>
+<line class="rowline" x1="1228" y1="380" x2="1452" y2="380"/>
+<text class="key" x="1230" y="395">FK</text>
+<text class="col" x="1256" y="395">role_designation_code</text>
+<text class="typ" x="1450" y="395" text-anchor="end">code?</text>
+<line class="rowline" x1="1228" y1="400" x2="1452" y2="400"/>
+<text class="key" x="1230" y="415">FK</text>
+<text class="col" x="1256" y="415">unit_id</text>
+<text class="typ" x="1450" y="415" text-anchor="end">uuid?</text>
+<line class="rowline" x1="1228" y1="420" x2="1452" y2="420"/>
+<text class="col" x="1230" y="435">shift_text</text>
+<text class="typ" x="1450" y="435" text-anchor="end">text?</text>
+<line class="rowline" x1="1228" y1="440" x2="1452" y2="440"/>
+<text class="col" x="1230" y="455">hours_status</text>
+<text class="typ" x="1450" y="455" text-anchor="end">enum</text>
+<line class="rowline" x1="1228" y1="460" x2="1452" y2="460"/>
+<text class="col" x="1230" y="475">benefits_eligible</text>
+<text class="typ" x="1450" y="475" text-anchor="end">bool</text>
+<line class="rowline" x1="1228" y1="480" x2="1452" y2="480"/>
+<text class="col" x="1230" y="495">effective_from &#183; to</text>
+<text class="typ" x="1450" y="495" text-anchor="end">date</text>
+</g>
+<g class="ent g-terms" id="s2-e-comp">
+<rect class="body" x="1220" y="540" width="240" height="198" rx="4"/>
+<path class="hdr" d="M1220,570 V544 Q1220,540 1224,540 H1456 Q1460,540 1460,544 V570 Z"/>
+<line class="hdrline" x1="1220" y1="570" x2="1460" y2="570"/>
+<text class="ttl" x="1230" y="560">compensation</text>
+<text class="key" x="1230" y="585">PK</text>
+<text class="col" x="1256" y="585">compensation_id</text>
+<text class="typ" x="1450" y="585" text-anchor="end">uuid</text>
+<line class="rowline" x1="1228" y1="590" x2="1452" y2="590"/>
+<text class="key" x="1230" y="605">FK</text>
+<text class="col" x="1256" y="605">employment_id</text>
+<text class="typ" x="1450" y="605" text-anchor="end">uuid</text>
+<line class="rowline" x1="1228" y1="610" x2="1452" y2="610"/>
+<text class="key" x="1230" y="625">FK</text>
+<text class="col" x="1256" y="625">produced_by_event_id</text>
+<text class="typ" x="1450" y="625" text-anchor="end">uuid</text>
+<line class="rowline" x1="1228" y1="630" x2="1452" y2="630"/>
+<text class="col" x="1230" y="645">pay_basis</text>
+<text class="typ" x="1450" y="645" text-anchor="end">enum</text>
+<line class="rowline" x1="1228" y1="650" x2="1452" y2="650"/>
+<text class="col" x="1230" y="665">base_rate</text>
+<text class="typ" x="1450" y="665" text-anchor="end">numeric</text>
+<line class="rowline" x1="1228" y1="670" x2="1452" y2="670"/>
+<text class="col" x="1230" y="685">shift_differential</text>
+<text class="typ" x="1450" y="685" text-anchor="end">numeric?</text>
+<line class="rowline" x1="1228" y1="690" x2="1452" y2="690"/>
+<text class="col" x="1230" y="705">pay_program &#183; note</text>
+<text class="typ" x="1450" y="705" text-anchor="end">bool</text>
+<line class="rowline" x1="1228" y1="710" x2="1452" y2="710"/>
+<text class="col" x="1230" y="725">effective_from &#183; to</text>
+<text class="typ" x="1450" y="725" text-anchor="end">date</text>
+</g>
+</svg>
+</g>
+<g transform="translate(48,1424)">
+<text class="pt" x="0" y="22">Step 4 · Compliance and Discipline</text>
+<text class="pr" x="1500" y="22" text-anchor="end">revision 5</text>
+<text class="pn" x="0" y="44">Dashed boxes are step 2 tables shown for context. Not drawn: requirement_rule references company, job class and position (step 3); background_screening.employment_id (re-checks); evaluation.raise_event_id points to a step 2</text>
+<text class="pn" x="0" y="62">status change; discipline_record.issued_by_person_id points to the director.</text>
+<rect class="frame" x="-1" y="79" width="1502" height="702" rx="4"/>
+<svg x="0" y="80" width="1500" height="700" viewBox="0 0 1500 700">
+
+<defs>
+<marker id="s4-m-one" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="12" y1="4" x2="12" y2="18"/><line class="mk" x1="16" y1="4" x2="16" y2="18"/></marker>
+<marker id="s4-m-zone" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><circle class="mk mkc" cx="8" cy="11" r="4"/><line class="mk" x1="16" y1="4" x2="16" y2="18"/></marker>
+<marker id="s4-m-zmany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><circle class="mk mkc" cx="5" cy="11" r="4"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker>
+<marker id="s4-m-omany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="9" y1="4" x2="9" y2="18"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker>
+</defs>
+<rect class="canvas" x="0" y="0" width="1500" height="700"/>
+<path class="edge" d="M160,198 V220" marker-start="url(#s4-m-one)" marker-end="url(#s4-m-zmany)"/>
+<path class="edge" d="M280,100 H320" marker-start="url(#s4-m-one)" marker-end="url(#s4-m-zmany)"/>
+<path class="edge" d="M560,70 H620" marker-start="url(#s4-m-zmany)" marker-end="url(#s4-m-zone)"/>
+<path class="edge" d="M560,320 H620" marker-start="url(#s4-m-zmany)" marker-end="url(#s4-m-one)"/>
+<path class="edge" d="M440,400 V358" marker-start="url(#s4-m-zone)" marker-end="url(#s4-m-zmany)"/>
+<path class="edge" d="M560,420 H600 V350 H620" marker-start="url(#s4-m-zmany)" marker-end="url(#s4-m-one)"/>
+<path class="edge" d="M560,540 H620" marker-start="url(#s4-m-zmany)" marker-end="url(#s4-m-zone)"/>
+<path class="edge" d="M920,70 H860" marker-start="url(#s4-m-zmany)" marker-end="url(#s4-m-one)"/>
+<path class="edge" d="M920,320 H890 V90 H860" marker-start="url(#s4-m-zmany)" marker-end="url(#s4-m-one)"/>
+<path class="edge" d="M1160,330 H1220" marker-start="url(#s4-m-zmany)" marker-end="url(#s4-m-one)"/>
+<path class="edge" d="M1160,480 H1220" marker-start="url(#s4-m-zmany)" marker-end="url(#s4-m-zone)"/>
+<path class="edge" d="M1340,578 V620" marker-start="url(#s4-m-zone)" marker-end="url(#s4-m-zmany)"/>
+<text class="elab" x="168" y="214" text-anchor="start">applies by</text>
+<text class="elab" x="448" y="376" text-anchor="start">one per check</text>
+<text class="elab" x="590" y="532" text-anchor="middle">pre-hire</text>
+<text class="elab" x="1348" y="604" text-anchor="start">r: progressive discipline</text>
+<g class="ent g-code" id="s4-e-rtype">
+<rect class="body" x="40" y="40" width="240" height="158" rx="4"/>
+<path class="hdr" d="M40,70 V44 Q40,40 44,40 H276 Q280,40 280,44 V70 Z"/>
+<line class="hdrline" x1="40" y1="70" x2="280" y2="70"/>
+<text class="ttl" x="50" y="60">requirement_type</text>
+<text class="key" x="50" y="85">PK</text>
+<text class="col" x="76" y="85">code</text>
+<text class="typ" x="270" y="85" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="90" x2="272" y2="90"/>
+<text class="col" x="50" y="105">label</text>
+<text class="typ" x="270" y="105" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="110" x2="272" y2="110"/>
+<text class="col" x="50" y="125">category</text>
+<text class="typ" x="270" y="125" text-anchor="end">enum</text>
+<line class="rowline" x1="48" y1="130" x2="272" y2="130"/>
+<text class="col" x="50" y="145">has_expiry</text>
+<text class="typ" x="270" y="145" text-anchor="end">bool</text>
+<line class="rowline" x1="48" y1="150" x2="272" y2="150"/>
+<text class="col" x="50" y="165">issuing_body</text>
+<text class="typ" x="270" y="165" text-anchor="end">text?</text>
+<line class="rowline" x1="48" y1="170" x2="272" y2="170"/>
+<text class="col" x="50" y="185">is_active &#183; retired_on</text>
+<text class="typ" x="270" y="185" text-anchor="end"></text>
+</g>
+<g class="ent g-org" id="s4-e-rule">
+<rect class="body" x="40" y="220" width="240" height="238" rx="4"/>
+<path class="hdr" d="M40,250 V224 Q40,220 44,220 H276 Q280,220 280,224 V250 Z"/>
+<line class="hdrline" x1="40" y1="250" x2="280" y2="250"/>
+<text class="ttl" x="50" y="240">requirement_rule</text>
+<text class="key" x="50" y="265">PK</text>
+<text class="col" x="76" y="265">rule_id</text>
+<text class="typ" x="270" y="265" text-anchor="end">uuid</text>
+<line class="rowline" x1="48" y1="270" x2="272" y2="270"/>
+<text class="key" x="50" y="285">FK</text>
+<text class="col" x="76" y="285">requirement_type_code</text>
+<text class="typ" x="270" y="285" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="290" x2="272" y2="290"/>
+<text class="key" x="50" y="305">FK</text>
+<text class="col" x="76" y="305">company_id</text>
+<text class="typ" x="270" y="305" text-anchor="end">uuid?</text>
+<line class="rowline" x1="48" y1="310" x2="272" y2="310"/>
+<text class="key" x="50" y="325">FK</text>
+<text class="col" x="76" y="325">job_class_code</text>
+<text class="typ" x="270" y="325" text-anchor="end">text?</text>
+<line class="rowline" x1="48" y1="330" x2="272" y2="330"/>
+<text class="key" x="50" y="345">FK</text>
+<text class="col" x="76" y="345">position_id</text>
+<text class="typ" x="270" y="345" text-anchor="end">uuid?</text>
+<line class="rowline" x1="48" y1="350" x2="272" y2="350"/>
+<text class="col" x="50" y="365">due_basis</text>
+<text class="typ" x="270" y="365" text-anchor="end">enum</text>
+<line class="rowline" x1="48" y1="370" x2="272" y2="370"/>
+<text class="col" x="50" y="385">due_value</text>
+<text class="typ" x="270" y="385" text-anchor="end">int?</text>
+<line class="rowline" x1="48" y1="390" x2="272" y2="390"/>
+<text class="col" x="50" y="405">season_start &#183; end</text>
+<text class="typ" x="270" y="405" text-anchor="end">mmdd?</text>
+<line class="rowline" x1="48" y1="410" x2="272" y2="410"/>
+<text class="col" x="50" y="425">blocks_work</text>
+<text class="typ" x="270" y="425" text-anchor="end">bool</text>
+<line class="rowline" x1="48" y1="430" x2="272" y2="430"/>
+<text class="col" x="50" y="445">reminder_lead_days</text>
+<text class="typ" x="270" y="445" text-anchor="end">int?</text>
+</g>
+<g class="ent g-org" id="s4-e-inst">
+<rect class="body" x="320" y="40" width="240" height="318" rx="4"/>
+<path class="hdr" d="M320,70 V44 Q320,40 324,40 H556 Q560,40 560,44 V70 Z"/>
+<line class="hdrline" x1="320" y1="70" x2="560" y2="70"/>
+<text class="ttl" x="330" y="60">requirement_instance</text>
+<text class="key" x="330" y="85">PK</text>
+<text class="col" x="356" y="85">requirement_instance_id</text>
+<text class="typ" x="550" y="85" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="90" x2="552" y2="90"/>
+<text class="key" x="330" y="105">FK</text>
+<text class="col" x="356" y="105">employment_id</text>
+<text class="typ" x="550" y="105" text-anchor="end">uuid?</text>
+<line class="rowline" x1="328" y1="110" x2="552" y2="110"/>
+<text class="key" x="330" y="125">FK</text>
+<text class="col" x="356" y="125">requirement_type_code</text>
+<text class="typ" x="550" y="125" text-anchor="end">text</text>
+<line class="rowline" x1="328" y1="130" x2="552" y2="130"/>
+<text class="key" x="330" y="145">FK</text>
+<text class="col" x="356" y="145">screening_id</text>
+<text class="typ" x="550" y="145" text-anchor="end">uuid?</text>
+<line class="rowline" x1="328" y1="150" x2="552" y2="150"/>
+<text class="col" x="330" y="165">status</text>
+<text class="typ" x="550" y="165" text-anchor="end">enum</text>
+<line class="rowline" x1="328" y1="170" x2="552" y2="170"/>
+<text class="col" x="330" y="185">sent &#183; completed &#183; rcvd</text>
+<text class="typ" x="550" y="185" text-anchor="end">date?</text>
+<line class="rowline" x1="328" y1="190" x2="552" y2="190"/>
+<text class="col" x="330" y="205">expires_on &#183; next_due_on</text>
+<text class="typ" x="550" y="205" text-anchor="end">date?</text>
+<line class="rowline" x1="328" y1="210" x2="552" y2="210"/>
+<text class="col rest" x="330" y="225">outcome_code</text>
+<text class="typ" x="550" y="225" text-anchor="end">text?</text>
+<line class="rowline" x1="328" y1="230" x2="552" y2="230"/>
+<text class="col" x="330" y="245">season_label</text>
+<text class="typ" x="550" y="245" text-anchor="end">text?</text>
+<line class="rowline" x1="328" y1="250" x2="552" y2="250"/>
+<text class="col rest" x="330" y="265">credential_number</text>
+<text class="typ" x="550" y="265" text-anchor="end">text?</text>
+<line class="rowline" x1="328" y1="270" x2="552" y2="270"/>
+<text class="col" x="330" y="285">last_reminded_on</text>
+<text class="typ" x="550" y="285" text-anchor="end">date?</text>
+<line class="rowline" x1="328" y1="290" x2="552" y2="290"/>
+<text class="col" x="330" y="305">verified_on</text>
+<text class="typ" x="550" y="305" text-anchor="end">date?</text>
+<line class="rowline" x1="328" y1="310" x2="552" y2="310"/>
+<text class="col" x="330" y="325">document_ref</text>
+<text class="typ" x="550" y="325" text-anchor="end">text?</text>
+<line class="rowline" x1="328" y1="330" x2="552" y2="330"/>
+<text class="key" x="330" y="345">FK</text>
+<text class="col" x="356" y="345">person_id</text>
+<text class="typ" x="550" y="345" text-anchor="end">uuid</text>
+</g>
+<g class="ent g-org" id="s4-e-scr">
+<rect class="body" x="320" y="400" width="240" height="218" rx="4"/>
+<path class="hdr" d="M320,430 V404 Q320,400 324,400 H556 Q560,400 560,404 V430 Z"/>
+<line class="hdrline" x1="320" y1="430" x2="560" y2="430"/>
+<text class="ttl" x="330" y="420">background_screening</text>
+<text class="key" x="330" y="445">PK</text>
+<text class="col" x="356" y="445">screening_id</text>
+<text class="typ" x="550" y="445" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="450" x2="552" y2="450"/>
+<text class="key" x="330" y="465">FK</text>
+<text class="col" x="356" y="465">person_id</text>
+<text class="typ" x="550" y="465" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="470" x2="552" y2="470"/>
+<text class="key" x="330" y="485">FK</text>
+<text class="col" x="356" y="485">application_id</text>
+<text class="typ" x="550" y="485" text-anchor="end">uuid?</text>
+<line class="rowline" x1="328" y1="490" x2="552" y2="490"/>
+<text class="key" x="330" y="505">FK</text>
+<text class="col" x="356" y="505">employment_id</text>
+<text class="typ" x="550" y="505" text-anchor="end">uuid?</text>
+<line class="rowline" x1="328" y1="510" x2="552" y2="510"/>
+<text class="col" x="330" y="525">purpose</text>
+<text class="typ" x="550" y="525" text-anchor="end">enum</text>
+<line class="rowline" x1="328" y1="530" x2="552" y2="530"/>
+<text class="col" x="330" y="545">disclosed_on_application</text>
+<text class="typ" x="550" y="545" text-anchor="end">bool</text>
+<line class="rowline" x1="328" y1="550" x2="552" y2="550"/>
+<text class="col" x="330" y="565">final_disposition</text>
+<text class="typ" x="550" y="565" text-anchor="end">enum</text>
+<line class="rowline" x1="328" y1="570" x2="552" y2="570"/>
+<text class="col" x="330" y="585">waiver_signed_on</text>
+<text class="typ" x="550" y="585" text-anchor="end">date?</text>
+<line class="rowline" x1="328" y1="590" x2="552" y2="590"/>
+<text class="col" x="330" y="605">terminated_for_result</text>
+<text class="typ" x="550" y="605" text-anchor="end">bool</text>
+</g>
+<g class="ent g-ghost ghost" id="s4-e-emp">
+<rect class="body" x="620" y="40" width="240" height="58" rx="4"/>
+<path class="hdr" d="M620,70 V44 Q620,40 624,40 H856 Q860,40 860,44 V70 Z"/>
+<line class="hdrline" x1="620" y1="70" x2="860" y2="70"/>
+<text class="ttl" x="630" y="60">employment</text>
+<text class="sub" x="850" y="60" text-anchor="end">step 2</text>
+<text class="key" x="630" y="85">PK</text>
+<text class="col" x="656" y="85">employment_id</text>
+<text class="typ" x="850" y="85" text-anchor="end">uuid</text>
+</g>
+<g class="ent g-ghost ghost" id="s4-e-per">
+<rect class="body" x="620" y="300" width="240" height="58" rx="4"/>
+<path class="hdr" d="M620,330 V304 Q620,300 624,300 H856 Q860,300 860,304 V330 Z"/>
+<line class="hdrline" x1="620" y1="330" x2="860" y2="330"/>
+<text class="ttl" x="630" y="320">person</text>
+<text class="sub" x="850" y="320" text-anchor="end">step 2</text>
+<text class="key" x="630" y="345">PK</text>
+<text class="col" x="656" y="345">person_id</text>
+<text class="typ" x="850" y="345" text-anchor="end">uuid</text>
+</g>
+<g class="ent g-ghost ghost" id="s4-e-app">
+<rect class="body" x="620" y="520" width="240" height="58" rx="4"/>
+<path class="hdr" d="M620,550 V524 Q620,520 624,520 H856 Q860,520 860,524 V550 Z"/>
+<line class="hdrline" x1="620" y1="550" x2="860" y2="550"/>
+<text class="ttl" x="630" y="540">application</text>
+<text class="sub" x="850" y="540" text-anchor="end">step 2</text>
+<text class="key" x="630" y="565">PK</text>
+<text class="col" x="656" y="565">application_id</text>
+<text class="typ" x="850" y="565" text-anchor="end">uuid</text>
+</g>
+<g class="ent g-emp" id="s4-e-eval">
+<rect class="body" x="920" y="40" width="240" height="238" rx="4"/>
+<path class="hdr" d="M920,70 V44 Q920,40 924,40 H1156 Q1160,40 1160,44 V70 Z"/>
+<line class="hdrline" x1="920" y1="70" x2="1160" y2="70"/>
+<text class="ttl" x="930" y="60">evaluation</text>
+<text class="key" x="930" y="85">PK</text>
+<text class="col" x="956" y="85">evaluation_id</text>
+<text class="typ" x="1150" y="85" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="90" x2="1152" y2="90"/>
+<text class="key" x="930" y="105">FK</text>
+<text class="col" x="956" y="105">employment_id</text>
+<text class="typ" x="1150" y="105" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="110" x2="1152" y2="110"/>
+<text class="col" x="930" y="125">eval_type</text>
+<text class="typ" x="1150" y="125" text-anchor="end">enum</text>
+<line class="rowline" x1="928" y1="130" x2="1152" y2="130"/>
+<text class="col" x="930" y="145">due_on</text>
+<text class="typ" x="1150" y="145" text-anchor="end">date</text>
+<line class="rowline" x1="928" y1="150" x2="1152" y2="150"/>
+<text class="col" x="930" y="165">sent_on &#183; received_on</text>
+<text class="typ" x="1150" y="165" text-anchor="end">date?</text>
+<line class="rowline" x1="928" y1="170" x2="1152" y2="170"/>
+<text class="col" x="930" y="185">effective_on &#183; completed_on</text>
+<text class="typ" x="1150" y="185" text-anchor="end">date?</text>
+<line class="rowline" x1="928" y1="190" x2="1152" y2="190"/>
+<text class="col" x="930" y="205">raise_applied</text>
+<text class="typ" x="1150" y="205" text-anchor="end">bool?</text>
+<line class="rowline" x1="928" y1="210" x2="1152" y2="210"/>
+<text class="key" x="930" y="225">FK</text>
+<text class="col" x="956" y="225">raise_event_id</text>
+<text class="typ" x="1150" y="225" text-anchor="end">uuid?</text>
+<line class="rowline" x1="928" y1="230" x2="1152" y2="230"/>
+<text class="col" x="930" y="245">no_raise_reason</text>
+<text class="typ" x="1150" y="245" text-anchor="end">enum?</text>
+<line class="rowline" x1="928" y1="250" x2="1152" y2="250"/>
+<text class="col" x="930" y="265">leave_delay_days</text>
+<text class="typ" x="1150" y="265" text-anchor="end">int?</text>
+</g>
+<g class="ent g-disc" id="s4-e-disc">
+<rect class="body" x="920" y="300" width="240" height="198" rx="4"/>
+<path class="hdr" d="M920,330 V304 Q920,300 924,300 H1156 Q1160,300 1160,304 V330 Z"/>
+<line class="hdrline" x1="920" y1="330" x2="1160" y2="330"/>
+<text class="ttl" x="930" y="320">discipline_record</text>
+<text class="key" x="930" y="345">PK</text>
+<text class="col" x="956" y="345">discipline_id</text>
+<text class="typ" x="1150" y="345" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="350" x2="1152" y2="350"/>
+<text class="key" x="930" y="365">FK</text>
+<text class="col" x="956" y="365">employment_id</text>
+<text class="typ" x="1150" y="365" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="370" x2="1152" y2="370"/>
+<text class="key" x="930" y="385">FK</text>
+<text class="col" x="956" y="385">discipline_level_code</text>
+<text class="typ" x="1150" y="385" text-anchor="end">text</text>
+<line class="rowline" x1="928" y1="390" x2="1152" y2="390"/>
+<text class="col" x="930" y="405">incident_on &#183; issued_on</text>
+<text class="typ" x="1150" y="405" text-anchor="end">date</text>
+<line class="rowline" x1="928" y1="410" x2="1152" y2="410"/>
+<text class="key" x="930" y="425">FK</text>
+<text class="col" x="956" y="425">policy_rule_code</text>
+<text class="typ" x="1150" y="425" text-anchor="end">text?</text>
+<line class="rowline" x1="928" y1="430" x2="1152" y2="430"/>
+<text class="col" x="930" y="445">description</text>
+<text class="typ" x="1150" y="445" text-anchor="end">text?</text>
+<line class="rowline" x1="928" y1="450" x2="1152" y2="450"/>
+<text class="key" x="930" y="465">FK</text>
+<text class="col" x="956" y="465">issued_by_person_id</text>
+<text class="typ" x="1150" y="465" text-anchor="end">uuid?</text>
+<line class="rowline" x1="928" y1="470" x2="1152" y2="470"/>
+<text class="col" x="930" y="485">document_ref</text>
+<text class="typ" x="1150" y="485" text-anchor="end">text?</text>
+</g>
+<g class="ent g-code" id="s4-e-lvl">
+<rect class="body" x="1220" y="300" width="240" height="118" rx="4"/>
+<path class="hdr" d="M1220,330 V304 Q1220,300 1224,300 H1456 Q1460,300 1460,304 V330 Z"/>
+<line class="hdrline" x1="1220" y1="330" x2="1460" y2="330"/>
+<text class="ttl" x="1230" y="320">discipline_level</text>
+<text class="key" x="1230" y="345">PK</text>
+<text class="col" x="1256" y="345">code</text>
+<text class="typ" x="1450" y="345" text-anchor="end">text</text>
+<line class="rowline" x1="1228" y1="350" x2="1452" y2="350"/>
+<text class="col" x="1230" y="365">label</text>
+<text class="typ" x="1450" y="365" text-anchor="end">text</text>
+<line class="rowline" x1="1228" y1="370" x2="1452" y2="370"/>
+<text class="col" x="1230" y="385">sort_order</text>
+<text class="typ" x="1450" y="385" text-anchor="end">int</text>
+<line class="rowline" x1="1228" y1="390" x2="1452" y2="390"/>
+<text class="col" x="1230" y="405">is_active &#183; retired_on</text>
+<text class="typ" x="1450" y="405" text-anchor="end"></text>
+</g>
+<g class="ent g-code" id="s4-e-pol">
+<rect class="body" x="1220" y="460" width="240" height="118" rx="4"/>
+<path class="hdr" d="M1220,490 V464 Q1220,460 1224,460 H1456 Q1460,460 1460,464 V490 Z"/>
+<line class="hdrline" x1="1220" y1="490" x2="1460" y2="490"/>
+<text class="ttl" x="1230" y="480">policy_rule</text>
+<text class="key" x="1230" y="505">PK</text>
+<text class="col" x="1256" y="505">code</text>
+<text class="typ" x="1450" y="505" text-anchor="end">text</text>
+<line class="rowline" x1="1228" y1="510" x2="1452" y2="510"/>
+<text class="col" x="1230" y="525">label</text>
+<text class="typ" x="1450" y="525" text-anchor="end">text</text>
+<line class="rowline" x1="1228" y1="530" x2="1452" y2="530"/>
+<text class="col" x="1230" y="545">handbook_section</text>
+<text class="typ" x="1450" y="545" text-anchor="end">text?</text>
+<line class="rowline" x1="1228" y1="550" x2="1452" y2="550"/>
+<text class="col" x="1230" y="565">is_active &#183; retired_on</text>
+<text class="typ" x="1450" y="565" text-anchor="end"></text>
+</g>
+<g class="ent g-ghost ghost" id="s4-e-sep">
+<rect class="body" x="1220" y="620" width="240" height="58" rx="4"/>
+<path class="hdr" d="M1220,650 V624 Q1220,620 1224,620 H1456 Q1460,620 1460,624 V650 Z"/>
+<line class="hdrline" x1="1220" y1="650" x2="1460" y2="650"/>
+<text class="ttl" x="1230" y="640">separation_detail</text>
+<text class="sub" x="1450" y="640" text-anchor="end">step 2</text>
+<text class="key" x="1230" y="665">FK</text>
+<text class="col" x="1256" y="665">policy_rule_code</text>
+<text class="typ" x="1450" y="665" text-anchor="end">text?</text>
+</g>
+</svg>
+</g>
+<g transform="translate(48,2248)">
+<text class="pt" x="0" y="22">Step 6 · Benefits and Bonuses</text>
+<text class="pr" x="1500" y="22" text-anchor="end">revision 5</text>
+<text class="pn" x="0" y="44">employment is drawn twice to keep lines from crossing. Not drawn: bonus_program.job_class_code (step 3) and the built-in Created By and Modified By on every table.</text>
+<rect class="frame" x="-1" y="61" width="1502" height="662" rx="4"/>
+<svg x="0" y="62" width="1500" height="660" viewBox="0 0 1500 660">
+
+<defs>
+<marker id="s6-m-one" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="12" y1="4" x2="12" y2="18"/><line class="mk" x1="16" y1="4" x2="16" y2="18"/></marker>
+<marker id="s6-m-zone" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><circle class="mk mkc" cx="8" cy="11" r="4"/><line class="mk" x1="16" y1="4" x2="16" y2="18"/></marker>
+<marker id="s6-m-zmany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><circle class="mk mkc" cx="5" cy="11" r="4"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker>
+<marker id="s6-m-omany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="9" y1="4" x2="9" y2="18"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker>
+</defs>
+<rect class="canvas" x="0" y="0" width="1500" height="660"/>
+<path class="edge" d="M280,100 H320" marker-start="url(#s6-m-zone)" marker-end="url(#s6-m-zmany)"/>
+<path class="edge" d="M620,70 H560" marker-start="url(#s6-m-one)" marker-end="url(#s6-m-zmany)"/>
+<path class="edge" d="M860,70 H920" marker-start="url(#s6-m-one)" marker-end="url(#s6-m-zmany)"/>
+<path class="edge" d="M920,200 H560" marker-start="url(#s6-m-one)" marker-end="url(#s6-m-zmany)"/>
+<path class="edge" d="M620,420 H560" marker-start="url(#s6-m-one)" marker-end="url(#s6-m-zone)"/>
+<path class="edge" d="M660,458 V580 H160 V518" marker-start="url(#s6-m-one)" marker-end="url(#s6-m-zmany)"/>
+<path class="edge" d="M860,420 H920" marker-start="url(#s6-m-one)" marker-end="url(#s6-m-zmany)"/>
+<path class="edge" d="M920,445 H860" marker-start="url(#s6-m-zmany)" marker-end="url(#s6-m-zone)"/>
+<path class="edge" d="M1220,300 H1190 V360 H1160" marker-start="url(#s6-m-one)" marker-end="url(#s6-m-zmany)"/>
+<path class="edge" d="M1160,450 H1220" marker-start="url(#s6-m-one)" marker-end="url(#s6-m-omany)"/>
+<text class="elab" x="740" y="192" text-anchor="middle">produces</text>
+<text class="elab" x="890" y="412" text-anchor="middle">earns</text>
+<text class="elab" x="890" y="470" text-anchor="middle">referee</text>
+<g class="ent g-org" id="s6-e-plan">
+<rect class="body" x="40" y="40" width="240" height="178" rx="4"/>
+<path class="hdr" d="M40,70 V44 Q40,40 44,40 H276 Q280,40 280,44 V70 Z"/>
+<line class="hdrline" x1="40" y1="70" x2="280" y2="70"/>
+<text class="ttl" x="50" y="60">benefit_plan</text>
+<text class="key" x="50" y="85">PK</text>
+<text class="col" x="76" y="85">plan_id</text>
+<text class="typ" x="270" y="85" text-anchor="end">uuid</text>
+<line class="rowline" x1="48" y1="90" x2="272" y2="90"/>
+<text class="col" x="50" y="105">plan_year</text>
+<text class="typ" x="270" y="105" text-anchor="end">int</text>
+<line class="rowline" x1="48" y1="110" x2="272" y2="110"/>
+<text class="col" x="50" y="125">kind</text>
+<text class="typ" x="270" y="125" text-anchor="end">enum</text>
+<line class="rowline" x1="48" y1="130" x2="272" y2="130"/>
+<text class="col" x="50" y="145">carrier &#183; plan_name</text>
+<text class="typ" x="270" y="145" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="150" x2="272" y2="150"/>
+<text class="col" x="50" y="165">premium_single</text>
+<text class="typ" x="270" y="165" text-anchor="end">numeric?</text>
+<line class="rowline" x1="48" y1="170" x2="272" y2="170"/>
+<text class="col" x="50" y="185">premium_family</text>
+<text class="typ" x="270" y="185" text-anchor="end">numeric?</text>
+<line class="rowline" x1="48" y1="190" x2="272" y2="190"/>
+<text class="col" x="50" y="205">is_active</text>
+<text class="typ" x="270" y="205" text-anchor="end">bool</text>
+</g>
+<g class="ent g-org" id="s6-e-cov">
+<rect class="body" x="320" y="40" width="240" height="218" rx="4"/>
+<path class="hdr" d="M320,70 V44 Q320,40 324,40 H556 Q560,40 560,44 V70 Z"/>
+<line class="hdrline" x1="320" y1="70" x2="560" y2="70"/>
+<text class="ttl" x="330" y="60">medical_coverage</text>
+<text class="key" x="330" y="85">PK</text>
+<text class="col" x="356" y="85">coverage_id</text>
+<text class="typ" x="550" y="85" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="90" x2="552" y2="90"/>
+<text class="key" x="330" y="105">FK</text>
+<text class="col" x="356" y="105">employment_id</text>
+<text class="typ" x="550" y="105" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="110" x2="552" y2="110"/>
+<text class="key" x="330" y="125">FK</text>
+<text class="col" x="356" y="125">plan_id</text>
+<text class="typ" x="550" y="125" text-anchor="end">uuid?</text>
+<line class="rowline" x1="328" y1="130" x2="552" y2="130"/>
+<text class="key" x="330" y="145">FK</text>
+<text class="col" x="356" y="145">benefit_event_id</text>
+<text class="typ" x="550" y="145" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="150" x2="552" y2="150"/>
+<text class="col" x="330" y="165">coverage_tier</text>
+<text class="typ" x="550" y="165" text-anchor="end">enum?</text>
+<line class="rowline" x1="328" y1="170" x2="552" y2="170"/>
+<text class="col" x="330" y="185">status</text>
+<text class="typ" x="550" y="185" text-anchor="end">enum</text>
+<line class="rowline" x1="328" y1="190" x2="552" y2="190"/>
+<text class="col" x="330" y="205">cash_in_lieu</text>
+<text class="typ" x="550" y="205" text-anchor="end">bool</text>
+<line class="rowline" x1="328" y1="210" x2="552" y2="210"/>
+<text class="col" x="330" y="225">self_pay</text>
+<text class="typ" x="550" y="225" text-anchor="end">bool</text>
+<line class="rowline" x1="328" y1="230" x2="552" y2="230"/>
+<text class="col" x="330" y="245">effective_from &#183; to</text>
+<text class="typ" x="550" y="245" text-anchor="end">date</text>
+</g>
+<g class="ent g-ghost ghost" id="s6-e-emp1">
+<rect class="body" x="620" y="40" width="240" height="58" rx="4"/>
+<path class="hdr" d="M620,70 V44 Q620,40 624,40 H856 Q860,40 860,44 V70 Z"/>
+<line class="hdrline" x1="620" y1="70" x2="860" y2="70"/>
+<text class="ttl" x="630" y="60">employment</text>
+<text class="sub" x="850" y="60" text-anchor="end">step 2</text>
+<text class="key" x="630" y="85">PK</text>
+<text class="col" x="656" y="85">employment_id</text>
+<text class="typ" x="850" y="85" text-anchor="end">uuid</text>
+</g>
+<g class="ent g-org" id="s6-e-evt">
+<rect class="body" x="920" y="40" width="240" height="238" rx="4"/>
+<path class="hdr" d="M920,70 V44 Q920,40 924,40 H1156 Q1160,40 1160,44 V70 Z"/>
+<line class="hdrline" x1="920" y1="70" x2="1160" y2="70"/>
+<text class="ttl" x="930" y="60">benefit_event</text>
+<text class="key" x="930" y="85">PK</text>
+<text class="col" x="956" y="85">benefit_event_id</text>
+<text class="typ" x="1150" y="85" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="90" x2="1152" y2="90"/>
+<text class="key" x="930" y="105">FK</text>
+<text class="col" x="956" y="105">employment_id</text>
+<text class="typ" x="1150" y="105" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="110" x2="1152" y2="110"/>
+<text class="col" x="930" y="125">event_type</text>
+<text class="typ" x="1150" y="125" text-anchor="end">enum</text>
+<line class="rowline" x1="928" y1="130" x2="1152" y2="130"/>
+<text class="col" x="930" y="145">event_on &#183; window_ends_on</text>
+<text class="typ" x="1150" y="145" text-anchor="end">date</text>
+<line class="rowline" x1="928" y1="150" x2="1152" y2="150"/>
+<text class="col" x="930" y="165">letter_sent_on</text>
+<text class="typ" x="1150" y="165" text-anchor="end">date?</text>
+<line class="rowline" x1="928" y1="170" x2="1152" y2="170"/>
+<text class="col" x="930" y="185">diocese_notified_on</text>
+<text class="typ" x="1150" y="185" text-anchor="end">date?</text>
+<line class="rowline" x1="928" y1="190" x2="1152" y2="190"/>
+<text class="col" x="930" y="205">proof_received_on</text>
+<text class="typ" x="1150" y="205" text-anchor="end">date?</text>
+<line class="rowline" x1="928" y1="210" x2="1152" y2="210"/>
+<text class="col" x="930" y="225">decided_on &#183; outcome</text>
+<text class="typ" x="1150" y="225" text-anchor="end">enum?</text>
+<line class="rowline" x1="928" y1="230" x2="1152" y2="230"/>
+<text class="col" x="930" y="245">payroll_notified_on</text>
+<text class="typ" x="1150" y="245" text-anchor="end">date?</text>
+<line class="rowline" x1="928" y1="250" x2="1152" y2="250"/>
+<text class="col" x="930" y="265">note</text>
+<text class="typ" x="1150" y="265" text-anchor="end">text?</text>
+</g>
+<g class="ent g-code" id="s6-e-prog">
+<rect class="body" x="1220" y="40" width="240" height="278" rx="4"/>
+<path class="hdr" d="M1220,70 V44 Q1220,40 1224,40 H1456 Q1460,40 1460,44 V70 Z"/>
+<line class="hdrline" x1="1220" y1="70" x2="1460" y2="70"/>
+<text class="ttl" x="1230" y="60">bonus_program</text>
+<text class="key" x="1230" y="85">PK</text>
+<text class="col" x="1256" y="85">program_id</text>
+<text class="typ" x="1450" y="85" text-anchor="end">uuid</text>
+<line class="rowline" x1="1228" y1="90" x2="1452" y2="90"/>
+<text class="col" x="1230" y="105">bonus_kind</text>
+<text class="typ" x="1450" y="105" text-anchor="end">enum</text>
+<line class="rowline" x1="1228" y1="110" x2="1452" y2="110"/>
+<text class="col" x="1230" y="125">name</text>
+<text class="typ" x="1450" y="125" text-anchor="end">text</text>
+<line class="rowline" x1="1228" y1="130" x2="1452" y2="130"/>
+<text class="key" x="1230" y="145">FK</text>
+<text class="col" x="1256" y="145">job_class_code</text>
+<text class="typ" x="1450" y="145" text-anchor="end">text?</text>
+<line class="rowline" x1="1228" y1="150" x2="1452" y2="150"/>
+<text class="col" x="1230" y="165">min_weekly_hours</text>
+<text class="typ" x="1450" y="165" text-anchor="end">int?</text>
+<line class="rowline" x1="1228" y1="170" x2="1452" y2="170"/>
+<text class="col" x="1230" y="185">total_amount</text>
+<text class="typ" x="1450" y="185" text-anchor="end">numeric</text>
+<line class="rowline" x1="1228" y1="190" x2="1452" y2="190"/>
+<text class="col" x="1230" y="205">installment_count</text>
+<text class="typ" x="1450" y="205" text-anchor="end">int</text>
+<line class="rowline" x1="1228" y1="210" x2="1452" y2="210"/>
+<text class="col" x="1230" y="225">interval_months</text>
+<text class="typ" x="1450" y="225" text-anchor="end">int</text>
+<line class="rowline" x1="1228" y1="230" x2="1452" y2="230"/>
+<text class="col" x="1230" y="245">first_due_after_months</text>
+<text class="typ" x="1450" y="245" text-anchor="end">int</text>
+<line class="rowline" x1="1228" y1="250" x2="1452" y2="250"/>
+<text class="col" x="1230" y="265">max_absences &#183; lates</text>
+<text class="typ" x="1450" y="265" text-anchor="end">int?</text>
+<line class="rowline" x1="1228" y1="270" x2="1452" y2="270"/>
+<text class="col" x="1230" y="285">rules_note</text>
+<text class="typ" x="1450" y="285" text-anchor="end">text?</text>
+<line class="rowline" x1="1228" y1="290" x2="1452" y2="290"/>
+<text class="col" x="1230" y="305">effective_from &#183; to</text>
+<text class="typ" x="1450" y="305" text-anchor="end">date</text>
+</g>
+<g class="ent g-org" id="s6-e-aca">
+<rect class="body" x="40" y="340" width="240" height="178" rx="4"/>
+<path class="hdr" d="M40,370 V344 Q40,340 44,340 H276 Q280,340 280,344 V370 Z"/>
+<line class="hdrline" x1="40" y1="370" x2="280" y2="370"/>
+<text class="ttl" x="50" y="360">aca_month</text>
+<text class="key" x="50" y="385">PK</text>
+<text class="col" x="76" y="385">aca_month_id</text>
+<text class="typ" x="270" y="385" text-anchor="end">uuid</text>
+<line class="rowline" x1="48" y1="390" x2="272" y2="390"/>
+<text class="key" x="50" y="405">FK</text>
+<text class="col" x="76" y="405">employment_id</text>
+<text class="typ" x="270" y="405" text-anchor="end">uuid</text>
+<line class="rowline" x1="48" y1="410" x2="272" y2="410"/>
+<text class="col" x="50" y="425">tax_year &#183; month</text>
+<text class="typ" x="270" y="425" text-anchor="end">int</text>
+<line class="rowline" x1="48" y1="430" x2="272" y2="430"/>
+<text class="col" x="50" y="445">line14_code</text>
+<text class="typ" x="270" y="445" text-anchor="end">choice</text>
+<line class="rowline" x1="48" y1="450" x2="272" y2="450"/>
+<text class="col" x="50" y="465">line16_code</text>
+<text class="typ" x="270" y="465" text-anchor="end">choice?</text>
+<line class="rowline" x1="48" y1="470" x2="272" y2="470"/>
+<text class="col" x="50" y="485">is_override</text>
+<text class="typ" x="270" y="485" text-anchor="end">bool</text>
+<line class="rowline" x1="48" y1="490" x2="272" y2="490"/>
+<text class="col" x="50" y="505">override_reason</text>
+<text class="typ" x="270" y="505" text-anchor="end">text?</text>
+</g>
+<g class="ent g-org" id="s6-e-ret">
+<rect class="body" x="320" y="340" width="240" height="198" rx="4"/>
+<path class="hdr" d="M320,370 V344 Q320,340 324,340 H556 Q560,340 560,344 V370 Z"/>
+<line class="hdrline" x1="320" y1="370" x2="560" y2="370"/>
+<text class="ttl" x="330" y="360">retirement_enrollment</text>
+<text class="key" x="330" y="385">PK</text>
+<text class="col" x="356" y="385">enrollment_id</text>
+<text class="typ" x="550" y="385" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="390" x2="552" y2="390"/>
+<text class="key" x="330" y="405">FK</text>
+<text class="col" x="356" y="405">employment_id</text>
+<text class="typ" x="550" y="405" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="410" x2="552" y2="410"/>
+<text class="col" x="330" y="425">eligible_on</text>
+<text class="typ" x="550" y="425" text-anchor="end">date</text>
+<line class="rowline" x1="328" y1="430" x2="552" y2="430"/>
+<text class="col" x="330" y="445">letter_sent_on</text>
+<text class="typ" x="550" y="445" text-anchor="end">date?</text>
+<line class="rowline" x1="328" y1="450" x2="552" y2="450"/>
+<text class="col" x="330" y="465">enrolled_on</text>
+<text class="typ" x="550" y="465" text-anchor="end">date?</text>
+<line class="rowline" x1="328" y1="470" x2="552" y2="470"/>
+<text class="col" x="330" y="485">contribution_pct</text>
+<text class="typ" x="550" y="485" text-anchor="end">numeric?</text>
+<line class="rowline" x1="328" y1="490" x2="552" y2="490"/>
+<text class="col" x="330" y="505">status</text>
+<text class="typ" x="550" y="505" text-anchor="end">enum</text>
+<line class="rowline" x1="328" y1="510" x2="552" y2="510"/>
+<text class="col" x="330" y="525">terminated_on</text>
+<text class="typ" x="550" y="525" text-anchor="end">date?</text>
+</g>
+<g class="ent g-ghost ghost" id="s6-e-emp2">
+<rect class="body" x="620" y="400" width="240" height="58" rx="4"/>
+<path class="hdr" d="M620,430 V404 Q620,400 624,400 H856 Q860,400 860,404 V430 Z"/>
+<line class="hdrline" x1="620" y1="430" x2="860" y2="430"/>
+<text class="ttl" x="630" y="420">employment</text>
+<text class="sub" x="850" y="420" text-anchor="end">step 2</text>
+<text class="key" x="630" y="445">PK</text>
+<text class="col" x="656" y="445">employment_id</text>
+<text class="typ" x="850" y="445" text-anchor="end">uuid</text>
+</g>
+<g class="ent g-org" id="s6-e-award">
+<rect class="body" x="920" y="340" width="240" height="198" rx="4"/>
+<path class="hdr" d="M920,370 V344 Q920,340 924,340 H1156 Q1160,340 1160,344 V370 Z"/>
+<line class="hdrline" x1="920" y1="370" x2="1160" y2="370"/>
+<text class="ttl" x="930" y="360">bonus_award</text>
+<text class="key" x="930" y="385">PK</text>
+<text class="col" x="956" y="385">award_id</text>
+<text class="typ" x="1150" y="385" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="390" x2="1152" y2="390"/>
+<text class="key" x="930" y="405">FK</text>
+<text class="col" x="956" y="405">program_id</text>
+<text class="typ" x="1150" y="405" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="410" x2="1152" y2="410"/>
+<text class="key" x="930" y="425">FK</text>
+<text class="col" x="956" y="425">employment_id</text>
+<text class="typ" x="1150" y="425" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="430" x2="1152" y2="430"/>
+<text class="key" x="930" y="445">FK</text>
+<text class="col" x="956" y="445">referee_employment_id</text>
+<text class="typ" x="1150" y="445" text-anchor="end">uuid?</text>
+<line class="rowline" x1="928" y1="450" x2="1152" y2="450"/>
+<text class="col" x="930" y="465">form_signed_on</text>
+<text class="typ" x="1150" y="465" text-anchor="end">date?</text>
+<line class="rowline" x1="928" y1="470" x2="1152" y2="470"/>
+<text class="col" x="930" y="485">total_amount</text>
+<text class="typ" x="1150" y="485" text-anchor="end">numeric</text>
+<line class="rowline" x1="928" y1="490" x2="1152" y2="490"/>
+<text class="col" x="930" y="505">status</text>
+<text class="typ" x="1150" y="505" text-anchor="end">enum</text>
+<line class="rowline" x1="928" y1="510" x2="1152" y2="510"/>
+<text class="col" x="930" y="525">forfeit_reason</text>
+<text class="typ" x="1150" y="525" text-anchor="end">text?</text>
+</g>
+<g class="ent g-org" id="s6-e-inst">
+<rect class="body" x="1220" y="380" width="240" height="258" rx="4"/>
+<path class="hdr" d="M1220,410 V384 Q1220,380 1224,380 H1456 Q1460,380 1460,384 V410 Z"/>
+<line class="hdrline" x1="1220" y1="410" x2="1460" y2="410"/>
+<text class="ttl" x="1230" y="400">bonus_installment</text>
+<text class="key" x="1230" y="425">PK</text>
+<text class="col" x="1256" y="425">installment_id</text>
+<text class="typ" x="1450" y="425" text-anchor="end">uuid</text>
+<line class="rowline" x1="1228" y1="430" x2="1452" y2="430"/>
+<text class="key" x="1230" y="445">FK</text>
+<text class="col" x="1256" y="445">award_id</text>
+<text class="typ" x="1450" y="445" text-anchor="end">uuid</text>
+<line class="rowline" x1="1228" y1="450" x2="1452" y2="450"/>
+<text class="col" x="1230" y="465">sequence &#183; due_on</text>
+<text class="typ" x="1450" y="465" text-anchor="end">date</text>
+<line class="rowline" x1="1228" y1="470" x2="1452" y2="470"/>
+<text class="col" x="1230" y="485">amount</text>
+<text class="typ" x="1450" y="485" text-anchor="end">numeric</text>
+<line class="rowline" x1="1228" y1="490" x2="1452" y2="490"/>
+<text class="col" x="1230" y="505">status</text>
+<text class="typ" x="1450" y="505" text-anchor="end">enum</text>
+<line class="rowline" x1="1228" y1="510" x2="1452" y2="510"/>
+<text class="col" x="1230" y="525">not_eligible_reason</text>
+<text class="typ" x="1450" y="525" text-anchor="end">text?</text>
+<line class="rowline" x1="1228" y1="530" x2="1452" y2="530"/>
+<text class="col" x="1230" y="545">excused_note</text>
+<text class="typ" x="1450" y="545" text-anchor="end">text?</text>
+<line class="rowline" x1="1228" y1="550" x2="1452" y2="550"/>
+<text class="col" x="1230" y="565">leave_delay_days</text>
+<text class="typ" x="1450" y="565" text-anchor="end">int?</text>
+<line class="rowline" x1="1228" y1="570" x2="1452" y2="570"/>
+<text class="col" x="1230" y="585">checked_on</text>
+<text class="typ" x="1450" y="585" text-anchor="end">date?</text>
+<line class="rowline" x1="1228" y1="590" x2="1452" y2="590"/>
+<text class="col" x="1230" y="605">form_out &#183; signed_on</text>
+<text class="typ" x="1450" y="605" text-anchor="end">date?</text>
+<line class="rowline" x1="1228" y1="610" x2="1452" y2="610"/>
+<text class="col" x="1230" y="625">sent_to_payroll_on</text>
+<text class="typ" x="1450" y="625" text-anchor="end">date?</text>
+</g>
+</svg>
+</g>
+<g transform="translate(1604,190)">
+<text class="pt" x="0" y="22">Step 3 · Organization and Reference Data</text>
+<text class="pr" x="1200" y="22" text-anchor="end">revision 5</text>
+<text class="pn" x="0" y="44">Dashed boxes are step 2 tables shown for context. Not drawn: job_assignment also references company and unit, company.default_facility_id references facility, application</text>
+<text class="pn" x="0" y="62">references department and position, and employee_number references department (step 2). pick_list_value has no foreign keys by design.</text>
+<rect class="frame" x="-1" y="79" width="1202" height="802" rx="4"/>
+<svg x="0" y="80" width="1200" height="800" viewBox="0 0 1200 800">
+
+<defs>
+<marker id="s3-m-one" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="12" y1="4" x2="12" y2="18"/><line class="mk" x1="16" y1="4" x2="16" y2="18"/></marker>
+<marker id="s3-m-zone" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><circle class="mk mkc" cx="8" cy="11" r="4"/><line class="mk" x1="16" y1="4" x2="16" y2="18"/></marker>
+<marker id="s3-m-zmany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><circle class="mk mkc" cx="5" cy="11" r="4"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker>
+<marker id="s3-m-omany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="9" y1="4" x2="9" y2="18"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker>
+</defs>
+<rect class="canvas" x="0" y="0" width="1200" height="800"/>
+<path class="edge" d="M280,100 H320" marker-start="url(#s3-m-one)" marker-end="url(#s3-m-zmany)"/>
+<path class="edge" d="M280,225 H320" marker-start="url(#s3-m-one)" marker-end="url(#s3-m-zmany)"/>
+<path class="edge" d="M560,120 H620" marker-start="url(#s3-m-one)" marker-end="url(#s3-m-zmany)"/>
+<path class="edge" d="M920,100 H860" marker-start="url(#s3-m-zone)" marker-end="url(#s3-m-zmany)"/>
+<path class="edge" d="M920,220 H860" marker-start="url(#s3-m-zone)" marker-end="url(#s3-m-zmany)"/>
+<path class="edge" d="M740,380 V238" marker-start="url(#s3-m-one)" marker-end="url(#s3-m-zmany)"/>
+<path class="edge" d="M560,470 H620" marker-start="url(#s3-m-one)" marker-end="url(#s3-m-omany)"/>
+<path class="edge" d="M320,450 H280" marker-start="url(#s3-m-one)" marker-end="url(#s3-m-zmany)"/>
+<path class="edge" d="M860,410 H920" marker-start="url(#s3-m-zmany)" marker-end="url(#s3-m-zone)"/>
+<path class="edge" d="M440,558 V620" marker-start="url(#s3-m-zone)" marker-end="url(#s3-m-zmany)"/>
+<text class="elab" x="590" y="462" text-anchor="middle">has</text>
+<text class="elab" x="300" y="442" text-anchor="middle">has</text>
+<text class="elab" x="890" y="402" text-anchor="middle">head</text>
+<text class="elab" x="432" y="592" text-anchor="end">overrides</text>
+<g class="ent g-code" id="s3-e-jc">
+<rect class="body" x="40" y="40" width="240" height="118" rx="4"/>
+<path class="hdr" d="M40,70 V44 Q40,40 44,40 H276 Q280,40 280,44 V70 Z"/>
+<line class="hdrline" x1="40" y1="70" x2="280" y2="70"/>
+<text class="ttl" x="50" y="60">job_class</text>
+<text class="key" x="50" y="85">PK</text>
+<text class="col" x="76" y="85">code</text>
+<text class="typ" x="270" y="85" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="90" x2="272" y2="90"/>
+<text class="col" x="50" y="105">label</text>
+<text class="typ" x="270" y="105" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="110" x2="272" y2="110"/>
+<text class="col" x="50" y="125">sort_order</text>
+<text class="typ" x="270" y="125" text-anchor="end">int</text>
+<line class="rowline" x1="48" y1="130" x2="272" y2="130"/>
+<text class="col" x="50" y="145">is_active &#183; retired_on</text>
+<text class="typ" x="270" y="145" text-anchor="end"></text>
+</g>
+<g class="ent g-code" id="s3-e-eeo">
+<rect class="body" x="40" y="200" width="240" height="118" rx="4"/>
+<path class="hdr" d="M40,230 V204 Q40,200 44,200 H276 Q280,200 280,204 V230 Z"/>
+<line class="hdrline" x1="40" y1="230" x2="280" y2="230"/>
+<text class="ttl" x="50" y="220">eeo_category</text>
+<text class="key" x="50" y="245">PK</text>
+<text class="col" x="76" y="245">code</text>
+<text class="typ" x="270" y="245" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="250" x2="272" y2="250"/>
+<text class="col" x="50" y="265">label</text>
+<text class="typ" x="270" y="265" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="270" x2="272" y2="270"/>
+<text class="col" x="50" y="285">eeo1_line</text>
+<text class="typ" x="270" y="285" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="290" x2="272" y2="290"/>
+<text class="col" x="50" y="305">is_active &#183; retired_on</text>
+<text class="typ" x="270" y="305" text-anchor="end"></text>
+</g>
+<g class="ent g-org" id="s3-e-unit">
+<rect class="body" x="40" y="400" width="240" height="138" rx="4"/>
+<path class="hdr" d="M40,430 V404 Q40,400 44,400 H276 Q280,400 280,404 V430 Z"/>
+<line class="hdrline" x1="40" y1="430" x2="280" y2="430"/>
+<text class="ttl" x="50" y="420">unit</text>
+<text class="key" x="50" y="445">PK</text>
+<text class="col" x="76" y="445">unit_id</text>
+<text class="typ" x="270" y="445" text-anchor="end">uuid</text>
+<line class="rowline" x1="48" y1="450" x2="272" y2="450"/>
+<text class="key" x="50" y="465">FK</text>
+<text class="col" x="76" y="465">company_id</text>
+<text class="typ" x="270" y="465" text-anchor="end">uuid</text>
+<line class="rowline" x1="48" y1="470" x2="272" y2="470"/>
+<text class="col" x="50" y="485">code</text>
+<text class="typ" x="270" y="485" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="490" x2="272" y2="490"/>
+<text class="col" x="50" y="505">name</text>
+<text class="typ" x="270" y="505" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="510" x2="272" y2="510"/>
+<text class="col" x="50" y="525">is_active</text>
+<text class="typ" x="270" y="525" text-anchor="end">bool</text>
+</g>
+<g class="ent g-code" id="s3-e-pick">
+<rect class="body" x="40" y="580" width="240" height="138" rx="4"/>
+<path class="hdr" d="M40,610 V584 Q40,580 44,580 H276 Q280,580 280,584 V610 Z"/>
+<line class="hdrline" x1="40" y1="610" x2="280" y2="610"/>
+<text class="ttl" x="50" y="600">pick_list_value</text>
+<text class="sub" x="270" y="600" text-anchor="end">suggestions</text>
+<text class="key" x="50" y="625">PK</text>
+<text class="col" x="76" y="625">pick_list_value_id</text>
+<text class="typ" x="270" y="625" text-anchor="end">uuid</text>
+<line class="rowline" x1="48" y1="630" x2="272" y2="630"/>
+<text class="col" x="50" y="645">list_key</text>
+<text class="typ" x="270" y="645" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="650" x2="272" y2="650"/>
+<text class="col" x="50" y="665">value</text>
+<text class="typ" x="270" y="665" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="670" x2="272" y2="670"/>
+<text class="col" x="50" y="685">sort_order</text>
+<text class="typ" x="270" y="685" text-anchor="end">int</text>
+<line class="rowline" x1="48" y1="690" x2="272" y2="690"/>
+<text class="col" x="50" y="705">is_active</text>
+<text class="typ" x="270" y="705" text-anchor="end">bool</text>
+</g>
+<g class="ent g-org" id="s3-e-pos">
+<rect class="body" x="320" y="60" width="240" height="178" rx="4"/>
+<path class="hdr" d="M320,90 V64 Q320,60 324,60 H556 Q560,60 560,64 V90 Z"/>
+<line class="hdrline" x1="320" y1="90" x2="560" y2="90"/>
+<text class="ttl" x="330" y="80">position</text>
+<text class="key" x="330" y="105">PK</text>
+<text class="col" x="356" y="105">position_id</text>
+<text class="typ" x="550" y="105" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="110" x2="552" y2="110"/>
+<text class="key" x="330" y="125">UK</text>
+<text class="col" x="356" y="125">code</text>
+<text class="typ" x="550" y="125" text-anchor="end">text</text>
+<line class="rowline" x1="328" y1="130" x2="552" y2="130"/>
+<text class="col" x="330" y="145">title</text>
+<text class="typ" x="550" y="145" text-anchor="end">text</text>
+<line class="rowline" x1="328" y1="150" x2="552" y2="150"/>
+<text class="key" x="330" y="165">FK</text>
+<text class="col" x="356" y="165">job_class_code</text>
+<text class="typ" x="550" y="165" text-anchor="end">text</text>
+<line class="rowline" x1="328" y1="170" x2="552" y2="170"/>
+<text class="key" x="330" y="185">FK</text>
+<text class="col" x="356" y="185">eeo_category_code</text>
+<text class="typ" x="550" y="185" text-anchor="end">text</text>
+<line class="rowline" x1="328" y1="190" x2="552" y2="190"/>
+<text class="col" x="330" y="205">default_flsa_exempt</text>
+<text class="typ" x="550" y="205" text-anchor="end">bool</text>
+<line class="rowline" x1="328" y1="210" x2="552" y2="210"/>
+<text class="col" x="330" y="225">is_active &#183; retired_on</text>
+<text class="typ" x="550" y="225" text-anchor="end"></text>
+</g>
+<g class="ent g-org" id="s3-e-co">
+<rect class="body" x="320" y="380" width="240" height="178" rx="4"/>
+<path class="hdr" d="M320,410 V384 Q320,380 324,380 H556 Q560,380 560,384 V410 Z"/>
+<line class="hdrline" x1="320" y1="410" x2="560" y2="410"/>
+<text class="ttl" x="330" y="400">company</text>
+<text class="key" x="330" y="425">PK</text>
+<text class="col" x="356" y="425">company_id</text>
+<text class="typ" x="550" y="425" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="430" x2="552" y2="430"/>
+<text class="key" x="330" y="445">UK</text>
+<text class="col" x="356" y="445">code</text>
+<text class="typ" x="550" y="445" text-anchor="end">text</text>
+<line class="rowline" x1="328" y1="450" x2="552" y2="450"/>
+<text class="col" x="330" y="465">legal_name &#183; display_name</text>
+<text class="typ" x="550" y="465" text-anchor="end">text</text>
+<line class="rowline" x1="328" y1="470" x2="552" y2="470"/>
+<text class="col" x="330" y="485">group_code</text>
+<text class="typ" x="550" y="485" text-anchor="end">enum</text>
+<line class="rowline" x1="328" y1="490" x2="552" y2="490"/>
+<text class="key" x="330" y="505">FK</text>
+<text class="col" x="356" y="505">default_facility_id</text>
+<text class="typ" x="550" y="505" text-anchor="end">uuid?</text>
+<line class="rowline" x1="328" y1="510" x2="552" y2="510"/>
+<text class="col" x="330" y="525">record_scope</text>
+<text class="typ" x="550" y="525" text-anchor="end">enum</text>
+<line class="rowline" x1="328" y1="530" x2="552" y2="530"/>
+<text class="col" x="330" y="545">is_active</text>
+<text class="typ" x="550" y="545" text-anchor="end">bool</text>
+</g>
+<g class="ent g-org" id="s3-e-pol">
+<rect class="body" x="320" y="620" width="240" height="138" rx="4"/>
+<path class="hdr" d="M320,650 V624 Q320,620 324,620 H556 Q560,620 560,624 V650 Z"/>
+<line class="hdrline" x1="320" y1="650" x2="560" y2="650"/>
+<text class="ttl" x="330" y="640">policy_setting</text>
+<text class="key" x="330" y="665">PK</text>
+<text class="col" x="356" y="665">setting_id</text>
+<text class="typ" x="550" y="665" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="670" x2="552" y2="670"/>
+<text class="key" x="330" y="685">UK</text>
+<text class="col" x="356" y="685">setting_key</text>
+<text class="typ" x="550" y="685" text-anchor="end">text</text>
+<line class="rowline" x1="328" y1="690" x2="552" y2="690"/>
+<text class="key" x="330" y="705">FK</text>
+<text class="col" x="356" y="705">company_id</text>
+<text class="typ" x="550" y="705" text-anchor="end">uuid?</text>
+<line class="rowline" x1="328" y1="710" x2="552" y2="710"/>
+<text class="col" x="330" y="725">value &#183; value_type</text>
+<text class="typ" x="550" y="725" text-anchor="end">text</text>
+<line class="rowline" x1="328" y1="730" x2="552" y2="730"/>
+<text class="col" x="330" y="745">note</text>
+<text class="typ" x="550" y="745" text-anchor="end">text?</text>
+</g>
+<g class="ent g-ghost ghost" id="s3-e-ja">
+<rect class="body" x="620" y="60" width="240" height="178" rx="4"/>
+<path class="hdr" d="M620,90 V64 Q620,60 624,60 H856 Q860,60 860,64 V90 Z"/>
+<line class="hdrline" x1="620" y1="90" x2="860" y2="90"/>
+<text class="ttl" x="630" y="80">job_assignment</text>
+<text class="sub" x="850" y="80" text-anchor="end">step 2</text>
+<text class="key" x="630" y="105">FK</text>
+<text class="col" x="656" y="105">company_id</text>
+<text class="typ" x="850" y="105" text-anchor="end">uuid</text>
+<line class="rowline" x1="628" y1="110" x2="852" y2="110"/>
+<text class="key" x="630" y="125">FK</text>
+<text class="col" x="656" y="125">facility_id</text>
+<text class="typ" x="850" y="125" text-anchor="end">uuid?</text>
+<line class="rowline" x1="628" y1="130" x2="852" y2="130"/>
+<text class="key" x="630" y="145">FK</text>
+<text class="col" x="656" y="145">department_id</text>
+<text class="typ" x="850" y="145" text-anchor="end">uuid</text>
+<line class="rowline" x1="628" y1="150" x2="852" y2="150"/>
+<text class="key" x="630" y="165">FK</text>
+<text class="col" x="656" y="165">position_id</text>
+<text class="typ" x="850" y="165" text-anchor="end">uuid</text>
+<line class="rowline" x1="628" y1="170" x2="852" y2="170"/>
+<text class="key" x="630" y="185">FK</text>
+<text class="col" x="656" y="185">role_designation_code</text>
+<text class="typ" x="850" y="185" text-anchor="end">code?</text>
+<line class="rowline" x1="628" y1="190" x2="852" y2="190"/>
+<text class="key" x="630" y="205">FK</text>
+<text class="col" x="656" y="205">unit_id</text>
+<text class="typ" x="850" y="205" text-anchor="end">uuid?</text>
+<line class="rowline" x1="628" y1="210" x2="852" y2="210"/>
+<text class="col" x="630" y="225">shift_text</text>
+<text class="typ" x="850" y="225" text-anchor="end">text?</text>
+</g>
+<g class="ent g-org" id="s3-e-dep">
+<rect class="body" x="620" y="380" width="240" height="158" rx="4"/>
+<path class="hdr" d="M620,410 V384 Q620,380 624,380 H856 Q860,380 860,384 V410 Z"/>
+<line class="hdrline" x1="620" y1="410" x2="860" y2="410"/>
+<text class="ttl" x="630" y="400">department</text>
+<text class="key" x="630" y="425">PK</text>
+<text class="col" x="656" y="425">department_id</text>
+<text class="typ" x="850" y="425" text-anchor="end">uuid</text>
+<line class="rowline" x1="628" y1="430" x2="852" y2="430"/>
+<text class="key" x="630" y="445">FK</text>
+<text class="col" x="656" y="445">company_id</text>
+<text class="typ" x="850" y="445" text-anchor="end">uuid</text>
+<line class="rowline" x1="628" y1="450" x2="852" y2="450"/>
+<text class="col" x="630" y="465">code</text>
+<text class="typ" x="850" y="465" text-anchor="end">text</text>
+<line class="rowline" x1="628" y1="470" x2="852" y2="470"/>
+<text class="col" x="630" y="485">name</text>
+<text class="typ" x="850" y="485" text-anchor="end">text</text>
+<line class="rowline" x1="628" y1="490" x2="852" y2="490"/>
+<text class="key" x="630" y="505">FK</text>
+<text class="col" x="656" y="505">head_person_id</text>
+<text class="typ" x="850" y="505" text-anchor="end">uuid?</text>
+<line class="rowline" x1="628" y1="510" x2="852" y2="510"/>
+<text class="col" x="630" y="525">is_active</text>
+<text class="typ" x="850" y="525" text-anchor="end">bool</text>
+</g>
+<g class="ent g-code" id="s3-e-role">
+<rect class="body" x="920" y="40" width="240" height="118" rx="4"/>
+<path class="hdr" d="M920,70 V44 Q920,40 924,40 H1156 Q1160,40 1160,44 V70 Z"/>
+<line class="hdrline" x1="920" y1="70" x2="1160" y2="70"/>
+<text class="ttl" x="930" y="60">role_designation</text>
+<text class="key" x="930" y="85">PK</text>
+<text class="col" x="956" y="85">code</text>
+<text class="typ" x="1150" y="85" text-anchor="end">text</text>
+<line class="rowline" x1="928" y1="90" x2="1152" y2="90"/>
+<text class="col" x="930" y="105">label</text>
+<text class="typ" x="1150" y="105" text-anchor="end">text</text>
+<line class="rowline" x1="928" y1="110" x2="1152" y2="110"/>
+<text class="col" x="930" y="125">sort_order</text>
+<text class="typ" x="1150" y="125" text-anchor="end">int</text>
+<line class="rowline" x1="928" y1="130" x2="1152" y2="130"/>
+<text class="col" x="930" y="145">is_active &#183; retired_on</text>
+<text class="typ" x="1150" y="145" text-anchor="end"></text>
+</g>
+<g class="ent g-org" id="s3-e-fac">
+<rect class="body" x="920" y="200" width="240" height="138" rx="4"/>
+<path class="hdr" d="M920,230 V204 Q920,200 924,200 H1156 Q1160,200 1160,204 V230 Z"/>
+<line class="hdrline" x1="920" y1="230" x2="1160" y2="230"/>
+<text class="ttl" x="930" y="220">facility</text>
+<text class="key" x="930" y="245">PK</text>
+<text class="col" x="956" y="245">facility_id</text>
+<text class="typ" x="1150" y="245" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="250" x2="1152" y2="250"/>
+<text class="key" x="930" y="265">UK</text>
+<text class="col" x="956" y="265">code</text>
+<text class="typ" x="1150" y="265" text-anchor="end">text</text>
+<line class="rowline" x1="928" y1="270" x2="1152" y2="270"/>
+<text class="col" x="930" y="285">name</text>
+<text class="typ" x="1150" y="285" text-anchor="end">text</text>
+<line class="rowline" x1="928" y1="290" x2="1152" y2="290"/>
+<text class="col" x="930" y="305">address</text>
+<text class="typ" x="1150" y="305" text-anchor="end">text</text>
+<line class="rowline" x1="928" y1="310" x2="1152" y2="310"/>
+<text class="col" x="930" y="325">is_active</text>
+<text class="typ" x="1150" y="325" text-anchor="end">bool</text>
+</g>
+<g class="ent g-ghost ghost" id="s3-e-per">
+<rect class="body" x="920" y="380" width="240" height="58" rx="4"/>
+<path class="hdr" d="M920,410 V384 Q920,380 924,380 H1156 Q1160,380 1160,384 V410 Z"/>
+<line class="hdrline" x1="920" y1="410" x2="1160" y2="410"/>
+<text class="ttl" x="930" y="400">person</text>
+<text class="sub" x="1150" y="400" text-anchor="end">step 2</text>
+<text class="key" x="930" y="425">PK</text>
+<text class="col" x="956" y="425">person_id</text>
+<text class="typ" x="1150" y="425" text-anchor="end">uuid</text>
+</g>
+</svg>
+</g>
+<g transform="translate(1604,1114)">
+<text class="pt" x="0" y="22">Step 5 · Leave, FMLA and Insurance Claims</text>
+<text class="pr" x="1200" y="22" text-anchor="end">revision 6</text>
+<text class="pn" x="0" y="44">Not drawn: insurance_claim.leave_case_id (a disability claim usually belongs to a leave; a death claim doesn't). The small loop under leave_case is prior_case_id: a medical leave</text>
+<text class="pn" x="0" y="62">continuing an exhausted FMLA leave.</text>
+<rect class="frame" x="-1" y="79" width="1202" height="722" rx="4"/>
+<svg x="0" y="80" width="1200" height="720" viewBox="0 0 1200 720">
+
+<defs>
+<marker id="s5-m-one" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="12" y1="4" x2="12" y2="18"/><line class="mk" x1="16" y1="4" x2="16" y2="18"/></marker>
+<marker id="s5-m-zone" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><circle class="mk mkc" cx="8" cy="11" r="4"/><line class="mk" x1="16" y1="4" x2="16" y2="18"/></marker>
+<marker id="s5-m-zmany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><circle class="mk mkc" cx="5" cy="11" r="4"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker>
+<marker id="s5-m-omany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="9" y1="4" x2="9" y2="18"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker>
+</defs>
+<rect class="canvas" x="0" y="0" width="1200" height="720"/>
+<path class="edge" d="M620,69 H160 V160" marker-start="url(#s5-m-one)" marker-end="url(#s5-m-zmany)"/>
+<path class="edge" d="M620,88 H440 V160" marker-start="url(#s5-m-one)" marker-end="url(#s5-m-zmany)"/>
+<path class="edge" d="M860,69 H1040 V160" marker-start="url(#s5-m-one)" marker-end="url(#s5-m-zmany)"/>
+<path class="edge" d="M280,300 H320" marker-start="url(#s5-m-zone)" marker-end="url(#s5-m-zmany)"/>
+<path class="edge" d="M560,250 H620" marker-start="url(#s5-m-one)" marker-end="url(#s5-m-zmany)"/>
+<path class="edge" d="M160,478 V500" marker-start="url(#s5-m-one)" marker-end="url(#s5-m-zmany)"/>
+<path class="edge" d="M250,478 V490 H210 V478" marker-start="url(#s5-m-zmany)" marker-end="url(#s5-m-zone)"/>
+<path class="edge" d="M1040,398 V460" marker-start="url(#s5-m-one)" marker-end="url(#s5-m-omany)"/>
+<text class="elab" x="590" y="242" text-anchor="middle">uses</text>
+<text class="elab" x="152" y="492" text-anchor="end">contacts</text>
+<text class="elab" x="1048" y="432" text-anchor="start">tracks</text>
+<g class="ent g-ghost ghost" id="s5-e-emp">
+<rect class="body" x="620" y="40" width="240" height="58" rx="4"/>
+<path class="hdr" d="M620,70 V44 Q620,40 624,40 H856 Q860,40 860,44 V70 Z"/>
+<line class="hdrline" x1="620" y1="70" x2="860" y2="70"/>
+<text class="ttl" x="630" y="60">employment</text>
+<text class="sub" x="850" y="60" text-anchor="end">step 2</text>
+<text class="key" x="630" y="85">PK</text>
+<text class="col" x="656" y="85">employment_id</text>
+<text class="typ" x="850" y="85" text-anchor="end">uuid</text>
+</g>
+<g class="ent g-org" id="s5-e-case">
+<rect class="body" x="40" y="160" width="240" height="318" rx="4"/>
+<path class="hdr" d="M40,190 V164 Q40,160 44,160 H276 Q280,160 280,164 V190 Z"/>
+<line class="hdrline" x1="40" y1="190" x2="280" y2="190"/>
+<text class="ttl" x="50" y="180">leave_case</text>
+<text class="key" x="50" y="205">PK</text>
+<text class="col" x="76" y="205">leave_case_id</text>
+<text class="typ" x="270" y="205" text-anchor="end">uuid</text>
+<line class="rowline" x1="48" y1="210" x2="272" y2="210"/>
+<text class="key" x="50" y="225">FK</text>
+<text class="col" x="76" y="225">employment_id</text>
+<text class="typ" x="270" y="225" text-anchor="end">uuid</text>
+<line class="rowline" x1="48" y1="230" x2="272" y2="230"/>
+<text class="col" x="50" y="245">leave_type &#183; other_text</text>
+<text class="typ" x="270" y="245" text-anchor="end">enum</text>
+<line class="rowline" x1="48" y1="250" x2="272" y2="250"/>
+<text class="col" x="50" y="265">status</text>
+<text class="typ" x="270" y="265" text-anchor="end">enum</text>
+<line class="rowline" x1="48" y1="270" x2="272" y2="270"/>
+<text class="col" x="50" y="285">last_day_worked</text>
+<text class="typ" x="270" y="285" text-anchor="end">date?</text>
+<line class="rowline" x1="48" y1="290" x2="272" y2="290"/>
+<text class="col" x="50" y="305">start_on &#183; expected_return</text>
+<text class="typ" x="270" y="305" text-anchor="end">date?</text>
+<line class="rowline" x1="48" y1="310" x2="272" y2="310"/>
+<text class="col" x="50" y="325">expected_duration_text</text>
+<text class="typ" x="270" y="325" text-anchor="end">text?</text>
+<line class="rowline" x1="48" y1="330" x2="272" y2="330"/>
+<text class="col" x="50" y="345">actual_return_on</text>
+<text class="typ" x="270" y="345" text-anchor="end">date?</text>
+<line class="rowline" x1="48" y1="350" x2="272" y2="350"/>
+<text class="col" x="50" y="365">outcome</text>
+<text class="typ" x="270" y="365" text-anchor="end">enum?</text>
+<line class="rowline" x1="48" y1="370" x2="272" y2="370"/>
+<text class="col" x="50" y="385">rtw_drug_test_required</text>
+<text class="typ" x="270" y="385" text-anchor="end">bool</text>
+<line class="rowline" x1="48" y1="390" x2="272" y2="390"/>
+<text class="key" x="50" y="405">FK</text>
+<text class="col" x="76" y="405">rtw_drug_test_id</text>
+<text class="typ" x="270" y="405" text-anchor="end">uuid?</text>
+<line class="rowline" x1="48" y1="410" x2="272" y2="410"/>
+<text class="col" x="50" y="425">signed: staff &#183; dir &#183; HR</text>
+<text class="typ" x="270" y="425" text-anchor="end">date?</text>
+<line class="rowline" x1="48" y1="430" x2="272" y2="430"/>
+<text class="key" x="50" y="445">FK</text>
+<text class="col" x="76" y="445">prior_case_id</text>
+<text class="typ" x="270" y="445" text-anchor="end">uuid?</text>
+<line class="rowline" x1="48" y1="450" x2="272" y2="450"/>
+<text class="col" x="50" y="465">document_ref &#183; note</text>
+<text class="typ" x="270" y="465" text-anchor="end">text?</text>
+</g>
+<g class="ent g-org" id="s5-e-cont">
+<rect class="body" x="40" y="500" width="240" height="158" rx="4"/>
+<path class="hdr" d="M40,530 V504 Q40,500 44,500 H276 Q280,500 280,504 V530 Z"/>
+<line class="hdrline" x1="40" y1="530" x2="280" y2="530"/>
+<text class="ttl" x="50" y="520">leave_contact</text>
+<text class="key" x="50" y="545">PK</text>
+<text class="col" x="76" y="545">contact_id</text>
+<text class="typ" x="270" y="545" text-anchor="end">uuid</text>
+<line class="rowline" x1="48" y1="550" x2="272" y2="550"/>
+<text class="key" x="50" y="565">FK</text>
+<text class="col" x="76" y="565">leave_case_id</text>
+<text class="typ" x="270" y="565" text-anchor="end">uuid</text>
+<line class="rowline" x1="48" y1="570" x2="272" y2="570"/>
+<text class="col" x="50" y="585">contacted_on</text>
+<text class="typ" x="270" y="585" text-anchor="end">date</text>
+<line class="rowline" x1="48" y1="590" x2="272" y2="590"/>
+<text class="col" x="50" y="605">method</text>
+<text class="typ" x="270" y="605" text-anchor="end">enum</text>
+<line class="rowline" x1="48" y1="610" x2="272" y2="610"/>
+<text class="col" x="50" y="625">summary</text>
+<text class="typ" x="270" y="625" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="630" x2="272" y2="630"/>
+<text class="col" x="50" y="645">next_contact_due_on</text>
+<text class="typ" x="270" y="645" text-anchor="end">date?</text>
+</g>
+<g class="ent g-org" id="s5-e-cert">
+<rect class="body" x="320" y="160" width="240" height="438" rx="4"/>
+<path class="hdr" d="M320,190 V164 Q320,160 324,160 H556 Q560,160 560,164 V190 Z"/>
+<line class="hdrline" x1="320" y1="190" x2="560" y2="190"/>
+<text class="ttl" x="330" y="180">fmla_certification</text>
+<text class="key" x="330" y="205">PK</text>
+<text class="col" x="356" y="205">certification_id</text>
+<text class="typ" x="550" y="205" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="210" x2="552" y2="210"/>
+<text class="key" x="330" y="225">FK</text>
+<text class="col" x="356" y="225">employment_id</text>
+<text class="typ" x="550" y="225" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="230" x2="552" y2="230"/>
+<text class="key" x="330" y="245">FK</text>
+<text class="col" x="356" y="245">leave_case_id</text>
+<text class="typ" x="550" y="245" text-anchor="end">uuid?</text>
+<line class="rowline" x1="328" y1="250" x2="552" y2="250"/>
+<text class="col" x="330" y="265">covers</text>
+<text class="typ" x="550" y="265" text-anchor="end">enum</text>
+<line class="rowline" x1="328" y1="270" x2="552" y2="270"/>
+<text class="col" x="330" y="285">status</text>
+<text class="typ" x="550" y="285" text-anchor="end">enum</text>
+<line class="rowline" x1="328" y1="290" x2="552" y2="290"/>
+<text class="col" x="330" y="305">fmla_reason</text>
+<text class="typ" x="550" y="305" text-anchor="end">enum</text>
+<line class="rowline" x1="328" y1="310" x2="552" y2="310"/>
+<text class="col" x="330" y="325">need_learned_on</text>
+<text class="typ" x="550" y="325" text-anchor="end">date?</text>
+<line class="rowline" x1="328" y1="330" x2="552" y2="330"/>
+<text class="col" x="330" y="345">eligible &#183; hours_12_months</text>
+<text class="typ" x="550" y="345" text-anchor="end">bool?</text>
+<line class="rowline" x1="328" y1="350" x2="552" y2="350"/>
+<text class="col" x="330" y="365">not_eligible_reason</text>
+<text class="typ" x="550" y="365" text-anchor="end">enum?</text>
+<line class="rowline" x1="328" y1="370" x2="552" y2="370"/>
+<text class="col" x="330" y="385">eligibility_notice_on</text>
+<text class="typ" x="550" y="385" text-anchor="end">date?</text>
+<line class="rowline" x1="328" y1="390" x2="552" y2="390"/>
+<text class="col" x="330" y="405">return_due_on</text>
+<text class="typ" x="550" y="405" text-anchor="end">date?</text>
+<line class="rowline" x1="328" y1="410" x2="552" y2="410"/>
+<text class="col" x="330" y="425">doctor_signed_on</text>
+<text class="typ" x="550" y="425" text-anchor="end">date?</text>
+<line class="rowline" x1="328" y1="430" x2="552" y2="430"/>
+<text class="col" x="330" y="445">valid_from &#183; valid_to</text>
+<text class="typ" x="550" y="445" text-anchor="end">date?</text>
+<line class="rowline" x1="328" y1="450" x2="552" y2="450"/>
+<text class="col" x="330" y="465">continuous_start &#183; end</text>
+<text class="typ" x="550" y="465" text-anchor="end">date?</text>
+<line class="rowline" x1="328" y1="470" x2="552" y2="470"/>
+<text class="col" x="330" y="485">frequency &#183; per</text>
+<text class="typ" x="550" y="485" text-anchor="end">int?</text>
+<line class="rowline" x1="328" y1="490" x2="552" y2="490"/>
+<text class="col" x="330" y="505">duration &#183; unit</text>
+<text class="typ" x="550" y="505" text-anchor="end">num?</text>
+<line class="rowline" x1="328" y1="510" x2="552" y2="510"/>
+<text class="col" x="330" y="525">freq_duration_text</text>
+<text class="typ" x="550" y="525" text-anchor="end">text?</text>
+<line class="rowline" x1="328" y1="530" x2="552" y2="530"/>
+<text class="col" x="330" y="545">designation_notice_on</text>
+<text class="typ" x="550" y="545" text-anchor="end">date?</text>
+<line class="rowline" x1="328" y1="550" x2="552" y2="550"/>
+<text class="col" x="330" y="565">denial_reason</text>
+<text class="typ" x="550" y="565" text-anchor="end">text?</text>
+<line class="rowline" x1="328" y1="570" x2="552" y2="570"/>
+<text class="col" x="330" y="585">expiry_letter_sent_on</text>
+<text class="typ" x="550" y="585" text-anchor="end">date?</text>
+</g>
+<g class="ent g-org" id="s5-e-use">
+<rect class="body" x="620" y="160" width="240" height="178" rx="4"/>
+<path class="hdr" d="M620,190 V164 Q620,160 624,160 H856 Q860,160 860,164 V190 Z"/>
+<line class="hdrline" x1="620" y1="190" x2="860" y2="190"/>
+<text class="ttl" x="630" y="180">fmla_usage</text>
+<text class="key" x="630" y="205">PK</text>
+<text class="col" x="656" y="205">usage_id</text>
+<text class="typ" x="850" y="205" text-anchor="end">uuid</text>
+<line class="rowline" x1="628" y1="210" x2="852" y2="210"/>
+<text class="key" x="630" y="225">FK</text>
+<text class="col" x="656" y="225">certification_id</text>
+<text class="typ" x="850" y="225" text-anchor="end">uuid</text>
+<line class="rowline" x1="628" y1="230" x2="852" y2="230"/>
+<text class="col" x="630" y="245">start_on</text>
+<text class="typ" x="850" y="245" text-anchor="end">date</text>
+<line class="rowline" x1="628" y1="250" x2="852" y2="250"/>
+<text class="col" x="630" y="265">end_on</text>
+<text class="typ" x="850" y="265" text-anchor="end">date?</text>
+<line class="rowline" x1="628" y1="270" x2="852" y2="270"/>
+<text class="col" x="630" y="285">shifts_counted</text>
+<text class="typ" x="850" y="285" text-anchor="end">numeric</text>
+<line class="rowline" x1="628" y1="290" x2="852" y2="290"/>
+<text class="col" x="630" y="305">source</text>
+<text class="typ" x="850" y="305" text-anchor="end">enum</text>
+<line class="rowline" x1="628" y1="310" x2="852" y2="310"/>
+<text class="col" x="630" y="325">source_ref</text>
+<text class="typ" x="850" y="325" text-anchor="end">text?</text>
+</g>
+<g class="ent g-org" id="s5-e-claim">
+<rect class="body" x="920" y="160" width="240" height="238" rx="4"/>
+<path class="hdr" d="M920,190 V164 Q920,160 924,160 H1156 Q1160,160 1160,164 V190 Z"/>
+<line class="hdrline" x1="920" y1="190" x2="1160" y2="190"/>
+<text class="ttl" x="930" y="180">insurance_claim</text>
+<text class="key" x="930" y="205">PK</text>
+<text class="col" x="956" y="205">claim_id</text>
+<text class="typ" x="1150" y="205" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="210" x2="1152" y2="210"/>
+<text class="key" x="930" y="225">FK</text>
+<text class="col" x="956" y="225">employment_id</text>
+<text class="typ" x="1150" y="225" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="230" x2="1152" y2="230"/>
+<text class="key" x="930" y="245">FK</text>
+<text class="col" x="956" y="245">leave_case_id</text>
+<text class="typ" x="1150" y="245" text-anchor="end">uuid?</text>
+<line class="rowline" x1="928" y1="250" x2="1152" y2="250"/>
+<text class="col" x="930" y="265">carrier</text>
+<text class="typ" x="1150" y="265" text-anchor="end">enum</text>
+<line class="rowline" x1="928" y1="270" x2="1152" y2="270"/>
+<text class="col" x="930" y="285">claim_type</text>
+<text class="typ" x="1150" y="285" text-anchor="end">enum</text>
+<line class="rowline" x1="928" y1="290" x2="1152" y2="290"/>
+<text class="col" x="930" y="305">status</text>
+<text class="typ" x="1150" y="305" text-anchor="end">enum</text>
+<line class="rowline" x1="928" y1="310" x2="1152" y2="310"/>
+<text class="col" x="930" y="325">opened_on</text>
+<text class="typ" x="1150" y="325" text-anchor="end">date</text>
+<line class="rowline" x1="928" y1="330" x2="1152" y2="330"/>
+<text class="col" x="930" y="345">benefit_start &#183; end</text>
+<text class="typ" x="1150" y="345" text-anchor="end">date?</text>
+<line class="rowline" x1="928" y1="350" x2="1152" y2="350"/>
+<text class="col" x="930" y="365">missing_items_note</text>
+<text class="typ" x="1150" y="365" text-anchor="end">text?</text>
+<line class="rowline" x1="928" y1="370" x2="1152" y2="370"/>
+<text class="col" x="930" y="385">closed_on</text>
+<text class="typ" x="1150" y="385" text-anchor="end">date?</text>
+</g>
+<g class="ent g-org" id="s5-e-doc">
+<rect class="body" x="920" y="460" width="240" height="158" rx="4"/>
+<path class="hdr" d="M920,490 V464 Q920,460 924,460 H1156 Q1160,460 1160,464 V490 Z"/>
+<line class="hdrline" x1="920" y1="490" x2="1160" y2="490"/>
+<text class="ttl" x="930" y="480">claim_document</text>
+<text class="key" x="930" y="505">PK</text>
+<text class="col" x="956" y="505">claim_document_id</text>
+<text class="typ" x="1150" y="505" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="510" x2="1152" y2="510"/>
+<text class="key" x="930" y="525">FK</text>
+<text class="col" x="956" y="525">claim_id</text>
+<text class="typ" x="1150" y="525" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="530" x2="1152" y2="530"/>
+<text class="col" x="930" y="545">document_type</text>
+<text class="typ" x="1150" y="545" text-anchor="end">enum</text>
+<line class="rowline" x1="928" y1="550" x2="1152" y2="550"/>
+<text class="col" x="930" y="565">party</text>
+<text class="typ" x="1150" y="565" text-anchor="end">enum</text>
+<line class="rowline" x1="928" y1="570" x2="1152" y2="570"/>
+<text class="col" x="930" y="585">sent_on</text>
+<text class="typ" x="1150" y="585" text-anchor="end">date?</text>
+<line class="rowline" x1="928" y1="590" x2="1152" y2="590"/>
+<text class="col" x="930" y="605">received_on</text>
+<text class="typ" x="1150" y="605" text-anchor="end">date?</text>
+</g>
+</svg>
+</g>
+<g transform="translate(1604,1958)">
+<text class="pt" x="0" y="22">Step 7 · Workflow, Records and Verifications</text>
+<text class="pr" x="1200" y="22" text-anchor="end">revision 6</text>
+<text class="pn" x="0" y="44">Dashed boxes are step 2 tables and the built-in Task. Not drawn: paper_file.employment_id; checklist_step.owner_team_id → team (step 8).</text>
+<rect class="frame" x="-1" y="61" width="1202" height="822" rx="4"/>
+<svg x="0" y="62" width="1200" height="820" viewBox="0 0 1200 820">
+
+<defs>
+<marker id="s7-m-one" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="12" y1="4" x2="12" y2="18"/><line class="mk" x1="16" y1="4" x2="16" y2="18"/></marker>
+<marker id="s7-m-zone" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><circle class="mk mkc" cx="8" cy="11" r="4"/><line class="mk" x1="16" y1="4" x2="16" y2="18"/></marker>
+<marker id="s7-m-zmany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><circle class="mk mkc" cx="5" cy="11" r="4"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker>
+<marker id="s7-m-omany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="9" y1="4" x2="9" y2="18"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker>
+</defs>
+<rect class="canvas" x="0" y="0" width="1200" height="820"/>
+<path class="edge" d="M160,178 V220" marker-start="url(#s7-m-one)" marker-end="url(#s7-m-omany)"/>
+<path class="edge" d="M320,150 H300 V330 H280" marker-start="url(#s7-m-zone)" marker-end="url(#s7-m-zmany)"/>
+<path class="edge" d="M280,400 H320" marker-start="url(#s7-m-zone)" marker-end="url(#s7-m-zmany)"/>
+<path class="edge" d="M440,198 V260" marker-start="url(#s7-m-zone)" marker-end="url(#s7-m-zmany)"/>
+<path class="edge" d="M560,290 H590 V70 H620" marker-start="url(#s7-m-zmany)" marker-end="url(#s7-m-one)"/>
+<path class="edge" d="M560,350 H620" marker-start="url(#s7-m-zmany)" marker-end="url(#s7-m-zone)"/>
+<path class="edge" d="M560,620 H620" marker-start="url(#s7-m-zmany)" marker-end="url(#s7-m-one)"/>
+<path class="edge" d="M920,70 H860" marker-start="url(#s7-m-zmany)" marker-end="url(#s7-m-zone)"/>
+<path class="edge" d="M1040,298 V630 H860" marker-start="url(#s7-m-zmany)" marker-end="url(#s7-m-zone)"/>
+<text class="elab" x="594" y="180" text-anchor="start">regarding</text>
+<text class="elab" x="590" y="342" text-anchor="middle">trigger</text>
+<g class="ent g-code" id="s7-e-tpl">
+<rect class="body" x="40" y="40" width="240" height="138" rx="4"/>
+<path class="hdr" d="M40,70 V44 Q40,40 44,40 H276 Q280,40 280,44 V70 Z"/>
+<line class="hdrline" x1="40" y1="70" x2="280" y2="70"/>
+<text class="ttl" x="50" y="60">checklist_template</text>
+<text class="key" x="50" y="85">PK</text>
+<text class="col" x="76" y="85">checklist_template_id</text>
+<text class="typ" x="270" y="85" text-anchor="end">uuid</text>
+<line class="rowline" x1="48" y1="90" x2="272" y2="90"/>
+<text class="key" x="50" y="105">UK</text>
+<text class="col" x="76" y="105">code</text>
+<text class="typ" x="270" y="105" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="110" x2="272" y2="110"/>
+<text class="col" x="50" y="125">name</text>
+<text class="typ" x="270" y="125" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="130" x2="272" y2="130"/>
+<text class="col" x="50" y="145">trigger</text>
+<text class="typ" x="270" y="145" text-anchor="end">choice</text>
+<line class="rowline" x1="48" y1="150" x2="272" y2="150"/>
+<text class="col" x="50" y="165">is_active</text>
+<text class="typ" x="270" y="165" text-anchor="end">bool</text>
+</g>
+<g class="ent g-code" id="s7-e-step">
+<rect class="body" x="40" y="220" width="240" height="258" rx="4"/>
+<path class="hdr" d="M40,250 V224 Q40,220 44,220 H276 Q280,220 280,224 V250 Z"/>
+<line class="hdrline" x1="40" y1="250" x2="280" y2="250"/>
+<text class="ttl" x="50" y="240">checklist_step</text>
+<text class="key" x="50" y="265">PK</text>
+<text class="col" x="76" y="265">checklist_step_id</text>
+<text class="typ" x="270" y="265" text-anchor="end">uuid</text>
+<line class="rowline" x1="48" y1="270" x2="272" y2="270"/>
+<text class="key" x="50" y="285">FK</text>
+<text class="col" x="76" y="285">checklist_template_id</text>
+<text class="typ" x="270" y="285" text-anchor="end">uuid</text>
+<line class="rowline" x1="48" y1="290" x2="272" y2="290"/>
+<text class="col" x="50" y="305">sequence</text>
+<text class="typ" x="270" y="305" text-anchor="end">int</text>
+<line class="rowline" x1="48" y1="310" x2="272" y2="310"/>
+<text class="col" x="50" y="325">title</text>
+<text class="typ" x="270" y="325" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="330" x2="272" y2="330"/>
+<text class="key" x="50" y="345">FK</text>
+<text class="col" x="76" y="345">external_system_id</text>
+<text class="typ" x="270" y="345" text-anchor="end">uuid?</text>
+<line class="rowline" x1="48" y1="350" x2="272" y2="350"/>
+<text class="col" x="50" y="365">action</text>
+<text class="typ" x="270" y="365" text-anchor="end">choice</text>
+<line class="rowline" x1="48" y1="370" x2="272" y2="370"/>
+<text class="key" x="50" y="385">FK</text>
+<text class="col" x="76" y="385">owner_team_id</text>
+<text class="typ" x="270" y="385" text-anchor="end">uuid</text>
+<line class="rowline" x1="48" y1="390" x2="272" y2="390"/>
+<text class="col" x="50" y="405">condition</text>
+<text class="typ" x="270" y="405" text-anchor="end">choice</text>
+<line class="rowline" x1="48" y1="410" x2="272" y2="410"/>
+<text class="col" x="50" y="425">condition_note</text>
+<text class="typ" x="270" y="425" text-anchor="end">text?</text>
+<line class="rowline" x1="48" y1="430" x2="272" y2="430"/>
+<text class="col" x="50" y="445">due_offset_days</text>
+<text class="typ" x="270" y="445" text-anchor="end">int?</text>
+<line class="rowline" x1="48" y1="450" x2="272" y2="450"/>
+<text class="key" x="50" y="465">FK</text>
+<text class="col" x="76" y="465">email_template_id</text>
+<text class="typ" x="270" y="465" text-anchor="end">uuid?</text>
+</g>
+<g class="ent g-code" id="s7-e-ext">
+<rect class="body" x="320" y="40" width="240" height="158" rx="4"/>
+<path class="hdr" d="M320,70 V44 Q320,40 324,40 H556 Q560,40 560,44 V70 Z"/>
+<line class="hdrline" x1="320" y1="70" x2="560" y2="70"/>
+<text class="ttl" x="330" y="60">external_system</text>
+<text class="key" x="330" y="85">PK</text>
+<text class="col" x="356" y="85">external_system_id</text>
+<text class="typ" x="550" y="85" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="90" x2="552" y2="90"/>
+<text class="key" x="330" y="105">UK</text>
+<text class="col" x="356" y="105">code</text>
+<text class="typ" x="550" y="105" text-anchor="end">text</text>
+<line class="rowline" x1="328" y1="110" x2="552" y2="110"/>
+<text class="col" x="330" y="125">name</text>
+<text class="typ" x="550" y="125" text-anchor="end">text</text>
+<line class="rowline" x1="328" y1="130" x2="552" y2="130"/>
+<text class="col" x="330" y="145">kind</text>
+<text class="typ" x="550" y="145" text-anchor="end">choice</text>
+<line class="rowline" x1="328" y1="150" x2="552" y2="150"/>
+<text class="col" x="330" y="165">contact_or_url</text>
+<text class="typ" x="550" y="165" text-anchor="end">text?</text>
+<line class="rowline" x1="328" y1="170" x2="552" y2="170"/>
+<text class="col" x="330" y="185">is_active</text>
+<text class="typ" x="550" y="185" text-anchor="end">bool</text>
+</g>
+<g class="ent g-ghost ghost" id="s7-e-task">
+<rect class="body" x="320" y="260" width="240" height="238" rx="4"/>
+<path class="hdr" d="M320,290 V264 Q320,260 324,260 H556 Q560,260 560,264 V290 Z"/>
+<line class="hdrline" x1="320" y1="290" x2="560" y2="290"/>
+<text class="ttl" x="330" y="280">task (built-in)</text>
+<text class="sub" x="550" y="280" text-anchor="end">built-in</text>
+<text class="key" x="330" y="305">PK</text>
+<text class="col" x="356" y="305">activityid</text>
+<text class="typ" x="550" y="305" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="310" x2="552" y2="310"/>
+<text class="key" x="330" y="325">FK</text>
+<text class="col" x="356" y="325">regarding: employment</text>
+<text class="typ" x="550" y="325" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="330" x2="552" y2="330"/>
+<text class="key" x="330" y="345">FK</text>
+<text class="col" x="356" y="345">checklist_step_id</text>
+<text class="typ" x="550" y="345" text-anchor="end">uuid?</text>
+<line class="rowline" x1="328" y1="350" x2="552" y2="350"/>
+<text class="key" x="330" y="365">FK</text>
+<text class="col" x="356" y="365">employment_event_id</text>
+<text class="typ" x="550" y="365" text-anchor="end">uuid?</text>
+<line class="rowline" x1="328" y1="370" x2="552" y2="370"/>
+<text class="key" x="330" y="385">FK</text>
+<text class="col" x="356" y="385">external_system_id</text>
+<text class="typ" x="550" y="385" text-anchor="end">uuid?</text>
+<line class="rowline" x1="328" y1="390" x2="552" y2="390"/>
+<text class="col" x="330" y="405">subject</text>
+<text class="typ" x="550" y="405" text-anchor="end">text</text>
+<line class="rowline" x1="328" y1="410" x2="552" y2="410"/>
+<text class="col" x="330" y="425">due (scheduledend)</text>
+<text class="typ" x="550" y="425" text-anchor="end">date</text>
+<line class="rowline" x1="328" y1="430" x2="552" y2="430"/>
+<text class="col" x="330" y="445">status (statecode)</text>
+<text class="typ" x="550" y="445" text-anchor="end">choice</text>
+<line class="rowline" x1="328" y1="450" x2="552" y2="450"/>
+<text class="col" x="330" y="465">owner</text>
+<text class="typ" x="550" y="465" text-anchor="end">user/team</text>
+<line class="rowline" x1="328" y1="470" x2="552" y2="470"/>
+<text class="col" x="330" y="485">completed (actualend)</text>
+<text class="typ" x="550" y="485" text-anchor="end">date?</text>
+</g>
+<g class="ent g-ghost ghost" id="s7-e-emp">
+<rect class="body" x="620" y="40" width="240" height="58" rx="4"/>
+<path class="hdr" d="M620,70 V44 Q620,40 624,40 H856 Q860,40 860,44 V70 Z"/>
+<line class="hdrline" x1="620" y1="70" x2="860" y2="70"/>
+<text class="ttl" x="630" y="60">employment</text>
+<text class="sub" x="850" y="60" text-anchor="end">step 2</text>
+<text class="key" x="630" y="85">PK</text>
+<text class="col" x="656" y="85">employment_id</text>
+<text class="typ" x="850" y="85" text-anchor="end">uuid</text>
+</g>
+<g class="ent g-ghost ghost" id="s7-e-evt">
+<rect class="body" x="620" y="320" width="240" height="58" rx="4"/>
+<path class="hdr" d="M620,350 V324 Q620,320 624,320 H856 Q860,320 860,324 V350 Z"/>
+<line class="hdrline" x1="620" y1="350" x2="860" y2="350"/>
+<text class="ttl" x="630" y="340">employment_event</text>
+<text class="sub" x="850" y="340" text-anchor="end">step 2</text>
+<text class="key" x="630" y="365">PK</text>
+<text class="col" x="656" y="365">event_id</text>
+<text class="typ" x="850" y="365" text-anchor="end">uuid</text>
+</g>
+<g class="ent g-ghost ghost" id="s7-e-per">
+<rect class="body" x="620" y="600" width="240" height="58" rx="4"/>
+<path class="hdr" d="M620,630 V604 Q620,600 624,600 H856 Q860,600 860,604 V630 Z"/>
+<line class="hdrline" x1="620" y1="630" x2="860" y2="630"/>
+<text class="ttl" x="630" y="620">person</text>
+<text class="sub" x="850" y="620" text-anchor="end">step 2</text>
+<text class="key" x="630" y="645">PK</text>
+<text class="col" x="656" y="645">person_id</text>
+<text class="typ" x="850" y="645" text-anchor="end">uuid</text>
+</g>
+<g class="ent g-org" id="s7-e-pf">
+<rect class="body" x="320" y="560" width="240" height="178" rx="4"/>
+<path class="hdr" d="M320,590 V564 Q320,560 324,560 H556 Q560,560 560,564 V590 Z"/>
+<line class="hdrline" x1="320" y1="590" x2="560" y2="590"/>
+<text class="ttl" x="330" y="580">paper_file</text>
+<text class="key" x="330" y="605">PK</text>
+<text class="col" x="356" y="605">paper_file_id</text>
+<text class="typ" x="550" y="605" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="610" x2="552" y2="610"/>
+<text class="key" x="330" y="625">FK</text>
+<text class="col" x="356" y="625">person_id</text>
+<text class="typ" x="550" y="625" text-anchor="end">uuid</text>
+<line class="rowline" x1="328" y1="630" x2="552" y2="630"/>
+<text class="key" x="330" y="645">FK</text>
+<text class="col" x="356" y="645">employment_id</text>
+<text class="typ" x="550" y="645" text-anchor="end">uuid?</text>
+<line class="rowline" x1="328" y1="650" x2="552" y2="650"/>
+<text class="col" x="330" y="665">file_type</text>
+<text class="typ" x="550" y="665" text-anchor="end">choice</text>
+<line class="rowline" x1="328" y1="670" x2="552" y2="670"/>
+<text class="col" x="330" y="685">location</text>
+<text class="typ" x="550" y="685" text-anchor="end">choice</text>
+<line class="rowline" x1="328" y1="690" x2="552" y2="690"/>
+<text class="col" x="330" y="705">box_label</text>
+<text class="typ" x="550" y="705" text-anchor="end">text?</text>
+<line class="rowline" x1="328" y1="710" x2="552" y2="710"/>
+<text class="col" x="330" y="725">moved_on</text>
+<text class="typ" x="550" y="725" text-anchor="end">date?</text>
+</g>
+<g class="ent g-org" id="s7-e-ver">
+<rect class="body" x="920" y="40" width="240" height="258" rx="4"/>
+<path class="hdr" d="M920,70 V44 Q920,40 924,40 H1156 Q1160,40 1160,44 V70 Z"/>
+<line class="hdrline" x1="920" y1="70" x2="1160" y2="70"/>
+<text class="ttl" x="930" y="60">verification_request</text>
+<text class="key" x="930" y="85">PK</text>
+<text class="col" x="956" y="85">verification_id</text>
+<text class="typ" x="1150" y="85" text-anchor="end">uuid</text>
+<line class="rowline" x1="928" y1="90" x2="1152" y2="90"/>
+<text class="col" x="930" y="105">received_on</text>
+<text class="typ" x="1150" y="105" text-anchor="end">date</text>
+<line class="rowline" x1="928" y1="110" x2="1152" y2="110"/>
+<text class="col" x="930" y="125">channel</text>
+<text class="typ" x="1150" y="125" text-anchor="end">choice</text>
+<line class="rowline" x1="928" y1="130" x2="1152" y2="130"/>
+<text class="col" x="930" y="145">requester_org</text>
+<text class="typ" x="1150" y="145" text-anchor="end">text</text>
+<line class="rowline" x1="928" y1="150" x2="1152" y2="150"/>
+<text class="col" x="930" y="165">subject_name_given</text>
+<text class="typ" x="1150" y="165" text-anchor="end">text</text>
+<line class="rowline" x1="928" y1="170" x2="1152" y2="170"/>
+<text class="key" x="930" y="185">FK</text>
+<text class="col" x="956" y="185">person_id</text>
+<text class="typ" x="1150" y="185" text-anchor="end">uuid?</text>
+<line class="rowline" x1="928" y1="190" x2="1152" y2="190"/>
+<text class="key" x="930" y="205">FK</text>
+<text class="col" x="956" y="205">employment_id</text>
+<text class="typ" x="1150" y="205" text-anchor="end">uuid?</text>
+<line class="rowline" x1="928" y1="210" x2="1152" y2="210"/>
+<text class="col" x="930" y="225">outcome</text>
+<text class="typ" x="1150" y="225" text-anchor="end">choice</text>
+<line class="rowline" x1="928" y1="230" x2="1152" y2="230"/>
+<text class="col" x="930" y="245">info_released</text>
+<text class="typ" x="1150" y="245" text-anchor="end">choices?</text>
+<line class="rowline" x1="928" y1="250" x2="1152" y2="250"/>
+<text class="col" x="930" y="265">responded_on</text>
+<text class="typ" x="1150" y="265" text-anchor="end">date?</text>
+<line class="rowline" x1="928" y1="270" x2="1152" y2="270"/>
+<text class="col" x="930" y="285">fax_filed</text>
+<text class="typ" x="1150" y="285" text-anchor="end">bool</text>
+</g>
+</svg>
+</g>
+<g transform="translate(1604,2884)">
+<text class="pt" x="0" y="22">Step 8 · Security, Audit and Retention</text>
+<text class="pr" x="1240" y="22" text-anchor="end">revision 6</text>
+<text class="pn" x="0" y="44">Dashed boxes are Dataverse built-ins and the step 2 person. A role or profile reaches a user directly (systemuserroles, systemuserprofiles) or through a team (teamroles, teamprofiles);</text>
+<text class="pn" x="0" y="62">all four links and teammembership are built-in intersect tables.</text>
+<rect class="frame" x="-1" y="79" width="1242" height="472" rx="4"/>
+<svg x="0" y="80" width="1240" height="470" viewBox="0 0 1240 470">
+
+<defs>
+<marker id="s8-m-one" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="12" y1="4" x2="12" y2="18"/><line class="mk" x1="16" y1="4" x2="16" y2="18"/></marker>
+<marker id="s8-m-zone" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><circle class="mk mkc" cx="8" cy="11" r="4"/><line class="mk" x1="16" y1="4" x2="16" y2="18"/></marker>
+<marker id="s8-m-zmany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><circle class="mk mkc" cx="5" cy="11" r="4"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker>
+<marker id="s8-m-omany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="9" y1="4" x2="9" y2="18"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker>
+</defs>
+<rect class="canvas" x="0" y="0" width="1240" height="470"/>
+<path class="edge" d="M360,130 H330 V200 H280" marker-start="url(#s8-m-zmany)" marker-end="url(#s8-m-one)"/>
+<path class="edge" d="M360,330 H310 V240 H280" marker-start="url(#s8-m-zmany)" marker-end="url(#s8-m-one)"/>
+<path class="edge" d="M600,80 H720" marker-start="url(#s8-m-zone)" marker-end="url(#s8-m-zone)"/>
+<path class="edge" d="M600,170 H720" marker-start="url(#s8-m-zmany)" marker-end="url(#s8-m-zmany)"/>
+<path class="edge" d="M560,50 V24 H1080 V150" marker-start="url(#s8-m-zmany)" marker-end="url(#s8-m-zmany)"/>
+<path class="edge" d="M600,340 H780 V248" marker-start="url(#s8-m-zmany)" marker-end="url(#s8-m-zmany)"/>
+<path class="edge" d="M600,390 H1080 V228" marker-start="url(#s8-m-zmany)" marker-end="url(#s8-m-zmany)"/>
+<path class="edge" d="M480,188 V300" marker-start="url(#s8-m-zmany)" marker-end="url(#s8-m-zmany)"/>
+<text class="elab" x="606" y="162" text-anchor="start">systemuserroles</text>
+<text class="elab" x="700" y="18" text-anchor="start">systemuserprofiles</text>
+<text class="elab" x="606" y="332" text-anchor="start">teamroles</text>
+<text class="elab" x="606" y="382" text-anchor="start">teamprofiles</text>
+<text class="elab" x="488" y="248" text-anchor="start">teammembership</text>
+<g class="ent g-ghost ghost" id="s8-e-usr">
+<rect class="body" x="360" y="50" width="240" height="138" rx="4"/>
+<path class="hdr" d="M360,80 V54 Q360,50 364,50 H596 Q600,50 600,54 V80 Z"/>
+<line class="hdrline" x1="360" y1="80" x2="600" y2="80"/>
+<text class="ttl" x="370" y="70">systemuser</text>
+<text class="sub" x="590" y="70" text-anchor="end">built-in</text>
+<text class="key" x="370" y="95">PK</text>
+<text class="col" x="396" y="95">systemuserid</text>
+<text class="typ" x="590" y="95" text-anchor="end">uuid</text>
+<line class="rowline" x1="368" y1="100" x2="592" y2="100"/>
+<text class="key" x="370" y="115">FK</text>
+<text class="col" x="396" y="115">businessunitid</text>
+<text class="typ" x="590" y="115" text-anchor="end">uuid</text>
+<line class="rowline" x1="368" y1="120" x2="592" y2="120"/>
+<text class="key" x="370" y="135">FK</text>
+<text class="col" x="396" y="135">person_id</text>
+<text class="typ" x="590" y="135" text-anchor="end">uuid?</text>
+<line class="rowline" x1="368" y1="140" x2="592" y2="140"/>
+<text class="col" x="370" y="155">domainname</text>
+<text class="typ" x="590" y="155" text-anchor="end">text</text>
+<line class="rowline" x1="368" y1="160" x2="592" y2="160"/>
+<text class="col" x="370" y="175">isdisabled</text>
+<text class="typ" x="590" y="175" text-anchor="end">bool</text>
+</g>
+<g class="ent g-ghost ghost" id="s8-e-team">
+<rect class="body" x="360" y="300" width="240" height="138" rx="4"/>
+<path class="hdr" d="M360,330 V304 Q360,300 364,300 H596 Q600,300 600,304 V330 Z"/>
+<line class="hdrline" x1="360" y1="330" x2="600" y2="330"/>
+<text class="ttl" x="370" y="320">team</text>
+<text class="sub" x="590" y="320" text-anchor="end">built-in</text>
+<text class="key" x="370" y="345">PK</text>
+<text class="col" x="396" y="345">teamid</text>
+<text class="typ" x="590" y="345" text-anchor="end">uuid</text>
+<line class="rowline" x1="368" y1="350" x2="592" y2="350"/>
+<text class="col" x="370" y="365">name</text>
+<text class="typ" x="590" y="365" text-anchor="end">text</text>
+<line class="rowline" x1="368" y1="370" x2="592" y2="370"/>
+<text class="key" x="370" y="385">FK</text>
+<text class="col" x="396" y="385">businessunitid</text>
+<text class="typ" x="590" y="385" text-anchor="end">uuid</text>
+<line class="rowline" x1="368" y1="390" x2="592" y2="390"/>
+<text class="col" x="370" y="405">teamtype</text>
+<text class="typ" x="590" y="405" text-anchor="end">owner | Entra group</text>
+<line class="rowline" x1="368" y1="410" x2="592" y2="410"/>
+<text class="col" x="370" y="425">azureactivedirectoryobjectid</text>
+<text class="typ" x="590" y="425" text-anchor="end">uuid?</text>
+</g>
+<g class="ent g-ghost ghost" id="s8-e-bu">
+<rect class="body" x="40" y="170" width="240" height="98" rx="4"/>
+<path class="hdr" d="M40,200 V174 Q40,170 44,170 H276 Q280,170 280,174 V200 Z"/>
+<line class="hdrline" x1="40" y1="200" x2="280" y2="200"/>
+<text class="ttl" x="50" y="190">businessunit</text>
+<text class="sub" x="270" y="190" text-anchor="end">built-in</text>
+<text class="key" x="50" y="215">PK</text>
+<text class="col" x="76" y="215">businessunitid</text>
+<text class="typ" x="270" y="215" text-anchor="end">uuid</text>
+<line class="rowline" x1="48" y1="220" x2="272" y2="220"/>
+<text class="col" x="50" y="235">name</text>
+<text class="typ" x="270" y="235" text-anchor="end">text</text>
+<line class="rowline" x1="48" y1="240" x2="272" y2="240"/>
+<text class="key" x="50" y="255">FK</text>
+<text class="col" x="76" y="255">parentbusinessunitid</text>
+<text class="typ" x="270" y="255" text-anchor="end">uuid?</text>
+</g>
+<g class="ent g-ghost ghost" id="s8-e-per">
+<rect class="body" x="720" y="50" width="200" height="58" rx="4"/>
+<path class="hdr" d="M720,80 V54 Q720,50 724,50 H916 Q920,50 920,54 V80 Z"/>
+<line class="hdrline" x1="720" y1="80" x2="920" y2="80"/>
+<text class="ttl" x="730" y="70">person</text>
+<text class="sub" x="910" y="70" text-anchor="end">step 2</text>
+<text class="key" x="730" y="95">PK</text>
+<text class="col" x="756" y="95">person_id</text>
+<text class="typ" x="910" y="95" text-anchor="end">uuid</text>
+</g>
+<g class="ent g-ghost ghost" id="s8-e-role">
+<rect class="body" x="720" y="150" width="200" height="98" rx="4"/>
+<path class="hdr" d="M720,180 V154 Q720,150 724,150 H916 Q920,150 920,154 V180 Z"/>
+<line class="hdrline" x1="720" y1="180" x2="920" y2="180"/>
+<text class="ttl" x="730" y="170">role</text>
+<text class="sub" x="910" y="170" text-anchor="end">built-in</text>
+<text class="key" x="730" y="195">PK</text>
+<text class="col" x="756" y="195">roleid</text>
+<text class="typ" x="910" y="195" text-anchor="end">uuid</text>
+<line class="rowline" x1="728" y1="200" x2="912" y2="200"/>
+<text class="col" x="730" y="215">name</text>
+<text class="typ" x="910" y="215" text-anchor="end">text</text>
+<line class="rowline" x1="728" y1="220" x2="912" y2="220"/>
+<text class="key" x="730" y="235">FK</text>
+<text class="col" x="756" y="235">businessunitid</text>
+<text class="typ" x="910" y="235" text-anchor="end">uuid</text>
+</g>
+<g class="ent g-ghost ghost" id="s8-e-fsp">
+<rect class="body" x="960" y="150" width="240" height="78" rx="4"/>
+<path class="hdr" d="M960,180 V154 Q960,150 964,150 H1196 Q1200,150 1200,154 V180 Z"/>
+<line class="hdrline" x1="960" y1="180" x2="1200" y2="180"/>
+<text class="ttl" x="970" y="170">fieldsecurityprofile</text>
+<text class="sub" x="1190" y="170" text-anchor="end">built-in</text>
+<text class="key" x="970" y="195">PK</text>
+<text class="col" x="996" y="195">fieldsecurityprofileid</text>
+<text class="typ" x="1190" y="195" text-anchor="end">uuid</text>
+<line class="rowline" x1="968" y1="200" x2="1192" y2="200"/>
+<text class="col" x="970" y="215">name</text>
+<text class="typ" x="1190" y="215" text-anchor="end">text</text>
+</g>
+</svg>
+</g>
+<g transform="translate(48,3014)">
+<text class="pt" x="0" y="22">How to read the diagrams</text>
+<rect class="frame" x="-1" y="35" width="1502" height="312" rx="4"/>
+<rect x="0" y="36" width="1500" height="310" fill="#f8f9f7"/>
+<path class="edge" d="M24,80 H164" marker-start="url(#k-one)" marker-end="url(#k-one)"/>
+<text class="kl" x="184" y="84">exactly one to exactly one</text>
+<path class="edge" d="M24,124 H164" marker-start="url(#k-one)" marker-end="url(#k-zmany)"/>
+<text class="kl" x="184" y="128">one to zero or many</text>
+<path class="edge" d="M24,168 H164" marker-start="url(#k-one)" marker-end="url(#k-omany)"/>
+<text class="kl" x="184" y="172">one to one or many</text>
+<path class="edge" d="M24,212 H164" marker-start="url(#k-zone)" marker-end="url(#k-zmany)"/>
+<text class="kl" x="184" y="216">zero or one to zero or many</text>
+<path class="edge dash" d="M24,256 H164"/><text class="kl" x="184" y="260">dashed line: planned or optional link</text>
+<rect x="560" y="66" width="34" height="20" rx="3" fill="#e6ecf5" stroke="#b9c0b6"/><text class="kl" x="606" y="81">Identity</text>
+<rect x="560" y="102" width="34" height="20" rx="3" fill="#f3ead6" stroke="#b9c0b6"/><text class="kl" x="606" y="117">Applicant, code tables, configuration</text>
+<rect x="560" y="138" width="34" height="20" rx="3" fill="#e5f1e7" stroke="#b9c0b6"/><text class="kl" x="606" y="153">Employment, organisation and records tables</text>
+<rect x="560" y="174" width="34" height="20" rx="3" fill="#efe6f2" stroke="#b9c0b6"/><text class="kl" x="606" y="189">Dated versions (history by effective date)</text>
+<rect x="560" y="210" width="34" height="20" rx="3" fill="#fbe9e7" stroke="#b9c0b6"/><text class="kl" x="606" y="225">Restricted table (own security role)</text>
+<rect x="560" y="246" width="34" height="20" rx="3" fill="none" stroke="#b9c0b6" stroke-dasharray="5 4"/><text class="kl" x="606" y="261">Table from another step, or a Dataverse built-in</text>
+<text class="kl" x="1080" y="70">PK primary key · FK lookup · UK alternate key (unique business key)</text>
+<text class="kl" x="1080" y="100">Red column name: secured column (field security profile)</text>
+<text class="kl" x="1080" y="130">Type ending in ?: optional (nullable)</text>
+<text class="kl" x="1080" y="160">Types are logical: uuid = primary key or lookup; enum = choice;</text>
+<text class="kl" x="1080" y="190">text, date, numeric, bool map to the matching Dataverse column types.</text>
+<text class="kl" x="1080" y="220">Not drawn: Created By/On, Modified By/On and Owner,</text>
+<text class="kl" x="1080" y="250">which Dataverse adds to every table.</text>
+</g>
+<text class="ft" x="48" y="3514">Dataverse adds Created By/On, Modified By/On and Owner to every table (not drawn). Planned Dataverse solution prefix sta_ (not shown in names).</text>
+</svg>

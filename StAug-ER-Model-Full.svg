@@ -18,11 +18,11 @@
 <text class="h2" x="48" y="152">For technical review. Revised 2026-10-07 by Nester Labs. Each panel is one design step; column details, decisions and open questions are in the accompanying model document.</text>
 <g transform="translate(48,190)">
 <text class="pt" x="0" y="22">Step 2 · Person, Application, Employment</text>
-<text class="pr" x="1500" y="22" text-anchor="end">revision 12</text>
+<text class="pr" x="1500" y="22" text-anchor="end">revision 13</text>
 <text class="pn" x="0" y="44">Crow's-foot notation. Header colour marks the area; dashed boxes are tables from other steps. Reference and code tables are foreign-key targets and aren't drawn. Every dated-terms row also carries produced_by_event_id back to</text>
 <text class="pn" x="0" y="62">the event that created it.</text>
-<rect class="frame" x="-1" y="79" width="1502" height="1112" rx="4"/>
-<svg x="0" y="80" width="1500" height="1110" viewBox="0 0 1500 1110">
+<rect class="frame" x="-1" y="79" width="1502" height="1142" rx="4"/>
+<svg x="0" y="80" width="1500" height="1140" viewBox="0 0 1500 1140">
 
 <defs>
 <marker id="s2-m-one" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="12" y1="4" x2="12" y2="18"/><line class="mk" x1="16" y1="4" x2="16" y2="18"/></marker>
@@ -30,11 +30,11 @@
 <marker id="s2-m-zmany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><circle class="mk mkc" cx="5" cy="11" r="4"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker>
 <marker id="s2-m-omany" viewBox="0 0 22 22" refX="22" refY="11" markerWidth="22" markerHeight="22" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><line class="mk" x1="9" y1="4" x2="9" y2="18"/><path class="mk" d="M12,11 L22,3 M12,11 L22,19 M12,11 L22,11"/></marker>
 </defs>
-<rect class="canvas" x="0" y="0" width="1500" height="1110"/>
+<rect class="canvas" x="0" y="0" width="1500" height="1140"/>
 <path class="edge" d="M520,300 V240 H620" marker-start="url(#s2-m-zone)" marker-end="url(#s2-m-zmany)"/>
 <path class="edge" d="M620,109 H560" marker-start="url(#s2-m-one)" marker-end="url(#s2-m-omany)"/>
 <path class="edge" d="M860,109 H920" marker-start="url(#s2-m-one)" marker-end="url(#s2-m-zone)"/>
-<path class="edge" d="M1000,178 V400" marker-start="url(#s2-m-zmany)" marker-end="url(#s2-m-one)"/>
+<path class="edge" d="M1000,198 V400" marker-start="url(#s2-m-zmany)" marker-end="url(#s2-m-one)"/>
 <path class="edge" d="M860,290 H890 V430 H920" marker-start="url(#s2-m-zone)" marker-end="url(#s2-m-zone)"/>
 <path class="edge" d="M560,470 H920" marker-start="url(#s2-m-one)" marker-end="url(#s2-m-zmany)"/>
 <path class="edge dash" d="M560,680 H900 V540 H920" marker-start="url(#s2-m-zmany)" marker-end="url(#s2-m-one)"/>
@@ -77,20 +77,24 @@
 <text class="typ" x="270" y="745" text-anchor="end"></text>
 </g>
 <g class="ent g-app" id="s2-e-adis">
-<rect class="body" x="320" y="60" width="240" height="98" rx="4"/>
+<rect class="body" x="320" y="60" width="240" height="118" rx="4"/>
 <path class="hdr" d="M320,90 V64 Q320,60 324,60 H556 Q560,60 560,64 V90 Z"/>
 <line class="hdrline" x1="320" y1="90" x2="560" y2="90"/>
 <text class="ttl" x="330" y="80">application_disposition</text>
-<text class="key" x="330" y="105">PK FK</text>
-<text class="col" x="372" y="105">application_id</text>
+<text class="key" x="330" y="105">PK</text>
+<text class="col" x="356" y="105">application_disposition_id</text>
 <text class="typ" x="550" y="105" text-anchor="end">uuid</text>
 <line class="rowline" x1="328" y1="110" x2="552" y2="110"/>
-<text class="key" x="330" y="125">PK FK</text>
-<text class="col" x="372" y="125">disposition_code</text>
-<text class="typ" x="550" y="125" text-anchor="end">code</text>
+<text class="key" x="330" y="125">FK</text>
+<text class="col" x="356" y="125">application_id</text>
+<text class="typ" x="550" y="125" text-anchor="end">uuid</text>
 <line class="rowline" x1="328" y1="130" x2="552" y2="130"/>
-<text class="col" x="330" y="145">recorded_on</text>
-<text class="typ" x="550" y="145" text-anchor="end">date</text>
+<text class="key" x="330" y="145">FK</text>
+<text class="col" x="356" y="145">disposition_code</text>
+<text class="typ" x="550" y="145" text-anchor="end">code</text>
+<line class="rowline" x1="328" y1="150" x2="552" y2="150"/>
+<text class="col" x="330" y="165">recorded_on</text>
+<text class="typ" x="550" y="165" text-anchor="end">date</text>
 </g>
 <g class="ent g-id" id="s2-e-per">
 <rect class="body" x="320" y="300" width="240" height="338" rx="4"/>
@@ -218,45 +222,53 @@
 <text class="typ" x="850" y="305" text-anchor="end">date?</text>
 </g>
 <g class="ent g-app" id="s2-e-rhr">
-<rect class="body" x="920" y="40" width="240" height="138" rx="4"/>
+<rect class="body" x="920" y="40" width="240" height="158" rx="4"/>
 <path class="hdr" d="M920,70 V44 Q920,40 924,40 H1156 Q1160,40 1160,44 V70 Z"/>
 <line class="hdrline" x1="920" y1="70" x2="1160" y2="70"/>
 <text class="ttl" x="930" y="60">rehire_review</text>
-<text class="key" x="930" y="85">PK FK</text>
-<text class="col" x="972" y="85">application_id</text>
+<text class="key" x="930" y="85">PK</text>
+<text class="col" x="956" y="85">rehire_review_id</text>
 <text class="typ" x="1150" y="85" text-anchor="end">uuid</text>
 <line class="rowline" x1="928" y1="90" x2="1152" y2="90"/>
 <text class="key" x="930" y="105">FK</text>
-<text class="col" x="956" y="105">matched_employment_id</text>
+<text class="col" x="956" y="105">application_id</text>
 <text class="typ" x="1150" y="105" text-anchor="end">uuid</text>
 <line class="rowline" x1="928" y1="110" x2="1152" y2="110"/>
-<text class="col" x="930" y="125">eligibility_on_record</text>
-<text class="typ" x="1150" y="125" text-anchor="end">enum</text>
+<text class="key" x="930" y="125">FK</text>
+<text class="col" x="956" y="125">matched_employment_id</text>
+<text class="typ" x="1150" y="125" text-anchor="end">uuid</text>
 <line class="rowline" x1="928" y1="130" x2="1152" y2="130"/>
-<text class="col" x="930" y="145">director_decision</text>
+<text class="col" x="930" y="145">eligibility_on_record</text>
 <text class="typ" x="1150" y="145" text-anchor="end">enum</text>
 <line class="rowline" x1="928" y1="150" x2="1152" y2="150"/>
-<text class="key" x="930" y="165">FK</text>
-<text class="col" x="956" y="165">decided_by_person_id</text>
-<text class="typ" x="1150" y="165" text-anchor="end">uuid?</text>
+<text class="col" x="930" y="165">director_decision</text>
+<text class="typ" x="1150" y="165" text-anchor="end">enum</text>
+<line class="rowline" x1="928" y1="170" x2="1152" y2="170"/>
+<text class="key" x="930" y="185">FK</text>
+<text class="col" x="956" y="185">decided_by_person_id</text>
+<text class="typ" x="1150" y="185" text-anchor="end">uuid?</text>
 </g>
 <g class="ent g-emp" id="s2-e-rein">
-<rect class="body" x="620" y="700" width="240" height="118" rx="4"/>
+<rect class="body" x="620" y="700" width="240" height="138" rx="4"/>
 <path class="hdr" d="M620,730 V704 Q620,700 624,700 H856 Q860,700 860,704 V730 Z"/>
 <line class="hdrline" x1="620" y1="730" x2="860" y2="730"/>
 <text class="ttl" x="630" y="720">reinstatement_detail</text>
-<text class="key" x="630" y="745">PK FK</text>
-<text class="col" x="672" y="745">event_id</text>
+<text class="key" x="630" y="745">PK</text>
+<text class="col" x="656" y="745">reinstatement_detail_id</text>
 <text class="typ" x="850" y="745" text-anchor="end">uuid</text>
 <line class="rowline" x1="628" y1="750" x2="852" y2="750"/>
-<text class="col" x="630" y="765">days_since_separation</text>
-<text class="typ" x="850" y="765" text-anchor="end">int</text>
+<text class="key" x="630" y="765">FK</text>
+<text class="col" x="656" y="765">event_id</text>
+<text class="typ" x="850" y="765" text-anchor="end">uuid</text>
 <line class="rowline" x1="628" y1="770" x2="852" y2="770"/>
-<text class="col" x="630" y="785">terms_changed</text>
-<text class="typ" x="850" y="785" text-anchor="end">bool</text>
+<text class="col" x="630" y="785">days_since_separation</text>
+<text class="typ" x="850" y="785" text-anchor="end">int</text>
 <line class="rowline" x1="628" y1="790" x2="852" y2="790"/>
-<text class="col" x="630" y="805">agreement_signed_on</text>
-<text class="typ" x="850" y="805" text-anchor="end">date</text>
+<text class="col" x="630" y="805">terms_changed</text>
+<text class="typ" x="850" y="805" text-anchor="end">bool</text>
+<line class="rowline" x1="628" y1="810" x2="852" y2="810"/>
+<text class="col" x="630" y="825">agreement_signed_on</text>
+<text class="typ" x="850" y="825" text-anchor="end">date</text>
 </g>
 <g class="ent g-emp" id="s2-e-empl">
 <rect class="body" x="920" y="400" width="240" height="178" rx="4"/>
@@ -322,37 +334,41 @@
 <text class="typ" x="1150" y="805" text-anchor="end">text?</text>
 </g>
 <g class="ent g-emp" id="s2-e-sep">
-<rect class="body" x="920" y="900" width="240" height="198" rx="4"/>
+<rect class="body" x="920" y="900" width="240" height="218" rx="4"/>
 <path class="hdr" d="M920,930 V904 Q920,900 924,900 H1156 Q1160,900 1160,904 V930 Z"/>
 <line class="hdrline" x1="920" y1="930" x2="1160" y2="930"/>
 <text class="ttl" x="930" y="920">separation_detail</text>
-<text class="key" x="930" y="945">PK FK</text>
-<text class="col" x="972" y="945">event_id</text>
+<text class="key" x="930" y="945">PK</text>
+<text class="col" x="956" y="945">separation_detail_id</text>
 <text class="typ" x="1150" y="945" text-anchor="end">uuid</text>
 <line class="rowline" x1="928" y1="950" x2="1152" y2="950"/>
-<text class="col" x="930" y="965">last_day_worked</text>
-<text class="typ" x="1150" y="965" text-anchor="end">date</text>
+<text class="key" x="930" y="965">FK</text>
+<text class="col" x="956" y="965">event_id</text>
+<text class="typ" x="1150" y="965" text-anchor="end">uuid</text>
 <line class="rowline" x1="928" y1="970" x2="1152" y2="970"/>
-<text class="key" x="930" y="985">FK</text>
-<text class="col" x="956" y="985">reason_code</text>
-<text class="typ" x="1150" y="985" text-anchor="end">code</text>
+<text class="col" x="930" y="985">last_day_worked</text>
+<text class="typ" x="1150" y="985" text-anchor="end">date</text>
 <line class="rowline" x1="928" y1="990" x2="1152" y2="990"/>
 <text class="key" x="930" y="1005">FK</text>
-<text class="col" x="956" y="1005">reason_subcode</text>
-<text class="typ" x="1150" y="1005" text-anchor="end">code?</text>
+<text class="col" x="956" y="1005">reason_code</text>
+<text class="typ" x="1150" y="1005" text-anchor="end">code</text>
 <line class="rowline" x1="928" y1="1010" x2="1152" y2="1010"/>
 <text class="key" x="930" y="1025">FK</text>
-<text class="col" x="956" y="1025">policy_rule_code</text>
+<text class="col" x="956" y="1025">reason_subcode</text>
 <text class="typ" x="1150" y="1025" text-anchor="end">code?</text>
 <line class="rowline" x1="928" y1="1030" x2="1152" y2="1030"/>
-<text class="col" x="930" y="1045">rehire_eligibility</text>
-<text class="typ" x="1150" y="1045" text-anchor="end">enum</text>
+<text class="key" x="930" y="1045">FK</text>
+<text class="col" x="956" y="1045">policy_rule_code</text>
+<text class="typ" x="1150" y="1045" text-anchor="end">code?</text>
 <line class="rowline" x1="928" y1="1050" x2="1152" y2="1050"/>
-<text class="col" x="930" y="1065">appeal_deadline</text>
-<text class="typ" x="1150" y="1065" text-anchor="end">date?</text>
+<text class="col" x="930" y="1065">rehire_eligibility</text>
+<text class="typ" x="1150" y="1065" text-anchor="end">enum</text>
 <line class="rowline" x1="928" y1="1070" x2="1152" y2="1070"/>
-<text class="col" x="930" y="1085">rescinded_on</text>
+<text class="col" x="930" y="1085">appeal_deadline</text>
 <text class="typ" x="1150" y="1085" text-anchor="end">date?</text>
+<line class="rowline" x1="928" y1="1090" x2="1152" y2="1090"/>
+<text class="col" x="930" y="1105">rescinded_on</text>
+<text class="typ" x="1150" y="1105" text-anchor="end">date?</text>
 </g>
 <g class="ent g-terms" id="s2-e-eno">
 <rect class="body" x="1220" y="40" width="240" height="158" rx="4"/>
@@ -382,7 +398,7 @@
 <text class="typ" x="1450" y="185" text-anchor="end">date</text>
 </g>
 <g class="ent g-terms" id="s2-e-job">
-<rect class="body" x="1220" y="210" width="240" height="298" rx="4"/>
+<rect class="body" x="1220" y="210" width="240" height="318" rx="4"/>
 <path class="hdr" d="M1220,240 V214 Q1220,210 1224,210 H1456 Q1460,210 1460,214 V240 Z"/>
 <line class="hdrline" x1="1220" y1="240" x2="1460" y2="240"/>
 <text class="ttl" x="1230" y="230">job_assignment</text>
@@ -428,11 +444,14 @@
 <text class="col" x="1230" y="455">hours_status</text>
 <text class="typ" x="1450" y="455" text-anchor="end">enum</text>
 <line class="rowline" x1="1228" y1="460" x2="1452" y2="460"/>
-<text class="col" x="1230" y="475">benefits_eligible</text>
-<text class="typ" x="1450" y="475" text-anchor="end">bool</text>
+<text class="col" x="1230" y="475">benefits_track</text>
+<text class="typ" x="1450" y="475" text-anchor="end">choice</text>
 <line class="rowline" x1="1228" y1="480" x2="1452" y2="480"/>
-<text class="col" x="1230" y="495">effective_from &#183; to</text>
-<text class="typ" x="1450" y="495" text-anchor="end">date</text>
+<text class="col" x="1230" y="495">status_code (calc)</text>
+<text class="typ" x="1450" y="495" text-anchor="end">text</text>
+<line class="rowline" x1="1228" y1="500" x2="1452" y2="500"/>
+<text class="col" x="1230" y="515">effective_from &#183; to</text>
+<text class="typ" x="1450" y="515" text-anchor="end">date</text>
 </g>
 <g class="ent g-terms" id="s2-e-comp">
 <rect class="body" x="1220" y="540" width="240" height="198" rx="4"/>
@@ -468,9 +487,9 @@
 </g>
 </svg>
 </g>
-<g transform="translate(48,1424)">
+<g transform="translate(48,1454)">
 <text class="pt" x="0" y="22">Step 4 · Compliance and Discipline</text>
-<text class="pr" x="1500" y="22" text-anchor="end">revision 5</text>
+<text class="pr" x="1500" y="22" text-anchor="end">revision 6</text>
 <text class="pn" x="0" y="44">Dashed boxes are step 2 tables shown for context. Not drawn: requirement_rule references company, job class and position (step 3); background_screening.employment_id (re-checks); evaluation.raise_event_id points to a step 2</text>
 <text class="pn" x="0" y="62">status change; discipline_record.issued_by_person_id points to the director.</text>
 <rect class="frame" x="-1" y="79" width="1502" height="702" rx="4"/>
@@ -487,7 +506,8 @@
 <path class="edge" d="M280,100 H320" marker-start="url(#s4-m-one)" marker-end="url(#s4-m-zmany)"/>
 <path class="edge" d="M560,70 H620" marker-start="url(#s4-m-zmany)" marker-end="url(#s4-m-zone)"/>
 <path class="edge" d="M560,320 H620" marker-start="url(#s4-m-zmany)" marker-end="url(#s4-m-one)"/>
-<path class="edge" d="M440,400 V358" marker-start="url(#s4-m-zone)" marker-end="url(#s4-m-zmany)"/>
+<path class="edge" d="M280,330 H320" marker-start="url(#s4-m-zone)" marker-end="url(#s4-m-zmany)"/>
+<path class="edge" d="M440,400 V378" marker-start="url(#s4-m-zone)" marker-end="url(#s4-m-zmany)"/>
 <path class="edge" d="M560,420 H600 V350 H620" marker-start="url(#s4-m-zmany)" marker-end="url(#s4-m-one)"/>
 <path class="edge" d="M560,540 H620" marker-start="url(#s4-m-zmany)" marker-end="url(#s4-m-zone)"/>
 <path class="edge" d="M920,70 H860" marker-start="url(#s4-m-zmany)" marker-end="url(#s4-m-one)"/>
@@ -496,7 +516,8 @@
 <path class="edge" d="M1160,480 H1220" marker-start="url(#s4-m-zmany)" marker-end="url(#s4-m-zone)"/>
 <path class="edge" d="M1340,578 V620" marker-start="url(#s4-m-zone)" marker-end="url(#s4-m-zmany)"/>
 <text class="elab" x="168" y="214" text-anchor="start">applies by</text>
-<text class="elab" x="448" y="376" text-anchor="start">one per check</text>
+<text class="elab" x="300" y="322" text-anchor="middle">applied rule</text>
+<text class="elab" x="448" y="392" text-anchor="start">one per check</text>
 <text class="elab" x="590" y="532" text-anchor="middle">pre-hire</text>
 <text class="elab" x="1348" y="604" text-anchor="start">r: progressive discipline</text>
 <g class="ent g-code" id="s4-e-rtype">
@@ -564,7 +585,7 @@
 <text class="typ" x="270" y="445" text-anchor="end">int?</text>
 </g>
 <g class="ent g-org" id="s4-e-inst">
-<rect class="body" x="320" y="40" width="240" height="318" rx="4"/>
+<rect class="body" x="320" y="40" width="240" height="338" rx="4"/>
 <path class="hdr" d="M320,70 V44 Q320,40 324,40 H556 Q560,40 560,44 V70 Z"/>
 <line class="hdrline" x1="320" y1="70" x2="560" y2="70"/>
 <text class="ttl" x="330" y="60">requirement_instance</text>
@@ -581,39 +602,43 @@
 <text class="typ" x="550" y="125" text-anchor="end">text</text>
 <line class="rowline" x1="328" y1="130" x2="552" y2="130"/>
 <text class="key" x="330" y="145">FK</text>
-<text class="col" x="356" y="145">screening_id</text>
+<text class="col" x="356" y="145">applied_rule_id</text>
 <text class="typ" x="550" y="145" text-anchor="end">uuid?</text>
 <line class="rowline" x1="328" y1="150" x2="552" y2="150"/>
-<text class="col" x="330" y="165">status</text>
-<text class="typ" x="550" y="165" text-anchor="end">enum</text>
+<text class="key" x="330" y="165">FK</text>
+<text class="col" x="356" y="165">screening_id</text>
+<text class="typ" x="550" y="165" text-anchor="end">uuid?</text>
 <line class="rowline" x1="328" y1="170" x2="552" y2="170"/>
-<text class="col" x="330" y="185">sent &#183; completed &#183; rcvd</text>
-<text class="typ" x="550" y="185" text-anchor="end">date?</text>
+<text class="col" x="330" y="185">status</text>
+<text class="typ" x="550" y="185" text-anchor="end">enum</text>
 <line class="rowline" x1="328" y1="190" x2="552" y2="190"/>
-<text class="col" x="330" y="205">expires_on &#183; next_due_on</text>
+<text class="col" x="330" y="205">sent &#183; completed &#183; rcvd</text>
 <text class="typ" x="550" y="205" text-anchor="end">date?</text>
 <line class="rowline" x1="328" y1="210" x2="552" y2="210"/>
-<text class="col rest" x="330" y="225">outcome_code</text>
-<text class="typ" x="550" y="225" text-anchor="end">text?</text>
+<text class="col" x="330" y="225">expires_on &#183; next_due_on</text>
+<text class="typ" x="550" y="225" text-anchor="end">date?</text>
 <line class="rowline" x1="328" y1="230" x2="552" y2="230"/>
-<text class="col" x="330" y="245">season_label</text>
+<text class="col rest" x="330" y="245">outcome_code</text>
 <text class="typ" x="550" y="245" text-anchor="end">text?</text>
 <line class="rowline" x1="328" y1="250" x2="552" y2="250"/>
-<text class="col rest" x="330" y="265">credential_number</text>
+<text class="col" x="330" y="265">season_label</text>
 <text class="typ" x="550" y="265" text-anchor="end">text?</text>
 <line class="rowline" x1="328" y1="270" x2="552" y2="270"/>
-<text class="col" x="330" y="285">last_reminded_on</text>
-<text class="typ" x="550" y="285" text-anchor="end">date?</text>
+<text class="col rest" x="330" y="285">credential_number</text>
+<text class="typ" x="550" y="285" text-anchor="end">text?</text>
 <line class="rowline" x1="328" y1="290" x2="552" y2="290"/>
-<text class="col" x="330" y="305">verified_on</text>
+<text class="col" x="330" y="305">last_reminded_on</text>
 <text class="typ" x="550" y="305" text-anchor="end">date?</text>
 <line class="rowline" x1="328" y1="310" x2="552" y2="310"/>
-<text class="col" x="330" y="325">document_ref</text>
-<text class="typ" x="550" y="325" text-anchor="end">text?</text>
+<text class="col" x="330" y="325">verified_on</text>
+<text class="typ" x="550" y="325" text-anchor="end">date?</text>
 <line class="rowline" x1="328" y1="330" x2="552" y2="330"/>
-<text class="key" x="330" y="345">FK</text>
-<text class="col" x="356" y="345">person_id</text>
-<text class="typ" x="550" y="345" text-anchor="end">uuid</text>
+<text class="col" x="330" y="345">document_ref</text>
+<text class="typ" x="550" y="345" text-anchor="end">text?</text>
+<line class="rowline" x1="328" y1="350" x2="552" y2="350"/>
+<text class="key" x="330" y="365">FK</text>
+<text class="col" x="356" y="365">person_id</text>
+<text class="typ" x="550" y="365" text-anchor="end">uuid</text>
 </g>
 <g class="ent g-org" id="s4-e-scr">
 <rect class="body" x="320" y="400" width="240" height="218" rx="4"/>
@@ -801,9 +826,9 @@
 </g>
 </svg>
 </g>
-<g transform="translate(48,2248)">
+<g transform="translate(48,2278)">
 <text class="pt" x="0" y="22">Step 6 · Benefits and Bonuses</text>
-<text class="pr" x="1500" y="22" text-anchor="end">revision 5</text>
+<text class="pr" x="1500" y="22" text-anchor="end">revision 6</text>
 <text class="pn" x="0" y="44">employment is drawn twice to keep lines from crossing. Not drawn: bonus_program.job_class_code (step 3) and the built-in Created By and Modified By on every table.</text>
 <rect class="frame" x="-1" y="61" width="1502" height="662" rx="4"/>
 <svg x="0" y="62" width="1500" height="660" viewBox="0 0 1500 660">
@@ -820,7 +845,7 @@
 <path class="edge" d="M860,70 H920" marker-start="url(#s6-m-one)" marker-end="url(#s6-m-zmany)"/>
 <path class="edge" d="M920,200 H560" marker-start="url(#s6-m-one)" marker-end="url(#s6-m-zmany)"/>
 <path class="edge" d="M620,420 H560" marker-start="url(#s6-m-one)" marker-end="url(#s6-m-zone)"/>
-<path class="edge" d="M660,458 V580 H160 V518" marker-start="url(#s6-m-one)" marker-end="url(#s6-m-zmany)"/>
+<path class="edge" d="M660,458 V580 H160 V558" marker-start="url(#s6-m-one)" marker-end="url(#s6-m-zmany)"/>
 <path class="edge" d="M860,420 H920" marker-start="url(#s6-m-one)" marker-end="url(#s6-m-zmany)"/>
 <path class="edge" d="M920,445 H860" marker-start="url(#s6-m-zmany)" marker-end="url(#s6-m-zone)"/>
 <path class="edge" d="M1220,300 H1190 V360 H1160" marker-start="url(#s6-m-one)" marker-end="url(#s6-m-zmany)"/>
@@ -982,7 +1007,7 @@
 <text class="typ" x="1450" y="305" text-anchor="end">date</text>
 </g>
 <g class="ent g-org" id="s6-e-aca">
-<rect class="body" x="40" y="340" width="240" height="178" rx="4"/>
+<rect class="body" x="40" y="340" width="240" height="218" rx="4"/>
 <path class="hdr" d="M40,370 V344 Q40,340 44,340 H276 Q280,340 280,344 V370 Z"/>
 <line class="hdrline" x1="40" y1="370" x2="280" y2="370"/>
 <text class="ttl" x="50" y="360">aca_month</text>
@@ -994,20 +1019,27 @@
 <text class="col" x="76" y="405">employment_id</text>
 <text class="typ" x="270" y="405" text-anchor="end">uuid</text>
 <line class="rowline" x1="48" y1="410" x2="272" y2="410"/>
-<text class="col" x="50" y="425">tax_year &#183; month</text>
-<text class="typ" x="270" y="425" text-anchor="end">int</text>
+<text class="key" x="50" y="425">FK</text>
+<text class="col" x="76" y="425">company_id</text>
+<text class="typ" x="270" y="425" text-anchor="end">uuid</text>
 <line class="rowline" x1="48" y1="430" x2="272" y2="430"/>
-<text class="col" x="50" y="445">line14_code</text>
-<text class="typ" x="270" y="445" text-anchor="end">choice</text>
+<text class="col" x="50" y="445">tax_year &#183; month</text>
+<text class="typ" x="270" y="445" text-anchor="end">int</text>
 <line class="rowline" x1="48" y1="450" x2="272" y2="450"/>
-<text class="col" x="50" y="465">line16_code</text>
-<text class="typ" x="270" y="465" text-anchor="end">choice?</text>
+<text class="col" x="50" y="465">line14_code</text>
+<text class="typ" x="270" y="465" text-anchor="end">choice</text>
 <line class="rowline" x1="48" y1="470" x2="272" y2="470"/>
-<text class="col" x="50" y="485">is_override</text>
-<text class="typ" x="270" y="485" text-anchor="end">bool</text>
+<text class="col" x="50" y="485">line16_code</text>
+<text class="typ" x="270" y="485" text-anchor="end">choice?</text>
 <line class="rowline" x1="48" y1="490" x2="272" y2="490"/>
-<text class="col" x="50" y="505">override_reason</text>
-<text class="typ" x="270" y="505" text-anchor="end">text?</text>
+<text class="col" x="50" y="505">is_override</text>
+<text class="typ" x="270" y="505" text-anchor="end">bool</text>
+<line class="rowline" x1="48" y1="510" x2="272" y2="510"/>
+<text class="col" x="50" y="525">override_reason</text>
+<text class="typ" x="270" y="525" text-anchor="end">text?</text>
+<line class="rowline" x1="48" y1="530" x2="272" y2="530"/>
+<text class="col" x="50" y="545">filed_on</text>
+<text class="typ" x="270" y="545" text-anchor="end">date?</text>
 </g>
 <g class="ent g-org" id="s6-e-ret">
 <rect class="body" x="320" y="340" width="240" height="198" rx="4"/>
@@ -1127,7 +1159,7 @@
 </g>
 <g transform="translate(1604,190)">
 <text class="pt" x="0" y="22">Step 3 · Organization and Reference Data</text>
-<text class="pr" x="1200" y="22" text-anchor="end">revision 5</text>
+<text class="pr" x="1200" y="22" text-anchor="end">revision 6</text>
 <text class="pn" x="0" y="44">Dashed boxes are step 2 tables shown for context. Not drawn: job_assignment also references company and unit, company.default_facility_id references facility, application</text>
 <text class="pn" x="0" y="62">references department and position, and employee_number references department (step 2). pick_list_value has no foreign keys by design.</text>
 <rect class="frame" x="-1" y="79" width="1202" height="802" rx="4"/>
@@ -1429,7 +1461,7 @@
 </g>
 <g transform="translate(1604,1114)">
 <text class="pt" x="0" y="22">Step 5 · Leave, FMLA and Insurance Claims</text>
-<text class="pr" x="1200" y="22" text-anchor="end">revision 6</text>
+<text class="pr" x="1200" y="22" text-anchor="end">revision 7</text>
 <text class="pn" x="0" y="44">Not drawn: insurance_claim.leave_case_id (a disability claim usually belongs to a leave; a death claim doesn't). The small loop under leave_case is prior_case_id: a medical leave</text>
 <text class="pn" x="0" y="62">continuing an exhausted FMLA leave.</text>
 <rect class="frame" x="-1" y="79" width="1202" height="722" rx="4"/>
@@ -1608,7 +1640,7 @@
 <text class="typ" x="550" y="585" text-anchor="end">date?</text>
 </g>
 <g class="ent g-org" id="s5-e-use">
-<rect class="body" x="620" y="160" width="240" height="178" rx="4"/>
+<rect class="body" x="620" y="160" width="240" height="198" rx="4"/>
 <path class="hdr" d="M620,190 V164 Q620,160 624,160 H856 Q860,160 860,164 V190 Z"/>
 <line class="hdrline" x1="620" y1="190" x2="860" y2="190"/>
 <text class="ttl" x="630" y="180">fmla_usage</text>
@@ -1626,14 +1658,18 @@
 <text class="col" x="630" y="265">end_on</text>
 <text class="typ" x="850" y="265" text-anchor="end">date?</text>
 <line class="rowline" x1="628" y1="270" x2="852" y2="270"/>
-<text class="col" x="630" y="285">shifts_counted</text>
+<text class="col" x="630" y="285">shifts_counted (&#177;)</text>
 <text class="typ" x="850" y="285" text-anchor="end">numeric</text>
 <line class="rowline" x1="628" y1="290" x2="852" y2="290"/>
-<text class="col" x="630" y="305">source</text>
-<text class="typ" x="850" y="305" text-anchor="end">enum</text>
+<text class="key" x="630" y="305">FK</text>
+<text class="col" x="656" y="305">reverses_usage_id</text>
+<text class="typ" x="850" y="305" text-anchor="end">uuid?</text>
 <line class="rowline" x1="628" y1="310" x2="852" y2="310"/>
-<text class="col" x="630" y="325">source_ref</text>
-<text class="typ" x="850" y="325" text-anchor="end">text?</text>
+<text class="col" x="630" y="325">source</text>
+<text class="typ" x="850" y="325" text-anchor="end">enum</text>
+<line class="rowline" x1="628" y1="330" x2="852" y2="330"/>
+<text class="col" x="630" y="345">source_ref</text>
+<text class="typ" x="850" y="345" text-anchor="end">text?</text>
 </g>
 <g class="ent g-org" id="s5-e-claim">
 <rect class="body" x="920" y="160" width="240" height="238" rx="4"/>
@@ -1702,7 +1738,7 @@
 </g>
 <g transform="translate(1604,1958)">
 <text class="pt" x="0" y="22">Step 7 · Workflow, Records and Verifications</text>
-<text class="pr" x="1200" y="22" text-anchor="end">revision 6</text>
+<text class="pr" x="1200" y="22" text-anchor="end">revision 7</text>
 <text class="pn" x="0" y="44">Dashed boxes are step 2 tables and the built-in Task. Not drawn: paper_file.employment_id; checklist_step.owner_team_id → team (step 8).</text>
 <rect class="frame" x="-1" y="61" width="1202" height="822" rx="4"/>
 <svg x="0" y="62" width="1200" height="820" viewBox="0 0 1200 820">
@@ -1960,7 +1996,7 @@
 </g>
 <g transform="translate(1604,2884)">
 <text class="pt" x="0" y="22">Step 8 · Security, Audit and Retention</text>
-<text class="pr" x="1240" y="22" text-anchor="end">revision 6</text>
+<text class="pr" x="1240" y="22" text-anchor="end">revision 7</text>
 <text class="pn" x="0" y="44">Dashed boxes are Dataverse built-ins and the step 2 person. A role or profile reaches a user directly (systemuserroles, systemuserprofiles) or through a team (teamroles, teamprofiles);</text>
 <text class="pn" x="0" y="62">all four links and teammembership are built-in intersect tables.</text>
 <rect class="frame" x="-1" y="79" width="1242" height="472" rx="4"/>
@@ -2092,7 +2128,7 @@
 </g>
 </svg>
 </g>
-<g transform="translate(48,3014)">
+<g transform="translate(48,3044)">
 <text class="pt" x="0" y="22">How to read the diagrams</text>
 <rect class="frame" x="-1" y="35" width="1502" height="312" rx="4"/>
 <rect x="0" y="36" width="1500" height="310" fill="#f8f9f7"/>

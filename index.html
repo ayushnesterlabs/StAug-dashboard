@@ -1180,8 +1180,8 @@ function archivedPage(){
 
 /* ---------- Design & artifacts: ER model viewer ---------- */
 let diagramSVG=null;
-const diaView={scale:1,x:0,y:0,fitted:false};
-const DIA_W=2892, DIA_H=3538, DIA_SRC='StAug-ER-Model-Full.svg';
+const diaView={scale:1,x:0,y:0,fitted:false,w:1596,h:6883};
+const DIA_SRC='StAug-ER-Model-Full.svg';
 function hldPage(){
  const flow=`<div class="hd-flow"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>`;
  const tt=(icon,title,sub)=>`<div class="hd-tt"><span class="ti">${ic(icon,16)}</span><b>${title}</b><span class="s">${sub}</span></div>`;
@@ -1361,12 +1361,12 @@ function diagramPage(){
    <p class="dia-hint">Scroll to zoom · drag to pan · the model spans HR-OPS steps 2–8</p></div>`;
 }
 function applyDia(){ const c=document.getElementById('diaCanvas'); if(c) c.style.transform=`translate(${diaView.x}px,${diaView.y}px) scale(${diaView.scale})`; }
-function fitDia(){ const s=document.getElementById('diaStage'); if(!s) return; const r=s.getBoundingClientRect(); const sc=Math.min(r.width/DIA_W, r.height/DIA_H)*0.96; diaView.scale=sc; diaView.x=(r.width-DIA_W*sc)/2; diaView.y=(r.height-DIA_H*sc)/2; applyDia(); }
+function fitDia(){ const s=document.getElementById('diaStage'); if(!s) return; const r=s.getBoundingClientRect(); const sc=Math.min(r.width/diaView.w, r.height/diaView.h)*0.96; diaView.scale=sc; diaView.x=(r.width-diaView.w*sc)/2; diaView.y=(r.height-diaView.h*sc)/2; applyDia(); }
 function zoomDia(factor,cx,cy){ const s=document.getElementById('diaStage'); if(!s) return; const r=s.getBoundingClientRect(); const mx=cx==null?r.width/2:cx-r.left, my=cy==null?r.height/2:cy-r.top; const ns=Math.min(10,Math.max(0.04,diaView.scale*factor)); const k=ns/diaView.scale; diaView.x=mx-(mx-diaView.x)*k; diaView.y=my-(my-diaView.y)*k; diaView.scale=ns; applyDia(); }
 function initDiagram(){
  const stage=document.getElementById('diaStage'), canvas=document.getElementById('diaCanvas'); if(!stage||!canvas) return;
  if(diagramSVG===null){ canvas.innerHTML='<p class="dia-msg">Loading diagram…</p>'; fetch(DIA_SRC).then(r=>{if(!r.ok)throw 0;return r.text();}).then(txt=>{diagramSVG=txt; if(S.page==='diagram') initDiagram();}).catch(()=>{canvas.innerHTML='<p class="dia-msg">Could not load the diagram. Open it directly: <a href="'+DIA_SRC+'" target="_blank" rel="noopener">'+DIA_SRC+'</a></p>';}); return; }
- if(canvas.dataset.loaded!=='1'){ canvas.innerHTML=diagramSVG; const svg=canvas.querySelector('svg'); if(svg){ svg.removeAttribute('width'); svg.removeAttribute('height'); svg.style.display='block'; svg.style.width=DIA_W+'px'; svg.style.height=DIA_H+'px'; } canvas.dataset.loaded='1'; if(!diaView.fitted){ fitDia(); diaView.fitted=true; } else { applyDia(); } }
+ if(canvas.dataset.loaded!=='1'){ canvas.innerHTML=diagramSVG; const svg=canvas.querySelector('svg'); if(svg){ const vb=(svg.getAttribute('viewBox')||'').split(/[\s,]+/).map(Number); if(vb.length===4&&vb[2]>0&&vb[3]>0){ diaView.w=vb[2]; diaView.h=vb[3]; } svg.removeAttribute('width'); svg.removeAttribute('height'); svg.style.display='block'; svg.style.width=diaView.w+'px'; svg.style.height=diaView.h+'px'; } canvas.dataset.loaded='1'; if(!diaView.fitted){ fitDia(); diaView.fitted=true; } else { applyDia(); } }
  else applyDia();
  wireDiagram(stage);
 }

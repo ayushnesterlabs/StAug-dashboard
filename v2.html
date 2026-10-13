@@ -554,6 +554,11 @@ b,strong{font-weight:600}.record-fields th{font-weight:400}.record-fields .c-aut
 #viz-tip{position:fixed;z-index:200;pointer-events:none;background:#111318;color:#fff;font-size:12px;padding:6px 9px;border-radius:6px;opacity:0;transition:opacity .1s;white-space:nowrap}
 @media(max-width:1000px){.rep-two,.viz-edit,.share-grid,.an-grid,.rp-grid{grid-template-columns:1fr}}
 @media(max-width:640px){.rep-foot{padding:12px 16px}.rep-list-wrap{padding:0 16px 24px}}
+.lic-banner{display:flex;align-items:center;gap:12px;margin:4px 24px 0;padding:12px 14px;border-radius:8px;background:var(--surface-2);border:1px solid var(--line);font-size:13px}.lic-banner>svg{color:var(--blue)}.lic-banner>div{flex:1;display:flex;flex-direction:column;gap:2px}.lic-banner span{color:var(--ink-2);font-size:12px}
+.remind-list{display:flex;flex-direction:column;gap:8px;max-height:220px;overflow:auto;margin-bottom:8px}.remind-list>div{display:flex;flex-direction:column;gap:2px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;font-size:13px}.remind-list span{color:var(--ink-2);font-size:12px}
+@media print{body.printing-app *{visibility:hidden}body.printing-app .record-content,body.printing-app .record-content *{visibility:visible}body.printing-app .record-content{position:absolute;left:0;top:0;width:100%}body.printing-app .prof-actions,body.printing-app .cv-header label,body.printing-app .rb-act,body.printing-app .codes-ms summary::after{display:none}body.printing-app .app-grid{grid-template-columns:1fr 1fr}}
+/* Toasts sit above the selection bar so they never cover its buttons */
+body:has(.bulk-bar) #toasts{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 </style>
 </head>
 <body>
@@ -644,7 +649,9 @@ const DEPTS=['Nursing','NTRN SVC','H/L','Rehab Speech','Life Enrich','Transporta
 const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 const WEEKDAYS=['Mon','Tue','Wed','Thu','Fri'];
 const EEO_CATS=['Executive/Senior Managers','First/Mid Managers','Professionals','Technicians','Sales','Administrative Support','Craft','Operatives','Laborers and Helpers','Service Workers'];
-const CODE_LEGEND={}; // Disposition legend pending from Tom's code sheet
+const CODE_LEGEND={};
+const INTERVIEW_STAGES=['Not scheduled','Scheduled','Interviewed','No-show']; // C2, good-to-have: shown as one column to see the impact
+const LIC_TYPES=['RN licence (OH Board of Nursing)','LPN licence (OH Board of Nursing)','STNA registry','CPR / BLS','Registered dietitian','Pharmacist (OH RPh)','Physical therapist','Speech-language pathologist','Law licence']; // Disposition legend pending from Tom's code sheet
 /* ---------- People and roles (V2) ---------- */
 const PEOPLE={
  tom:{name:'Tom',role:'Employment',desc:'Applicant intake, disposition codes, licences',ini:'T'},
@@ -655,9 +662,10 @@ const PEOPLE={
 const ROLE_ORDER=['tom','ivy','marcie','alicia'];
 const ROLE_NAV={tom:['tasks','applicants','employees','archived'], // sidebar order follows these lists
  ivy:['tasks','employees','archived'],marcie:['tasks','employees','leaves'],alicia:['tasks','employees','leaves','applicants','reports','archived']};
-const ROLE_EMP_TABS={tom:['licences'],ivy:['all','inservice','eeo','evaluations'],marcie:['all','insurance','bonus','benefits','evaluations'],alicia:['all','inservice','eeo','insurance','bonus','benefits','evaluations','licences']};
+const ROLE_EMP_TABS={tom:['licences'],ivy:['all','inservice','eeo','evaluations','parking'],marcie:['all','insurance','bonus','benefits','evaluations'],alicia:['all','inservice','eeo','insurance','bonus','benefits','evaluations','licences','parking']};
 // Who edits each profile section. Marcie also reads Ivy's sections to check her work.
-const SEC_OWNER={job:'ivy',personal:'ivy',inservice:'ivy',eeo:'ivy',evaluations:'ivy',separation:'ivy',insurance:'marcie',aca:'marcie',benefits:'marcie',bonus:'marcie'};
+const SEC_EDITORS={}; // sections with more than one editor
+const SEC_OWNER={parking:'ivy',job:'ivy',personal:'ivy',inservice:'ivy',eeo:'ivy',evaluations:'ivy',separation:'ivy',insurance:'marcie',aca:'marcie',benefits:'marcie',bonus:'marcie'};
 // Order follows Ivy's week: door card on orientation day, employee # back from payroll, then post-orientation entry
 const DESTS=[
  {k:'door',label:'Door card',needs:['first','last','entity','dept'],note:'Orientation day'},
@@ -689,7 +697,7 @@ const FMLA_REASONS=['Own serious health condition','Care for spouse','Care for p
 const SEP_REASONS=[['Resignation',[['a','Retired'],['b','Relocating'],['c','Returning to school'],['d','Marriage'],['e','Illness'],['f','Pregnancy'],['g','Personal reasons'],['h','No reason'],['i','New job'],['j','Without notice'],['k','Inability to cope/work'],['l','Other'],['m','No call/No show x2']]],['Termination',[['n','Attendance'],['o','Insubordination'],['p','Poor job performance'],['q','Walking off the job'],['r','Progressive disciplinary procedure'],['s','Disqualifying criminal record'],['t','Failure to provide necessary documentation'],['u','Other']]]];
 
 /* ---------- Seed data (all invented) ---------- */
-const BLANK={empNo:'',entity:'',dept:'',title:'',type:'FT',hours:'',benefits:'Yes',shiftStart:'',shiftEnd:'',shiftDays:[],gender:'',race:'',eeoCat:'',setup:null,prevEmpNos:[],source:'',weekend:'None',schedNotes:'',unit:'',rate:'',doh:'',dob:'',ssn:'',phone:'',notes:'',virtus:'',custSvc:'',abuse:'',tb:'',flu:'',fluDate:'',termDate:'',termType:'',efr:'',insLetter:'',medPlan:'',medCov:'',dentPlan:'',dentCov:'',vision:'',waiver:'',cashInLieu:'',inLieu:'',aca:{},k401Letter:'',k401Enrolled:'',k401Pct:'',tuition:'',bonusType:'',bonusAmt:'',bonusPaid:[false,false,false,false],bonusStatus:'',evalEff:'',evalDone:'',timeline:[],incomplete:false,archived:false};
+const BLANK={empNo:'',entity:'',dept:'',title:'',type:'FT',hours:'',benefits:'Yes',shiftStart:'',shiftEnd:'',shiftDays:[],gender:'',race:'',eeoCat:'',setup:null,prevEmpNos:[],source:'',parking:'',weekend:'None',schedNotes:'',unit:'',rate:'',doh:'',dob:'',ssn:'',phone:'',notes:'',virtus:'',custSvc:'',abuse:'',tb:'',flu:'',fluDate:'',termDate:'',termType:'',efr:'',insLetter:'',medPlan:'',medCov:'',dentPlan:'',dentCov:'',vision:'',waiver:'',cashInLieu:'',inLieu:'',aca:{},k401Letter:'',k401Enrolled:'',k401Pct:'',tuition:'',bonusType:'',bonusAmt:'',bonusPaid:[false,false,false,false],bonusStatus:'',evalEff:'',evalDone:'',timeline:[],incomplete:false,archived:false};
 let seq=1;
 const S1=SHIFTS[0],S2=SHIFTS[1],S3=SHIFTS[2],D7=SHIFTS[3],D730=SHIFTS[4],N7=SHIFTS[6],N730=SHIFTS[7],H16=SHIFTS[9],OTH=SHIFTS[11];
 const ROWS=[
@@ -826,7 +834,7 @@ DB.leaves=[
  {id:'l7',empId:eid('Okafor'),ltype:'FMLA',from:'2026-08-20',to:'2027-08-19',lnotes:'',reason:'Care for child',mode:'Intermittent',shiftsWk:3,intUsed:2,loaUsed:0,freq:'Appointments every 2–3 weeks',lastLetter:''}
 ];
 // Tom's log is "very, very basic": name, position, date received, department, source, interviewed, disposition codes (+ CV and optional EEO)
-const A_=(id,first,last,position,dept,applied,source,interview,gender,race,codes,status,hiredOn)=>({id:String(id),first,last,position,dept,applied,source,interview,gender,race,codes,status,hiredOn,directorRehire:'',converted:false,empId:null,cv:{sample:true}});
+const A_=(id,first,last,position,dept,applied,source,interview,gender,race,codes,status,hiredOn)=>({id:String(id),first,last,position,dept,applied,source,interview,gender,race,codes,status,hiredOn,directorRehire:'',parking:'',converted:false,empId:null,cv:{sample:true}});
 DB.apps=[
  A_(19888,'Nia','Fairbanks','CNA','Nursing','2026-09-02','Indeed','Yes','Female','Black or African American',['A','B','D','F','K'],'Hired','2026-09-21'),
  A_(19889,'Arturo','Belmonte','Housekeeping aide','H/L','2026-09-03','Website','Yes','Male','Hispanic or Latino',['A','C','D'],'Hired','2026-09-22'),
@@ -842,15 +850,40 @@ DB.apps=[
  A_(19899,'Camila','Ortega','Patient billing','Admin','2026-09-19','Website','No','Female','Hispanic or Latino',['A','B','C'],'New',''),
  A_(19900,'Brianna','Holloway','LPN','Nursing','2026-09-21','Indeed','No','','',[],'New','')
 ];
+// Licences now link to the person (B6). Binder lists stay as unlinked rows until they're broken out per person.
+const L_=(id,last,license,number,expires,cycle,checked,lastReminder='')=>({id,empId:last?eid(last):null,name:'',license,number,expires,cycle,checked,lastReminder});
 DB.lics=[
- {id:'m1',group:'August',name:'Evan Nakamura',ldept:'Nutrition Svc',license:'RD #704512',expires:'2027-08-31',cycle:'1 yr',checked:'R. Ellis'},
- {id:'m2',group:'September',name:'Denise Hargrove',ldept:'Pharmacy',license:'OH RPh',expires:'2027-09-15',cycle:'2 yr',checked:'R. Ellis'},
- {id:'m3',group:'September',name:'Luis Quintero',ldept:'HR',license:'OH-Law',expires:'2027-09-01',cycle:'2 yr',checked:'R. Ellis'},
- {id:'m4',group:'October',name:'All Manor LPNs – list kept in binder & Nrsg Ofc',ldept:'',license:'OH Board of Nursing',expires:'2026-10-31',cycle:'2 yr',checked:'K. Moss'},
- {id:'m5',group:'October',name:'All Manor RNs – list kept in binder & Nrsg Ofc',ldept:'',license:'OH Board of Nursing',expires:'2027-10-31',cycle:'2 yr',checked:'K. Moss'},
- {id:'m6',group:'November',name:'Ellery Vance',ldept:'HHC',license:'OH PT license',expires:'2026-11-30',cycle:'2 yr',checked:'R. Ellis'},
- {id:'m7',group:'December',name:'Sara Lindqvist',ldept:'Rehab/Speech',license:'OH Board SLP & A',expires:'2026-12-31',cycle:'2 yr',checked:'R. Ellis'}
+ L_('m1','Nakamura','Registered dietitian','RD 704512','2027-08-31','1 yr','R. Ellis'),
+ L_('m2','Hargrove','Pharmacist (OH RPh)','RPh 03-118842','2027-09-15','2 yr','R. Ellis'),
+ L_('m3','Quintero','Law licence','OH 0091827','2027-09-01','2 yr','R. Ellis'),
+ L_('m6','Vance','Physical therapist','PT 015522','2026-11-30','2 yr','R. Ellis','2026-09-15'),
+ L_('m7','Lindqvist','Speech-language pathologist','SLP 11274','2026-12-31','2 yr','R. Ellis'),
+ L_('n1','Baptiste','LPN licence (OH Board of Nursing)','PN 158842','2026-10-31','2 yr','K. Moss','2026-09-15'),
+ L_('n2','Castellano','RN licence (OH Board of Nursing)','RN 377120','2027-10-31','2 yr','K. Moss'),
+ L_('n3','Kouyaté','RN licence (OH Board of Nursing)','RN 512904','2027-10-31','2 yr','K. Moss'),
+ L_('n4','Okafor','LPN licence (OH Board of Nursing)','PN 171233','2026-10-31','2 yr','K. Moss'),
+ L_('n5','Thibodeaux','RN licence (OH Board of Nursing)','RN 244018','2027-10-31','2 yr','K. Moss'),
+ L_('n6','Uzoma','RN licence (OH Board of Nursing)','RN 488375','2027-10-31','2 yr','K. Moss'),
+ L_('n7','Yardley','RN licence (OH Board of Nursing)','RN 301556','2027-10-31','2 yr','K. Moss'),
+ L_('n8','Brisbane','RN licence (OH Board of Nursing)','RN 266710','2027-10-31','2 yr','K. Moss'),
+ L_('c1','Aldridge','CPR / BLS','AHA 8841-2','2026-10-12','2 yr','K. Moss'),
+ L_('c2','Sandoval','CPR / BLS','AHA 7720-9','2026-09-18','2 yr','K. Moss','2026-09-01'),
+ L_('c3','Baptiste','CPR / BLS','AHA 9012-4','2027-03-04','2 yr','K. Moss'),
+ L_('c4','Castellano','CPR / BLS','AHA 6631-0','2026-11-20','2 yr','K. Moss'),
+ L_('c5','Iverson','CPR / BLS','AHA 9934-1','2028-08-20','2 yr','K. Moss'),
+ L_('c6','Okafor','CPR / BLS','AHA 9902-7','2028-07-28','2 yr','K. Moss'),
+ L_('c7','Brisbane','CPR / BLS','AHA 5520-3','2026-10-05','2 yr','K. Moss'),
+ L_('s1','Dunmore','STNA registry','STNA 448120','2027-06-15','2 yr','K. Moss'),
+ L_('s2','Zeller','STNA registry','STNA 461877','2028-08-17','2 yr','K. Moss'),
+ {id:'m4',empId:null,name:'All Manor LPNs – list kept in binder & Nrsg Ofc',license:'LPN licence (OH Board of Nursing)',number:'',expires:'2026-10-31',cycle:'2 yr',checked:'K. Moss',lastReminder:''},
+ {id:'m5',empId:null,name:'All Manor RNs – list kept in binder & Nrsg Ofc',license:'RN licence (OH Board of Nursing)',number:'',expires:'2027-10-31',cycle:'2 yr',checked:'K. Moss',lastReminder:''}
 ];
+// Applicant interview stage (seed); Tom's log used to hold a yes/no
+DB.apps.forEach(a=>{a.interview=a.interview==='Yes'?'Interviewed':'Not scheduled';});
+DB.apps.find(a=>a.id==='19888').parking='P-2101';
+Object.entries({'19891':'Scheduled','19897':'Scheduled','19894':'No-show','19898':'No-show'}).forEach(([id,v])=>DB.apps.find(a=>a.id===id).interview=v);
+// Parking passes (GTH-3): numbers for current staff; the newest hires don't have one yet
+DB.emps.filter(e=>!e.archived).forEach((e,i)=>{ if(!(e.doh&&diff(e.doh,TODAY)<=45)) e.parking='P-'+String(1040+i*7); });
 DB.todos=[
  {id:'t1',owner:'marcie',text:'Send open enrollment reminder to Towers staff',due:'2026-09-30',done:false},
  {id:'t2',owner:'ivy',text:'Collect signed Status Change form from Nursing for PRN change',due:'2026-09-25',done:false},
@@ -883,12 +916,12 @@ const pendingHires=()=>DB.apps.filter(a=>a.status==='Hired'&&!a.converted);
 
 /* ---------- Roles: what each person sees and edits (V2) ---------- */
 function fieldSec(key){ const s=SECTIONS.find(x=>x[2].includes(key)); if(s) return s[0]; return ({fluDate:'inservice'})[key]||null; }
-function canSeeSec(sec){ const u=S.user; if(!sec||u==='alicia'||SEC_OWNER[sec]===u) return true; if(u==='marcie'&&SEC_OWNER[sec]==='ivy') return true; if(u==='tom') return sec==='job'||sec==='separation'; return false; }
-function canEditSec(sec){ return S.user==='alicia'||SEC_OWNER[sec]===S.user; }
+function canSeeSec(sec){ const u=S.user; if(!sec||u==='alicia'||SEC_OWNER[sec]===u||(SEC_EDITORS[sec]||[]).includes(u)) return true; if(u==='marcie'&&SEC_OWNER[sec]==='ivy') return true; if(u==='tom') return sec==='job'||sec==='separation'; return false; }
+function canEditSec(sec){ return S.user==='alicia'||SEC_OWNER[sec]===S.user||(SEC_EDITORS[sec]||[]).includes(S.user); }
 function canSeeField(key){ return canSeeSec(fieldSec(key)); }
 function canEditField(kind,key){ const u=S.user; if(kind==='emp'&&fieldSec(key)==='separation') return false; // only via Separate
   if(u==='alicia') return true;
-  if(kind==='emp'){ const s=fieldSec(key); return !!s&&SEC_OWNER[s]===u; }
+  if(kind==='emp'){ const s=fieldSec(key); return !!s&&(SEC_OWNER[s]===u||(SEC_EDITORS[s]||[]).includes(u)); }
   return ({app:'tom',leave:'marcie',lic:'tom'})[kind]===u; }
 function can(action){ const u=S.user,adm=u==='alicia';
   return ({status:adm||u==='ivy',separate:adm||u==='ivy',reinstate:adm||u==='ivy',createEmp:adm||u==='ivy',bulk:adm||u==='ivy',setup:adm||u==='ivy',leave:adm||u==='marcie',profile:u!=='tom',profileLeaves:adm||u==='marcie'})[action]; }
@@ -906,6 +939,11 @@ function missingFor(e,u){ if(!e||e.archived) return []; const roles=u==='alicia'
 
 const destDone=(e,d)=>d.auto?d.auto(e):!!e.setup[d.k];
 const blankSetup=()=>Object.fromEntries(DESTS.filter(d=>!d.auto).map(d=>[d.k,false]));
+function nextLicBatch(){ const y=+TODAY.slice(0,4),m=+TODAY.slice(5,7),d=+TODAY.slice(8,10),last=new Date(Date.UTC(y,m,0)).getUTCDate(),ym=TODAY.slice(0,8);
+  const pts=[[1,'Start of month'],[15,'Middle of month'],[last,'End of month']]; const nx=pts.find(p=>p[0]>=d);
+  const date=nx?ym+String(nx[0]).padStart(2,'0'):addMonths(ym+'01',1), label=nx?nx[1]:'Start of month';
+  const pv=[...pts].reverse().find(p=>p[0]<d), prev=pv?ym+String(pv[0]).padStart(2,'0'):addDays(ym+'01',-1); return {date,label,prev}; }
+function licToRemind(){ const b=nextLicBatch(); return DB.lics.filter(l=>l.expires&&diff(TODAY,l.expires)<=60&&!(l.lastReminder&&l.lastReminder>=b.prev)); }
 function setupInfo(e){ if(!e||!e.setup) return null; const n=DESTS.filter(d=>destDone(e,d)).length,next=DESTS.find(d=>!destDone(e,d)); return {n,total:DESTS.length,next,complete:!next}; }
 // Ivy hands the record to Marcie only once all of her setup is done (synthesis §5)
 function checkSetupHandoff(e){ const s=setupInfo(e); if(!s||!s.complete||e.setupHanded) return false;
@@ -932,6 +970,7 @@ const F={
  shiftDays:{label:'Shift days',custom:'days',editable:true,w:300},
  gender:{label:'Gender',type:'select',opts:['Female','Male','Not stated'],w:115},
  race:{label:'Race / ethnicity',type:'select',opts:RACES,w:240},
+ parking:{label:'Parking pass #',type:'text',w:150},
  eeoCat:{label:'EEO-1 job category',type:'select',opts:EEO_CATS,w:220},
  missing:{label:'Missing fields',auto:true,get:r=>missingFor(r,S.user).map(k=>F[k].label).join(', '),render:v=>`<span class="miss-text">${esc(v)}</span>`,w:260},
  weekend:{label:'Weekend program',type:'select',opts:['None','8-hour','16-hour'],w:155},
@@ -989,10 +1028,11 @@ const AF={
  dept:{label:'Department',type:'select',opts:DEPTS,w:150},
  applied:{label:'Date received',type:'date',w:135},
  source:{label:'Source',type:'select',opts:SOURCES,w:120},
- interview:{label:'Interviewed',type:'select',opts:YN,w:120},
+ interview:{label:'Interview',type:'select',opts:INTERVIEW_STAGES,w:150},
  gender:{label:'Gender',type:'select',opts:['Female','Male','Not stated'],w:115},
  race:{label:'Race / ethnicity',type:'select',opts:RACES,w:240},
  codes:{label:'Disposition codes',custom:'codes',editable:true,w:230},
+ parking:{label:'Parking pass #',type:'text',w:140},
  astatus:{label:'Status',type:'select',k:'status',opts:['New','Hired','Rejected'],show:v=>v==='New'||!v?esc(v):chip(v,{Hired:'green',Rejected:'red'}[v]),w:130}
 };
 const LF={
@@ -1017,13 +1057,17 @@ const LF={
  freq:{label:'Frequency & duration',type:'text',w:230},
  lastLetter:{label:'"Last letter" sent',type:'date',w:150}
 };
+const licEmp=l=>l.empId?empById(l.empId):null;
+const licState=l=>{if(!l.expires)return '';const d=diff(TODAY,l.expires);return d<0?'Expired':d<=60?'Expiring':'Current';};
 const LicF={
- name:{label:'Name',type:'text',w:320},
- ldept:{label:'Department',type:'text',w:150},
- license:{label:'License / certification',type:'text',w:200},
- expires:{label:'Expires',type:'date',w:190,show:v=>{if(!v)return '';const d=diff(TODAY,v);return fd(v)+(d<0?' '+chip('Expired','red sm'):d<=60?' '+chip('Soon','amber sm'):'');}},
- cycle:{label:'Renewal',type:'text',w:100},
- checked:{label:'Checked by',type:'text',w:130}
+ name:{label:'Employee',custom:'licName',w:280},
+ ldept:{label:'Department',auto:true,get:l=>licEmp(l)?.dept||'',w:140},
+ license:{label:'Licence / certification',type:'select',opts:LIC_TYPES,w:260},
+ number:{label:'Number',type:'text',w:140},
+ expires:{label:'Expires',type:'date',w:190,show:v=>{if(!v)return '';const d=diff(TODAY,v);return fd(v)+(d<0?' '+chip('Expired','red sm'):d<=60?' '+chip(`${d} days`,'amber sm'):'');}},
+ cycle:{label:'Renewal',type:'select',opts:['1 yr','2 yr'],w:100},
+ checked:{label:'Checked by',type:'text',w:120},
+ reminded:{label:'Last reminder',auto:true,get:l=>fd(l.lastReminder),w:130}
 };
 const FD={emp:F,app:AF,leave:LF,lic:LicF};
 const TRACK={dept:'Department',entity:'Entity',title:'Job title',type:'Type',hours:'Hours/week',benefits:'Benefits',shiftStart:'Shift start',shiftEnd:'Shift end',shiftDays:'Shift days',rate:'Rate',empNo:'Employee #'};
@@ -1034,6 +1078,7 @@ Object.assign(S,{sort:'asc',deptFilter:'all',typeFilter:'all',selected:[],hidden
 // V2: signed-in person, login step, missing-fields filter, Alicia's queue view, Ivy's last setup, report builder
 Object.assign(S,{user:null,loginStep:'signin',missingOnly:false,teamView:null,lastSetup:null,rep:{view:'list',step:1,def:null,sort:null,pg:0,colsOpen:false,busy:'',editing:null}});
 S.groups.eeo=false;
+S.licFilter='all';
 let needsRender=false;
 
 function rec(kind,id){ return ({emp:DB.emps,app:DB.apps,leave:DB.leaves,lic:DB.lics})[kind].find(x=>x.id===id); }
@@ -1062,7 +1107,7 @@ const CUSTOM={
  appName:(r,col,st)=>`<td class="${st}"><button class="lnk" data-a="openApp" data-id="${r.id}">${esc(r.last+', '+r.first)}</button></td>`,
  leaveName:(r,col,st)=>{const e=empById(r.empId);return `<td class="${st}">${e?`<button class="lnk" data-a="openEmp" data-id="${e.id}">${esc(nm(e))}</button>`:''}</td>`;},
  payments:(r)=>`<td>${paymentsHTML(r)}</td>`,
-
+ licName:(r,col,st)=>{const e=licEmp(r);return `<td class="${st}">${e?(can('profile')?`<button class="lnk" data-a="openEmp" data-id="${e.id}">${esc(nm(e))}</button>`:esc(nm(e)))+(e.archived?' '+chip('Separated','sm'):''):`<span class="muted">${esc(r.name)}</span> ${chip('Not linked','amber sm')}`}</td>`;},
  codes:(r)=>canEditField('app','codes')?`<td><button class="codes-btn" data-a="codesPop" data-pop-trigger data-id="${r.id}" aria-label="Edit disposition codes">${r.codes.length?r.codes.map(c=>`<span class="ctag">${c}</span>`).join(''):'<span>Select codes</span>'}${ic('chev',14)}</button></td>`:`<td class="c-ro">${r.codes.map(c=>`<span class="ctag">${c}</span>`).join('')||'—'}</td>`
 };
 // Day-of-week picker (A1). attrs=null renders read-only.
@@ -1080,17 +1125,18 @@ function tdHTML(kind,r,col,sticky){
   if(col.custom) return CUSTOM[col.custom](r,col,st);
   if(col.auto){ const v=col.get(r); if(kind==='app'&&col.key==='astatus')return `<td>${v==='New'?'New':chip(v,{Hired:'green',Rejected:'red'}[v])}${v!=='New'&&!r.converted?`<button class="lnk sm row-undo" data-a="undoDecision" data-id="${r.id}">Undo</button>`:''}</td>`; return `<td class="c-auto ${st}">${v===''||v==null?'—':col.render?col.render(v,r):esc(v)}</td>`; }
   const k=`${kind}|${r.id}|${col.key}`;
-  if(!canEditField(kind,col.key)||(kind==='app'&&col.key==='astatus'&&r.converted)){ const v=getVal(r,col); const shown=col.key==='ssn'&&v&&!(S.page==='profile'&&S.revealedSSN[r.id])?esc('•••-••-'+String(v).slice(-4)):fmtVal(col,v,r); return `<td class="c-ro ${st}">${shown||'<span class="muted">—</span>'}</td>`; }
+  // Parking pass: only hires coming to orientation get one; Ivy owns it once they're employees
+  if(!canEditField(kind,col.key)||(kind==='app'&&col.key==='astatus'&&r.converted)||(kind==='app'&&col.key==='parking'&&(r.status!=='Hired'||r.converted))){ const v=getVal(r,col); const shown=col.key==='ssn'&&v&&!(S.page==='profile'&&S.revealedSSN[r.id])?esc('•••-••-'+String(v).slice(-4)):fmtVal(col,v,r); return `<td class="c-ro ${st}">${shown||'<span class="muted">—</span>'}</td>`; }
   if(S.editCell===k) return `<td class="editing ${st}">${editorHTML(col,getVal(r,col),r)}</td>`;
   const shown=col.key==='ssn'&&getVal(r,col)&&!(S.page==='profile'&&S.revealedSSN[r.id])?esc('•••-••-'+String(getVal(r,col)).slice(-4)):fmtVal(col,getVal(r,col),r);
   return `<td class="c-ed ${st} ${col.key==='email'?'email-cell':''}" data-a="edit" data-k="${k}" tabindex="0" aria-label="Edit ${esc(col.label)}"><span>${shown||`<span class="empty">Set ${esc(col.label.toLowerCase())}…</span>`}</span><span class="pen">${ic('pencil',14)}</span></td>`;
 }
 function tableHTML(kind,keys,rows,o={}){
   keys=keys.filter(k=>!(S.hiddenFields[kind]||[]).includes(k));
-  const cols=keys.map(k=>colOf(kind,k)), selectable=kind==='emp'&&S.page!=='archived'&&can('bulk');
+  const cols=keys.map(k=>colOf(kind,k)), selectable=(kind==='emp'&&S.page!=='archived'&&can('bulk'))||(kind==='lic'&&canEditField('lic','license'));
   S.visibleIds=selectable?rows.map(r=>r.id):[];
   const checked=rows.length&&rows.every(r=>S.selected.includes(r.id));
-  const checkHead=selectable?`<th class="selcol"><input type="checkbox" data-chk="rowAll" aria-label="Select all visible employees" ${checked?'checked':''}></th>`:'';
+  const checkHead=selectable?`<th class="selcol"><input type="checkbox" data-chk="rowAll" aria-label="Select all visible rows" ${checked?'checked':''}></th>`:'';
   const ek=editKey(kind); const th=checkHead+cols.map((c,i)=>`<th class="${i===0&&o.sticky!==false?'stk':''} ${ek===c.key?'col-active':''}" style="min-width:${c.w||120}px"><span class="th">${esc(c.label)}${c.key==='entitle'?`<button class="hint" aria-label="Entitlement is shifts per week multiplied by 12 weeks" title="Entitlement is shifts per week × 12 weeks">?</button>`:''}</span></th>`).join('')+(o.actions?`<th class="stkr" aria-label="${o.actionsLabel||'Row actions'}"></th>`:'');
   o={...o,selectable};
   const total=cols.length+(selectable?1:0)+(o.actions?1:0);
@@ -1100,13 +1146,13 @@ function tableHTML(kind,keys,rows,o={}){
   if(!rows.length)body=`<tr><td class="empty-row" colspan="${total}">${o.empty||'No matching records'}</td></tr>`;
   const nouns={emp:'employees',app:'applicants',leave:'leaves',lic:'licences'};
   const detail=kind==='emp'?`${rows.filter(r=>workStatus(r)==='On leave').length} on leave`:kind==='app'?`${rows.filter(r=>r.status==='New').length} new · ${rows.filter(r=>r.status==='Hired').length} hired · ${rows.filter(r=>r.status==='Rejected').length} rejected`:kind==='leave'?`${rows.filter(r=>leaveStatus(r)==='Active').length} active`:'';
-  return `<div class="tw ${selectable?'with-selection':''}" data-scroll-key="tw-${S.page}-${S.empTab}-${S.leaveTab}"><table class="grid"><thead><tr>${th}</tr></thead><tbody>${body}</tbody></table></div><div class="table-footer">${rows.length} ${nouns[kind]}${detail?' <span>·</span> '+detail:''}</div>${selectable?bulkBar():''}`;
+  return `<div class="tw ${selectable?'with-selection':''}" data-scroll-key="tw-${S.page}-${S.empTab}-${S.leaveTab}"><table class="grid"><thead><tr>${th}</tr></thead><tbody>${body}</tbody></table></div><div class="table-footer">${rows.length} ${nouns[kind]}${detail?' <span>·</span> '+detail:''}</div>${selectable?bulkBar(kind):''}`;
 }
 // Active row: the record whose cell is open for editing, or whose actions menu is open
 const isActiveRow=(kind,r)=>(S.editCell&&S.editCell.startsWith(`${kind}|${r.id}|`))||(S.popover&&S.popover.type==='row'&&S.popover.id===r.id&&kind==='emp');
 const editKey=kind=>S.editCell&&S.editCell.startsWith(kind+'|')?S.editCell.split('|')[2]:null;
-function rowHTML(kind,cols,r,o){return `<tr class="${r._flash?'flash':''} ${S.selected.includes(r.id)?'selected':''} ${isActiveRow(kind,r)?'row-active':''}" ${isActiveRow(kind,r)?'aria-current="true"':''} ${kind==='app'?`data-a="openApp" data-id="${r.id}" tabindex="0" aria-label="Open ${esc(r.first+' '+r.last)}"`:''}>${o.selectable?`<td class="selcol"><input type="checkbox" data-chk="row" value="${r.id}" aria-label="Select ${esc(nm(r))}" ${S.selected.includes(r.id)?'checked':''}></td>`:''}${cols.map((c,i)=>tdHTML(kind,r,c,i===0&&o.sticky!==false)).join('')}${o.actions?o.actions(r):''}</tr>`;}
-function bulkBar(){const n=S.selected.length;return n?`<div class="bulk-bar" role="region" aria-label="Selected employees"><strong>${n} selected</strong><span class="vdiv"></span><button class="btn btn-ghost" data-a="bulkOpen" data-mode="status">Change status</button><button class="btn btn-ghost btn-danger" data-a="bulkOpen" data-mode="separate">Separate</button><button class="icon-btn sm" data-a="clearSelection" aria-label="Clear selection">${ic('x',16)}</button></div>`:'';}
+function rowHTML(kind,cols,r,o){return `<tr class="${r._flash?'flash':''} ${S.selected.includes(r.id)?'selected':''} ${isActiveRow(kind,r)?'row-active':''}" ${isActiveRow(kind,r)?'aria-current="true"':''} ${kind==='app'?`data-a="openApp" data-id="${r.id}" tabindex="0" aria-label="Open ${esc(r.first+' '+r.last)}"`:''}>${o.selectable?`<td class="selcol"><input type="checkbox" data-chk="row" value="${r.id}" aria-label="Select ${esc(kind==='lic'?(licEmp(r)?nm(licEmp(r)):r.name):nm(r))}" ${S.selected.includes(r.id)?'checked':''}></td>`:''}${cols.map((c,i)=>tdHTML(kind,r,c,i===0&&o.sticky!==false)).join('')}${o.actions?o.actions(r):''}</tr>`;}
+function bulkBar(kind){const n=S.selected.length; if(kind==='lic') return n?`<div class="bulk-bar" role="region" aria-label="Selected licences"><strong>${n} selected</strong><span class="vdiv"></span><button class="btn btn-ghost" data-a="licRemind">${ic('clock',15)} Send reminders</button><button class="icon-btn sm" data-a="clearSelection" aria-label="Clear selection">${ic('x',16)}</button></div>`:''; return n?`<div class="bulk-bar" role="region" aria-label="Selected employees"><strong>${n} selected</strong><span class="vdiv"></span><button class="btn btn-ghost" data-a="bulkOpen" data-mode="status">Change status</button><button class="btn btn-ghost btn-danger" data-a="bulkOpen" data-mode="separate">Separate</button><button class="icon-btn sm" data-a="clearSelection" aria-label="Clear selection">${ic('x',16)}</button></div>`:'';}
 function tableTools(kind,keys){return `<div class="table-tools"><button class="btn btn-ghost ${S.deptFilter!=='all'||S.typeFilter!=='all'?'is-set':''}" data-a="tableMenu" data-menu="filter" data-kind="${kind}" data-pop-trigger>Filter${S.deptFilter!=='all'||S.typeFilter!=='all'?' · 1':''}</button><button class="btn btn-ghost" data-a="tableMenu" data-menu="sort" data-kind="${kind}" data-pop-trigger>Sort${S.sort==='desc'?' ↓':''}</button><button class="btn btn-ghost" data-a="tableMenu" data-menu="fields" data-kind="${kind}" data-keys="${keys.join(',')}" data-pop-trigger>Fields ${ic('chev',14)}</button></div>`;}
 function sorted(rows,name,date){return rows.slice().sort((a,b)=>{const v=S.sort.startsWith('date')?String(date?.(a)||'').localeCompare(String(date?.(b)||'')):name(a).localeCompare(name(b));return S.sort.endsWith('desc')?-v:v;});}
 
@@ -1132,7 +1178,7 @@ function crumbs(){
   const c=(label,p)=>`<button data-a="nav" data-p="${p}">${esc(label)}</button>`;
   const cur=l=>`<span class="cur">${esc(l)}</span>`;
   const sep='<span aria-hidden="true">/</span>';
-  const tabName={inservice:'In-services',eeo:'EEO',insurance:'Insurance',bonus:'Bonus',benefits:'Benefits',evaluations:'Evaluations',discipline:'Discipline',licences:'Licences'};
+  const tabName={parking:'Parking',inservice:'In-services',eeo:'EEO',insurance:'Insurance',bonus:'Bonus',benefits:'Benefits',evaluations:'Evaluations',discipline:'Discipline',licences:'Licences'};
   switch(S.page){
     case 'employees': return cur('Employees')+sep+cur(tabName[S.empTab]);
     case 'profile': return c('Employees','employees')+sep+cur(nm(empById(S.profileId)));
@@ -1182,14 +1228,16 @@ function ownQueue(u,done=false){
   if(h.type==='separation')q.push({key:h.id,from:h.from,due:addDays(h.created,14),title:`Separation follow-up: ${n}`,sub:'Termination letter · Sun Life continuation · 401(k) close after final hours',act:done?'':btn('openEmp','Open profile',`data-id="${e.id}"`)+btn('hoDone','Mark done',`data-id="${h.id}"`,1)});
  });
  if(!done&&u==='ivy'){
-  pendingHires().forEach(a=>{const f=formerMatch(a),om=orientationAfter(a.hiredOn||TODAY);q.push({key:'hire'+a.id,from:'tom',due:om,title:`Set up new hire: ${esc(a.first+' '+a.last)}`,sub:`${esc(a.position)} · ${esc(a.dept||'No department')} · orientation Mon ${fd(om)}${f?' · former employee, will be rehired':''}`,act:btn('newEmp','Set up',`data-id="${a.id}"`,1)});});
+  pendingHires().forEach(a=>{const f=formerMatch(a),om=orientationAfter(a.hiredOn||TODAY);q.push({key:'hire'+a.id,from:'tom',due:om,title:`Set up new hire: ${esc(a.first+' '+a.last)}`,sub:`${esc(a.position)} · ${esc(a.dept||'No department')} · orientation Mon ${fd(om)}${a.parking?' · parking pass '+esc(a.parking):''}${f?' · former employee, will be rehired':''}`,act:btn('newEmp','Set up',`data-id="${a.id}"`,1)});});
   active().filter(e=>{const s=setupInfo(e);return s&&!s.complete;}).forEach(e=>{const s=setupInfo(e);q.push({key:'setup'+e.id,due:addDays(e.doh,3),title:`Finish setup: ${esc(e.first+' '+e.last)}`,sub:`${s.n} of ${s.total} destinations done · Next: ${s.next.label}`,act:btn('resumeSetup','Resume',`data-id="${e.id}"`,1)});});
   active().filter(e=>['Overdue','Due soon'].includes(evalState(e))).forEach(e=>q.push({key:'ev'+e.id,due:nextEval(e),title:`Evaluation due: ${esc(e.first+' '+e.last)}`,sub:`${esc(e.title)} · ${esc(e.entity)}`,act:btn('goSec','Open',`data-id="${e.id}" data-sec="evaluations"`)}));
  }
  if(!done&&u==='tom'){
   DB.apps.filter(a=>a.status==='New'&&formerMatch(a)&&!a.directorRehire).forEach(a=>{const f=formerMatch(a);q.push({key:'rh'+a.id,due:addDays(a.applied,5),title:`Rehire check: ${esc(a.first+' '+a.last)}`,sub:`Former ${esc(f.title)}, separated ${fd(f.termDate)} · ask the ${esc(f.dept)} director`,act:btn('openApp','Open',`data-id="${a.id}"`,1)});});
   DB.apps.filter(a=>a.status==='New'&&!a.codes.length).forEach(a=>q.push({key:'cd'+a.id,due:addDays(a.applied,7),title:`Add disposition code: ${esc(a.first+' '+a.last)}`,sub:`${esc(a.position)} · received ${fd(a.applied)}`,act:btn('openApp','Open',`data-id="${a.id}"`)}));
-  DB.lics.filter(l=>l.expires&&diff(TODAY,l.expires)<=60).forEach(l=>q.push({key:'lc'+l.id,due:l.expires,title:`Licence expiring: ${esc(l.name)}`,sub:esc(l.license),act:btn('nav','Licences','data-p="employees" data-tab="licences"')}));
+  { const b=nextLicBatch(),n=licToRemind().length; if(n) q.push({key:'licbatch',due:b.date,title:`Send licence reminders · ${b.label} batch`,sub:`${n} licence${n===1?'':'s'} expire within 60 days and haven't had a reminder since ${fd(b.prev)}`,act:btn('licReview','Review & send','',1)}); }
+  pendingHires().filter(a=>!a.parking).forEach(a=>{const om=orientationAfter(a.hiredOn||TODAY);q.push({key:'pk'+a.id,due:om,title:`Parking pass: ${esc(a.first+' '+a.last)}`,sub:`Hired · orientation Mon ${fd(om)} · set the pass number at orientation`,act:btn('openApp','Open',`data-id="${a.id}"`)});});
+  DB.apps.filter(a=>a.status==='New'&&a.interview==='Interviewed').forEach(a=>q.push({key:'iv'+a.id,due:addDays(a.applied,10),title:`Hire or reject: ${esc(a.first+' '+a.last)}`,sub:`Interviewed · ${esc(a.position)}`,act:btn('openApp','Open',`data-id="${a.id}"`)}));
  }
  if(u==='marcie') ninetyList().filter(x=>x.done===done).forEach(x=>q.push({key:'n'+x.e.id,due:x.due,ninety:x}));
  if(!done&&(u==='ivy'||u==='marcie')){const n=active().filter(e=>missingFor(e,u).length).length; if(n) q.push({key:'miss',due:null,title:`${n} employee${n>1?'s':''} missing your fields`,sub:u==='ivy'?'Job, personal and EEO details':'Insurance, bonus and 401(k)',act:btn('showMissing','Show')});}
@@ -1238,7 +1286,7 @@ function taskItemHTML(item,done){
 }
 
 /* ---------- Employees ---------- */
-const EMP_TABS=()=>[['all','All',active().length],['inservice','In-services'],['eeo','EEO'],['insurance','Insurance'],['bonus','Bonus'],['benefits','Benefits'],['evaluations','Evaluations'],['licences','Licences']].filter(t=>ROLE_EMP_TABS[S.user].includes(t[0]));
+const EMP_TABS=()=>[['all','All',active().length],['inservice','In-services'],['eeo','EEO'],['insurance','Insurance'],['bonus','Bonus'],['benefits','Benefits'],['evaluations','Evaluations'],['licences','Licences'],['parking','Parking']].filter(t=>ROLE_EMP_TABS[S.user].includes(t[0]));
 function empKeys(){ const k=empKeysAll().filter(canSeeField); return S.missingOnly&&S.empTab!=='licences'?[k[0],'missing',...k.slice(1)]:k; }
 function empKeysAll(){
   const t=S.empTab, base=['name','empNo','entity'];
@@ -1249,6 +1297,7 @@ function empKeysAll(){
   if(t==='insurance') return [...base,'employment','dohRO','day90','insLetter','medPlan','medCov','dentPlan','dentCov','vision','waiver','cashInLieu','inLieu',...MONTHS.map(m=>'aca_'+m)];
   if(t==='benefits') return [...base,'employment','dohRO','k401Elig','k401Letter','k401Enrolled','k401Pct','tuition'];
   if(t==='bonus') return [...base,'titleRO','dohRO','bonusType','bonusAmt','payments','bonusStatus'];
+  if(t==='parking') return [...base,'deptRO','titleRO','dohRO','parking'];
   if(t==='inservice') return [...base,'deptRO','titleRO','virtus','custSvc','abuse','tb','flu'];
   if(t==='eeo') return [...base,'deptRO','titleRO','gender','race','eeoCat'];
   if(t==='evaluations') return [...base,'deptRO','titleRO','dohRO','evalEff','evalDone','nextEval','evalState'];
@@ -1260,11 +1309,16 @@ function employeesPage(){
  const cta=(navOK('archived')?cta0.split('<button class="btn btn-primary"')[0]:'')+(can('createEmp')?`<button class="btn btn-primary" data-a="newEmp">${ic('plus',16)} Create employee</button>`:'');
  let h=`<div class="content tp">${phead('Employees','',cta)}${EMP_TABS().length>1?tabsHTML('empTab',EMP_TABS()):''}`;
  if(S.empTab==='licences'){
-  let rows=DB.lics.filter(l=>!S.search||(l.name+l.license+l.ldept).toLowerCase().includes(S.search.toLowerCase()));
-  rows=sorted(rows,r=>r.name,r=>r.expires);const keys=['name','ldept','license','expires','cycle','checked'];
-  return h+`<div class="toolbar">${searchHTML('Search licences')}${tableTools('lic',keys)}</div>`+tableHTML('lic',keys,rows,{sticky:false,groups:[...new Set(rows.map(r=>r.group))].map(g=>({name:g,rows:rows.filter(r=>r.group===g)}))})+'</div>';
+  let rows=DB.lics.filter(l=>{const e=licEmp(l);return !S.search||((e?nm(e):l.name)+' '+l.license+' '+(l.number||'')+' '+(e?.dept||'')).toLowerCase().includes(S.search.toLowerCase());});
+  if(S.licFilter==='due') rows=rows.filter(l=>licState(l)!=='Current'); if(S.licFilter==='cpr') rows=rows.filter(l=>l.license==='CPR / BLS');
+  rows=rows.slice().sort((a,b)=>(a.expires||'9').localeCompare(b.expires||'9'));const keys=['name','ldept','license','number','expires','cycle','checked','reminded'];
+  const month=l=>l.expires?new Date(l.expires+'T12:00:00Z').toLocaleDateString('en-US',{month:'long',year:'numeric',timeZone:'UTC'}):'No expiry date';
+  const b=nextLicBatch(),due=licToRemind().length;
+  return h+`<div class="lic-banner">${ic('clock',16)}<div><b>Next reminder batch: ${b.label} (${fd(b.date)})</b><span>${due} licence${due===1?'':'s'} expire within 60 days and haven't had a reminder since ${fd(b.prev)}.</span></div>${due?`<button class="btn btn-sm btn-primary" data-a="licSelectDue">Select them</button>`:''}</div>
+   <div class="toolbar">${searchHTML('Search name, licence or number')}${segHTML('licFilter',[['all','All'],['due','Expiring or expired'],['cpr','CPR / BLS']],'Licence filter')}${canEditField('lic','license')?`<button class="btn btn-ghost" data-a="newLic">${ic('plus',16)} Add licence</button>`:''}${tableTools('lic',keys)}</div>`
+   +tableHTML('lic',keys,rows,{sticky:false,groups:[...new Set(rows.map(month))].map(g=>({name:g,rows:rows.filter(r=>month(r)===g)}))})+'</div>';
  }
- let rows=filtered(active(),r=>nm(r)+' '+r.empNo+' '+r.title,r=>r.entity);
+ let rows=filtered(active(),r=>nm(r)+' '+r.empNo+' '+r.title+' '+(r.parking||''),r=>r.entity);
  const nMiss=active().filter(r=>missingFor(r,S.user).length).length;
  if(S.missingOnly) rows=rows.filter(r=>missingFor(r,S.user).length);
  if(S.empTab==='all'&&S.workFilter!=='all')rows=rows.filter(r=>workStatus(r)===S.workFilter);
@@ -1283,6 +1337,7 @@ const SECTIONS=[
  ['job','Job',['empNo','entity','dept','title','type','hours','benefits','shiftStart','shiftEnd','shiftDays','weekend','schedNotes','unit','rate','doh','lastChange','workStatus']],
  ['personal','Personal',['dob','ssn','phone','notes']],
  ['eeo','EEO',['gender','race','eeoCat']],
+ ['parking','Parking',['parking']],
  ['inservice','In-services',['virtus','custSvc','abuse','tb','flu']],
  ['insurance','Insurance',['day90','insLetter','medPlan','medCov','dentPlan','dentCov','vision','waiver','cashInLieu','inLieu']],
  ['aca','ACA monthly codes',MONTHS.map(m=>'aca_'+m)],
@@ -1327,7 +1382,9 @@ function profilePage(){
  if(S.profileTab==='details'){
   if(can('setup')&&!e.archived&&e.setup) h+=setupPanelHTML(e);
   if((S.user==='marcie'||S.user==='alicia')&&!e.archived&&e.doh&&diff(e.doh,TODAY)>=0&&diff(e.doh,TODAY)<=150){const x=ninety(e);if(!x.done)h+=`<div class="checkin-line"><div><strong>90-day check-in</strong><span>Due ${fd(x.due)}</span>${chip(x.left<0?`Overdue ${-x.left} days`:x.left===0?'Due today':`Due in ${x.left} days`,x.left<0?'red':x.left<=30?'amber':'')}<span>${Object.values(x.items).filter(Boolean).length} of 3 done</span></div>${checkinSteps({e,...x})}</div>`;}
-  h+=SECTIONS.filter(([k])=>canSeeSec(k)&&(k!=='separation'||e.archived)).map(([k,label,keys])=>{const g=e.id+'-'+k,open=S.groupOpen[g]??(k!=='separation'||e.archived);return `<details class="field-group" data-group="${g}" id="sec-${k}" ${open?'open':''}><summary>${ic('chev',14)}${label}${canEditSec(k)?'':`<span class="ro-tag">${ic('lock',12)} View only · ${PEOPLE[SEC_OWNER[k]].name} edits</span>`}</summary>${recordFields('emp',e,keys)}</details>`;}).join('');
+  const lics=DB.lics.filter(l=>l.empId===e.id).sort((a,b)=>(a.expires||'').localeCompare(b.expires||''));
+  const licBlock=`<details class="field-group" id="sec-licences" open><summary>${ic('chev',14)}Licences & certifications<span class="ro-tag">${ic('lock',12)} View only · Tom edits</span></summary>${lics.length?`<table class="record-fields"><tbody>${lics.map(l=>`<tr><th scope="row">${esc(l.license)}</th><td>${esc(l.number||'')}${l.number?' · ':''}expires ${fd(l.expires)} ${licState(l)==='Expired'?chip('Expired','red sm'):licState(l)==='Expiring'?chip('Expiring','amber sm'):''}</td></tr>`).join('')}</tbody></table>`:'<p class="empty-state" style="padding:0 0 8px">No licences on file</p>'}</details>`;
+  h+=SECTIONS.filter(([k])=>canSeeSec(k)&&(k!=='separation'||e.archived)).map(([k,label,keys])=>{const g=e.id+'-'+k,open=S.groupOpen[g]??(k!=='separation'||e.archived);return `${k==='inservice'?licBlock:''}<details class="field-group" data-group="${g}" id="sec-${k}" ${open?'open':''}><summary>${ic('chev',14)}${label}${canEditSec(k)?'':`<span class="ro-tag">${ic('lock',12)} View only · ${PEOPLE[SEC_OWNER[k]].name} edits</span>`}</summary>${recordFields('emp',e,keys)}</details>`;}).join('');
  }else if(S.profileTab==='leaves'){
   const rows=DB.leaves.filter(l=>l.empId===e.id).sort((a,b)=>b.from.localeCompare(a.from));
   h+=rows.length?rows.map(l=>`<div class="record-leave"><div><strong>${esc(l.ltype)}</strong><p>${fd(l.from)} – ${fd(l.to)}${l.ltype==='FMLA'?' · '+esc(l.mode):''}</p></div>${chip(leaveStatus(l),leaveStatus(l)==='Active'?'blue':'')}</div>`).join(''):'<p class="empty-state">No leaves recorded</p>';
@@ -1375,7 +1432,7 @@ function leavesPage(){
 /* ---------- Applicants ---------- */
 function applicantRows(){let rows=filtered(DB.apps,a=>a.first+' '+a.last+' '+a.position+' '+a.id,()=>S.entity);if(S.appFilter!=='all')rows=rows.filter(a=>a.status===S.appFilter);return sorted(rows,a=>a.last+', '+a.first,a=>a.applied);}
 function applicantsPage(){
- const rows=applicantRows();const keys=['appId','aname','position','dept','applied','source','interview','astatus','codes','gender','race'];
+ const rows=applicantRows();const keys=['appId','aname','position','dept','applied','source','interview','astatus','parking','codes','gender','race'];
  return `<div class="content tp">${phead('Applicants','',canEditField('app','position')?`<button class="btn btn-primary" data-a="newApp">${ic('plus',16)} Create applicant</button>`:'')}<div class="toolbar">${searchHTML('Search applicants')}${segHTML('appFilter',[['all','All'],['New','New'],['Hired','Hired'],['Rejected','Rejected']],'Applicant status')}${tableTools('app',keys)}</div>${tableHTML('app',keys,rows,{sticky:false})}</div>`;
 }
 
@@ -1404,9 +1461,9 @@ function applicantPage(){
  const a=DB.apps.find(x=>x.id===S.applicantId);if(!a)return applicantsPage();
  const order=S.applicantOrder||applicantRows().map(a=>a.id),i=order.indexOf(a.id);
  const nav=`<div class="record-pagination"><button class="icon-btn sm" data-a="appPrevNext" data-step="-1" aria-label="Previous applicant" ${i<=0?'disabled':''}>‹</button><span>${i+1} of ${order.length}</span><button class="icon-btn sm" data-a="appPrevNext" data-step="1" aria-label="Next applicant" ${i>=order.length-1?'disabled':''}>›</button></div>`;
- const actions=a.status==='New'?`<button class="btn" data-a="reject" data-id="${a.id}">Reject</button><button class="btn btn-primary" data-a="hire" data-id="${a.id}">Hire</button>`:decisionHTML(a);
+ const actions=`<button class="btn" data-a="printApp" title="Print the application and CV for interviewers">Print</button>`+(a.status==='New'?`<button class="btn" data-a="reject" data-id="${a.id}">Reject</button><button class="btn btn-primary" data-a="hire" data-id="${a.id}">Hire</button>`:decisionHTML(a));
  const file=a.cv?.url?a.cv.name:a.cv?.sample?`${a.last}_${a.first}_CV.pdf`:'';
- return `<div class="content record-content" data-scroll-key="c-${pageKey()}"><div class="prof-head applicant-head"><div class="record-heading"><h1>${esc(a.first+' '+a.last)}</h1><div class="meta-line">#${a.id}<span>·</span>${esc(a.position)}<span>·</span>Received ${fd(a.applied)}<span>·</span>${chip(a.status,{Hired:'green',Rejected:'red'}[a.status]||'')}</div></div><div class="prof-actions">${nav}${actions}</div></div><div class="app-grid"><div>${rehireBannerHTML(a)}<h2 class="section-label">Application log</h2>${recordFields('app',a,['position','dept','applied','source','interview'])}<div class="codes-section"><h2 class="section-label">Disposition codes</h2>${codesFieldHTML(a)}</div><h2 class="section-label" style="margin-top:28px">EEO <span class="muted">Optional</span></h2>${recordFields('app',a,['gender','race'])}</div><section class="cv-section"><div class="cv-header"><div><h2 class="section-label">CV</h2>${file?`<p>${esc(file)}</p>`:''}</div>${a.cv?`<label class="btn btn-sm" style="position:relative">${ic('upload',14)} Replace CV<input type="file" accept="application/pdf" data-file="app" data-id="${a.id}" style="position:absolute;inset:0;opacity:0;cursor:pointer" aria-label="Replace CV"></label>`:''}</div><div class="cv-view">${cvHTML(a)}</div></section></div></div>`;
+ return `<div class="content record-content" data-scroll-key="c-${pageKey()}"><div class="prof-head applicant-head"><div class="record-heading"><h1>${esc(a.first+' '+a.last)}</h1><div class="meta-line">#${a.id}<span>·</span>${esc(a.position)}<span>·</span>Received ${fd(a.applied)}<span>·</span>${chip(a.status,{Hired:'green',Rejected:'red'}[a.status]||'')}</div></div><div class="prof-actions">${nav}${actions}</div></div><div class="app-grid"><div>${rehireBannerHTML(a)}<h2 class="section-label">Application log</h2>${recordFields('app',a,['position','dept','applied','source','interview'])}<div class="codes-section"><h2 class="section-label">Disposition codes</h2>${codesFieldHTML(a)}</div>${a.status==='Hired'?`<h2 class="section-label" style="margin-top:28px">At orientation</h2>${recordFields('app',a,['parking'])}<p class="help" style="margin-top:6px">Goes to Ivy with the hire and onto the employee record.</p>`:''}<h2 class="section-label" style="margin-top:28px">EEO <span class="muted">Optional</span></h2>${recordFields('app',a,['gender','race'])}</div><section class="cv-section"><div class="cv-header"><div><h2 class="section-label">CV</h2>${file?`<p>${esc(file)}</p>`:''}</div>${a.cv?`<label class="btn btn-sm" style="position:relative">${ic('upload',14)} Replace CV<input type="file" accept="application/pdf" data-file="app" data-id="${a.id}" style="position:absolute;inset:0;opacity:0;cursor:pointer" aria-label="Replace CV"></label>`:''}</div><div class="cv-view">${cvHTML(a)}</div></section></div></div>`;
 }
 // Disposition codes (B3): a dropdown listing each letter with its legend; several codes allowed
 const codeLegend=c=>CODE_LEGEND[c]||'Legend pending from Tom’s code sheet';
@@ -1461,19 +1518,20 @@ const SEM={
    ['shifts_entitled','Entitlement (shifts)','num',l=>l.ltype==='FMLA'&&lfmla(l).ent!==''?lfmla(l).ent:null],['shifts_used','Shifts used','num',l=>l.ltype==='FMLA'?lfmla(l).used:null],['shifts_left','Shifts left','num',l=>l.ltype==='FMLA'&&lfmla(l).left!==''?lfmla(l).left:null]]},
   applicants:{label:'Applicants',desc:'Tom’s applicant log. One row per application.',rows:()=>DB.apps,fields:[
    ['employee_id','Person ID','text',a=>a.empId,1],['applicant_id','Applicant #','text',a=>a.id],['applicant','Applicant','text',a=>a.last+', '+a.first],['position','Position applied for','cat',a=>a.position],['a_department','Department applied to','cat',a=>a.dept],
-   ['received','Date received','date',a=>a.applied||null],['source','Source','cat',a=>a.source],['interviewed','Interviewed','cat',a=>a.interview],['a_status','Applicant status','cat',a=>a.status],['codes','Disposition codes','text',a=>a.codes.join(', ')],
+   ['received','Date received','date',a=>a.applied||null],['source','Source','cat',a=>a.source],['interviewed','Interview','cat',a=>a.interview],['a_status','Applicant status','cat',a=>a.status],['codes','Disposition codes','text',a=>a.codes.join(', ')],
    ['a_gender','Applicant gender','cat',a=>a.gender],['a_race','Applicant race / ethnicity','cat',a=>a.race],['days_to_hire','Days to hire','num',a=>a.status==='Hired'&&a.hiredOn?diff(a.applied,a.hiredOn):null]]},
   inservices:{label:'In-services',desc:'Required in-services for current staff. One row per person per in-service.',rows:()=>active().flatMap(e=>INSERVICES.map(([k,l])=>({e,k,l}))),fields:[
    ['employee_id','Person ID','text',r=>r.e.id,1],['in_service','In-service','cat',r=>r.l],['completed','Last completed','date',r=>(r.k==='flu'?r.e.fluDate:r.e[r.k])||null],
    ['ins_status','Completion','cat',r=>{const d=r.k==='flu'?(r.e.flu==='Declined'?'Declined':r.e.fluDate):r.e[r.k];if(d==='Declined')return 'Declined';if(!d)return 'Not done';if(['tb','flu'].includes(r.k)&&diff(d,TODAY)>365)return 'Overdue';return 'Done';}]]},
-  licences:{label:'Licences',desc:'Tom’s licence list. Not linked to employee records yet (open item B6).',rows:()=>DB.lics,fields:[
-   ['lic_name','Name on licence list','text',l=>l.name],['lic_dept','Department','cat',l=>l.ldept],['licence','Licence / certification','cat',l=>l.license],['expires','Expires','date',l=>l.expires||null],['renewal','Renewal','cat',l=>l.cycle],['checked_by','Checked by','cat',l=>l.checked]]}
+  licences:{label:'Licences',desc:'Licences and CPR/BLS. One row per licence, linked to the person.',rows:()=>DB.lics,fields:[
+   ['employee_id','Person ID','text',l=>l.empId,1],['lic_holder','Holder','text',l=>licEmp(l)?nm(licEmp(l)):l.name],['licence','Licence / certification','cat',l=>l.license],['expires','Expires','date',l=>l.expires||null],['lic_status','Licence status','cat',l=>licState(l)],['renewal','Renewal','cat',l=>l.cycle],['last_reminder','Last reminder','date',l=>l.lastReminder||null],['checked_by','Checked by','cat',l=>l.checked]]}
  },
  // Every dataset joins to Employees on the system's own person ID, never on employee number (it changes)
  relationships:[
   {from:'leaves',to:'employees',key:'employee_id',label:'Person ID'},
   {from:'applicants',to:'employees',key:'employee_id',label:'Person ID (hired applicants only)'},
-  {from:'inservices',to:'employees',key:'employee_id',label:'Person ID'}
+  {from:'inservices',to:'employees',key:'employee_id',label:'Person ID'},
+  {from:'licences',to:'employees',key:'employee_id',label:'Person ID'}
  ]
 };
 // Pre-built measures (in production these are DAX measures in the semantic model)
@@ -1499,12 +1557,11 @@ const MockDataAdapter={
  combine(ids){
   if(!ids.length) return {ok:false,reason:'Choose at least one dataset.'};
   if(ids.length===1) return {ok:true,links:[]};
-  if(ids.includes('licences')) return {ok:false,reason:'Licences can’t be combined with other data yet. Names on Tom’s licence list are typed text and aren’t linked to employee records (open item B6). Use Licences on its own.'};
   const facts=ids.filter(i=>i!=='employees');
   if(!ids.includes('employees')) return {ok:false,reason:`${facts.map(f=>SEM.datasets[f].label).join(' and ')} only connect through Employees. Add Employees to combine them.`};
   if(facts.length>1) return {ok:false,reason:`${facts.map(f=>SEM.datasets[f].label).join(' and ')} each have many rows per person, so putting them in one table would repeat rows. Build a separate report for each, combined with Employees.`};
   const rel=SEM.relationships.find(r=>r.from===facts[0]&&r.to==='employees');
-  return {ok:true,links:[`${SEM.datasets[facts[0]].label} → Employees, matched on ${rel.label}`],note:facts[0]==='applicants'?'Applicants who weren’t hired have no employee record, so their Employees columns stay blank.':''};
+  return {ok:true,links:[`${SEM.datasets[facts[0]].label} → Employees, matched on ${rel.label}`],note:facts[0]==='applicants'?'Applicants who weren’t hired have no employee record, so their Employees columns stay blank.':facts[0]==='licences'?'Licences kept as binder lists aren’t linked to a person, so their Employees columns stay blank.':''};
  },
  // Joined rows with namespaced keys, e.g. "employees.department"
  rows(ids){
@@ -1755,8 +1812,9 @@ function wireDiagram(stage){
 /* ---------- Overlays ---------- */
 function openOverlay(kind,init={}){
   S.popover=null; S.editCell=null;
-  if(kind==='newEmp') S.overlay={kind,mode:pendingHires().length?'hires':'manual',sel:init.sel||[],form:{doh:TODAY,entity:'',type:'FT',benefits:'Yes',weekend:'None',shiftDays:[]},hireDoh:(init.sel&&init.sel.length)?orientationAfter(DB.apps.find(a=>a.id===init.sel[0])?.hiredOn||TODAY):TODAY,errs:{}};
+  if(kind==='newEmp') S.overlay={kind,mode:pendingHires().length?'hires':'manual',sel:init.sel||[],form:{doh:TODAY,entity:'',type:'FT',benefits:'Yes',weekend:'None',shiftDays:[]},hireDoh:orientationAfter(((init.sel&&init.sel.length)?DB.apps.find(a=>a.id===init.sel[0])?.hiredOn:pendingHires().map(a=>a.hiredOn).sort()[0])||TODAY),errs:{}};
   if(kind==='newLeave') S.overlay={kind,form:{empId:init.empId||'',ltype:'',from:'',to:'',lnotes:'',reason:'',mode:'Continuous',shiftsWk:'',freq:''},errs:{}};
+  if(kind==='newLic') S.overlay={kind,form:{empId:'',license:'',number:'',expires:'',cycle:'2 yr',checked:''},errs:{}};
   if(kind==='newApp') S.overlay={kind,form:{applied:TODAY},codes:[],cv:null,errs:{}};
   S.overlay.fresh=true; S.focusFirst=true; render();
 }
@@ -1767,7 +1825,7 @@ function overlayHTML(){
  if(o.kind==='newEmp'){
   const hires=pendingHires();const seg=`<div class="seg create-tabs" role="group" aria-label="How to add"><button class="${o.mode==='hires'?'on':''}" data-a="ovMode" data-v="hires">From hired applicants (${hires.length})</button><button class="${o.mode==='manual'?'on':''}" data-a="ovMode" data-v="manual">Add manually</button></div>`;
   if(o.mode==='hires'){
-   const body=seg+(hires.length?`<div class="hire-list"><label class="select-all"><input type="checkbox" data-chk="hireAll" ${o.sel.length===hires.length?'checked':''}>Select all<span>${hires.length} applicants</span></label>${hires.map(a=>`<label class="check-row"><input type="checkbox" data-chk="hireSel" value="${a.id}" ${o.sel.includes(a.id)?'checked':''}><span class="cr-main"><strong>${esc(a.first+' '+a.last)}</strong><span>${esc(a.position)} · ${esc(a.dept||'No department')}${formerMatch(a)?' · former employee, history is linked':''}</span></span><span class="cr-meta">${fd(a.hiredOn)}</span></label>`).join('')}</div><div style="margin-top:24px">${fieldHTML('ov','hireDoh','Date of hire','date',o.hireDoh,{req:true,err:er.hireDoh})}</div>`:'<p class="empty-state">No hired applicants to set up</p>');
+   const body=seg+(hires.length?`<div class="hire-list"><label class="select-all"><input type="checkbox" data-chk="hireAll" ${o.sel.length===hires.length?'checked':''}>Select all<span>${hires.length} applicants</span></label>${hires.map(a=>`<label class="check-row"><input type="checkbox" data-chk="hireSel" value="${a.id}" ${o.sel.includes(a.id)?'checked':''}><span class="cr-main"><strong>${esc(a.first+' '+a.last)}</strong><span>${esc(a.position)} · ${esc(a.dept||'No department')} · ${a.parking?'Parking pass '+esc(a.parking):'No parking pass yet'}${formerMatch(a)?' · former employee, history is linked':''}</span></span><span class="cr-meta">${fd(a.hiredOn)}</span></label>`).join('')}</div><div style="margin-top:24px">${fieldHTML('ov','hireDoh','Date of hire','date',o.hireDoh,{req:true,err:er.hireDoh})}</div>`:'<p class="empty-state">No hired applicants to set up</p>');
    return sheet('Create employee','',body,`<span class="grow">${o.sel.length} selected</span>${cancel}<button class="btn btn-primary" data-a="convertHires" ${o.sel.length?'':'disabled'}>Create ${o.sel.length||''} employee${o.sel.length===1?'':'s'}</button>`);
   }
   const body=seg+`<div class="fgrid">${fieldHTML('ov','first','First name','text',f.first,{req:true,err:er.first})}${fieldHTML('ov','last','Last name','text',f.last,{req:true,err:er.last})}${fieldHTML('ov','entity','Entity','select',f.entity,{opts:ENTITIES,req:true,err:er.entity})}${fieldHTML('ov','dept','Department','select',f.dept,{opts:DEPTS,req:true,err:er.dept})}${fieldHTML('ov','title','Job title','text',f.title,{req:true,err:er.title})}${fieldHTML('ov','doh','Date of hire','date',f.doh,{req:true,err:er.doh})}</div>
@@ -1781,8 +1839,13 @@ function overlayHTML(){
   body+=`<div class="fgrid" style="margin-top:24px">${fieldHTML('ov','lnotes','Notes','textarea',f.lnotes,{span:true})}</div>`;
   return sheet('Record leave','',body,cancel+'<button class="btn btn-primary" data-a="saveLeave">Record leave</button>');
  }
+ if(o.kind==='newLic'){
+  const emps=active().slice().sort((a,b)=>nm(a).localeCompare(nm(b)));
+  const body=`<div class="fgrid"><div class="field span2"><label for="ov-empId">Employee<span class="req" aria-hidden="true">*</span></label><select id="ov-empId" data-f="empId" data-scope="ov"><option value="">Choose employee…</option>${emps.map(e=>`<option value="${e.id}" ${f.empId===e.id?'selected':''}>${esc(nm(e))} · ${esc(e.title)}</option>`).join('')}</select>${er.empId?`<p class="err">${er.empId}</p>`:''}</div>${fieldHTML('ov','license','Licence / certification','select',f.license,{opts:LIC_TYPES,req:true,err:er.license,span:true})}${fieldHTML('ov','number','Number','text',f.number)}${fieldHTML('ov','expires','Expires','date',f.expires,{req:true,err:er.expires})}${fieldHTML('ov','cycle','Renewal','select',f.cycle,{opts:['1 yr','2 yr']})}${fieldHTML('ov','checked','Checked by','text',f.checked)}</div>`;
+  return sheet('Add licence','',body,cancel+'<button class="btn btn-primary" data-a="saveLic">Add licence</button>');
+ }
  if(o.kind==='newApp'){
-  const cv=o.cv;const body=`<div class="fgrid">${fieldHTML('ov','first','First name','text',f.first,{req:true,err:er.first})}${fieldHTML('ov','last','Last name','text',f.last,{req:true,err:er.last})}${fieldHTML('ov','position','Position applied for','text',f.position,{req:true,err:er.position,span:true})}${fieldHTML('ov','dept','Department','select',f.dept,{opts:DEPTS})}${fieldHTML('ov','applied','Date received','date',f.applied)}${fieldHTML('ov','source','Source','select',f.source,{opts:SOURCES})}${fieldHTML('ov','interview','Interviewed','select',f.interview,{opts:YN})}${codesDropHTML(o.codes)}</div>
+  const cv=o.cv;const body=`<div class="fgrid">${fieldHTML('ov','first','First name','text',f.first,{req:true,err:er.first})}${fieldHTML('ov','last','Last name','text',f.last,{req:true,err:er.last})}${fieldHTML('ov','position','Position applied for','text',f.position,{req:true,err:er.position,span:true})}${fieldHTML('ov','dept','Department','select',f.dept,{opts:DEPTS})}${fieldHTML('ov','applied','Date received','date',f.applied)}${fieldHTML('ov','source','Source','select',f.source,{opts:SOURCES})}${fieldHTML('ov','interview','Interview','select',f.interview,{opts:INTERVIEW_STAGES})}${codesDropHTML(o.codes)}</div>
   <h3 class="fsec">CV</h3>${cv?`<div class="file-pill"><span class="fi">${ic('file')}</span><div><b>${esc(cv.name)}</b><span>${(cv.size/1024).toFixed(0)} KB · PDF</span></div><button class="btn btn-sm" data-a="removeCv">Remove</button></div>`:`<label class="drop" style="position:relative">${ic('upload',24)}<strong>Upload a CV</strong><span class="help">PDF</span><input type="file" accept="application/pdf" data-file="ov" aria-label="Upload CV"></label>`}
   <details class="optional-fields" data-create-details="eeo" ${o.eeoOpen?'open':''}><summary>${ic('chev',14)} EEO <span class="muted">Optional</span></summary><div class="fgrid">${fieldHTML('ov','gender','Gender','select',f.gender,{opts:['Female','Male','Not stated']})}${fieldHTML('ov','race','Race / ethnicity','select',f.race,{opts:RACES})}</div></details>`;
   return sheet('Create applicant','',body,cancel+'<button class="btn btn-primary" data-a="saveApp2">Create applicant</button>');
@@ -1796,6 +1859,7 @@ function openModal(m,id){ const e=empById(id); S.popover=null; S.editCell=null;
   if(m==='reinstate') S.modal={m,id,form:{date:TODAY},errs:{}};
   if(m==='rehire') S.modal={m,id,form:{doh:TODAY,empNo:'',entity:e.entity,dept:e.dept,title:e.title},errs:{}};
   if(m==='sendBack') S.modal={m,id,form:{note:''},errs:{}};
+  if(m==='remind') S.modal={m,form:{toEmp:true,toDir:true,msg:'Your licence or certification on file with HR expires soon. Please renew it and bring a copy of the renewal to HR before the expiry date. You can’t work on an expired licence.'},errs:{}};
   if(m==='email'){ const d=S.rep.def; S.modal={m,id,form:{to:'',subject:(d.name||'Report')+' · '+fd(TODAY),msg:''},errs:{}}; }
   S.modal.fresh=true; S.focusFirst=true; render(); }
 function modalHTML(){
@@ -1816,6 +1880,11 @@ function modalHTML(){
     return wrap(`Rehire ${esc(e.first+' '+e.last)}`,'',
     `<p class="modal-note">Separated ${fd(e.termDate)}, ${diff(e.termDate,TODAY)} days ago. After 90 days they return as a <b>rehire</b>: new employee number and hire date, seniority starts again. Their earlier record stays linked in the timeline.</p>${barred?`<p class="err" style="margin:0 0 16px">Marked not eligible for rehire at separation (${esc(sepLabel(e.termType))}). Check with Alicia before going ahead.</p>`:''}<div class="fgrid">${fieldHTML('md','doh','New date of hire','date',f.doh,{req:true,err:er.doh})}${fieldHTML('md','empNo','New employee #','text',f.empNo,{ph:'Assigned by payroll'})}${fieldHTML('md','entity','Entity','select',f.entity,{opts:ENTITIES})}${fieldHTML('md','dept','Department','select',f.dept,{opts:DEPTS})}${fieldHTML('md','title','Job title','text',f.title,{span:true})}</div>`,
     `<button class="btn" data-a="closeModal">Cancel</button><button class="btn btn-primary" data-a="saveRehire">Rehire</button>`); }
+  if(md.m==='remind'){ const L=S.selected.map(id=>DB.lics.find(l=>l.id===id)).filter(Boolean);
+    return wrap(`Send ${L.length} licence reminder${L.length===1?'':'s'}`,'',`<div class="remind-list">${L.map(l=>{const e=licEmp(l);return `<div><b>${esc(e?nm(e):l.name)}</b><span>${esc(l.license)} · expires ${fd(l.expires)}${l.lastReminder?` · last reminded ${fd(l.lastReminder)}`:''}</span>${e?'':chip('Not linked: goes to the department only','amber sm')}</div>`;}).join('')}</div>
+     <h3 class="fsec">Send to</h3><label class="menu-check"><input type="checkbox" data-f="toEmp" data-scope="md" data-chkf ${f.toEmp?'checked':''}>The employee</label><label class="menu-check"><input type="checkbox" data-f="toDir" data-scope="md" data-chkf ${f.toDir?'checked':''}>Their department director</label>${er.to?`<p class="err">${er.to}</p>`:''}
+     <div class="fgrid" style="margin-top:16px">${fieldHTML('md','msg','Message','textarea',f.msg,{span:true})}</div>`,
+     `<button class="btn" data-a="closeModal">Cancel</button><button class="btn btn-primary" data-a="saveRemind">Send reminders</button>`); }
   if(md.m==='sendBack') return wrap(`Send ${esc(e.first+' '+e.last)} back to Ivy`,'',
     `<div class="fgrid">${fieldHTML('md','note','What needs fixing?','textarea',f.note,{span:true,req:true,err:er.note,ph:'For example: hours/week doesn’t match the getting-started page'})}</div>`,
     `<button class="btn" data-a="closeModal">Cancel</button><button class="btn btn-primary" data-a="saveSendBack">Send back to Ivy</button>`);
@@ -1893,7 +1962,7 @@ function commitEdit(doRender=true){
   if(td&&r){
     if(col.type==='flu'){ const a=td.querySelector('[name=fluS]').value, b=td.querySelector('[name=fluD]').value; if(a!==r.flu||b!==r.fluDate){logChange(r,'flu',fluText(r),a==='Declined'?a:a+(b?', '+fd(b):''));r._flash=true;setTimeout(()=>delete r._flash,1800); r.flu=a; r.fluDate=a==='Declined'?'':b; toast('Saved'); } }
     else { const inp=td.querySelector('input,select'); let v=inp.value; if((col.type==='number'||col.type==='money')&&v!=='') v=Number(v); const old=getVal(r,col);
-      if(String(old)!==String(v)){ setVal(r,col,v);r._flash=true;setTimeout(()=>delete r._flash,1800); if(kind==='app'&&key==='astatus'){ r.hiredOn=v==='Hired'?TODAY:''; if(v==='Hired'){ toast(`${r.first} ${r.last} hired · Sent to Ivy to set up`); S.editCell=null; if(doRender) render(); else needsRender=true; return; } } if(kind==='emp'){ logChange(r,key,old,v); if(key==='empNo'&&checkSetupHandoff(r)) toast(`Setup complete for ${r.first} ${r.last} · Sent to Marcie to check`); } if(kind==='emp'&&key==='bonusType'&&v==='None'){r.bonusAmt='';} toast('Saved'); } }
+      if(String(old)!==String(v)){ setVal(r,col,v);r._flash=true;setTimeout(()=>delete r._flash,1800); if(kind==='app'&&key==='astatus'){ r.hiredOn=v==='Hired'?TODAY:''; if(v!=='Hired') r.parking=''; if(v==='Hired'){ toast(`${r.first} ${r.last} hired · Sent to Ivy to set up`); S.editCell=null; if(doRender) render(); else needsRender=true; return; } } if(kind==='emp'){ logChange(r,key,old,v); if(key==='empNo'&&checkSetupHandoff(r)) toast(`Setup complete for ${r.first} ${r.last} · Sent to Marcie to check`); } if(kind==='emp'&&key==='bonusType'&&v==='None'){r.bonusAmt='';} toast('Saved'); } }
   }
   S.editCell=null; if(doRender) render(); else needsRender=true;
 }
@@ -1914,7 +1983,17 @@ const A={
   nav:t=>{ S.selected=[];S.search='';S.entity='all';S.deptFilter='all';S.typeFilter='all';S.missingOnly=false;S.teamView=null; if(t.dataset.tab) S.empTab=t.dataset.tab; S.page=t.dataset.p; S.editCell=null; S.profileEdit=null; S.appEdit=null; S.popover=null; render(); },
   diaZoom:t=>{ zoomDia(t.dataset.d==='in'?1.25:0.8); },
   diaFit:()=>{ fitDia(); },
-  setS:t=>{ S[t.dataset.g]=t.dataset.v; S.editCell=null; render(); },
+  licSelectDue:()=>{ S.licFilter='due'; S.selected=licToRemind().map(l=>l.id); render(); },
+  licReview:()=>{ S.page='employees'; S.empTab='licences'; S.licFilter='due'; S.search=''; S.selected=licToRemind().map(l=>l.id); render(); },
+  licRemind:()=>openModal('remind'),
+  saveRemind:()=>{ const md=S.modal,f=md.form; if(!f.toEmp&&!f.toDir){ md.errs={to:'Choose who gets the reminder'}; render(); return; }
+    const L=S.selected.map(id=>DB.lics.find(l=>l.id===id)).filter(Boolean),prev=L.map(l=>[l,l.lastReminder]); L.forEach(l=>l.lastReminder=TODAY);
+    S.modal=null; S.selected=[]; toast(`${L.length} reminder${L.length===1?'':'s'} sent · prototype, nothing was emailed`,{label:'Undo',fn:()=>{prev.forEach(([l,v])=>l.lastReminder=v);render();}}); render(); },
+  newLic:()=>openOverlay('newLic'),
+  saveLic:()=>{ const o=S.overlay,f=o.form,er={}; if(!f.empId) er.empId='Choose an employee'; if(!f.license) er.license='Required'; if(!f.expires) er.expires='Required'; o.errs=er; if(Object.keys(er).length){ render(); return; }
+    DB.lics.push({id:'l'+Date.now(),empId:f.empId,name:'',license:f.license,number:f.number||'',expires:f.expires,cycle:f.cycle||'',checked:f.checked||'',lastReminder:''}); S.overlay=null; toast('Licence added'); render(); },
+  printApp:()=>{ document.body.classList.add('printing-app'); setTimeout(()=>{ window.print(); document.body.classList.remove('printing-app'); },50); },
+  setS:t=>{ S[t.dataset.g]=t.dataset.v; if(t.dataset.g==='empTab') S.selected=[]; S.editCell=null; render(); },
   tog:t=>{ S.groups[t.dataset.v]=!S.groups[t.dataset.v]; render(); },
   edit:t=>{ if(S.editCell===t.dataset.k) return; if(S.editCell) commitEdit(false); S.editCell=t.dataset.k; render(); },
   openEmp:t=>{ if(S.user==='ivy'&&setupInfo(empById(t.dataset.id))&&!setupInfo(empById(t.dataset.id)).complete) S.lastSetup=t.dataset.id; S.profileTab='details'; S.page='profile'; S.profileId=t.dataset.id; S.profileEdit=null; S.popover=null; S.editCell=null; render(); },
@@ -1941,17 +2020,17 @@ const A={
   editApp:()=>{ const a=DB.apps.find(x=>x.id===S.applicantId); const f={}; ['position','dept','applied','source','interview','gender','race'].forEach(k=>f[k]=a[k]??''); S.appEdit={form:f}; render(); },
   cancelApp:()=>{ S.appEdit=null; render(); },
   saveApp:()=>{ const a=DB.apps.find(x=>x.id===S.applicantId); Object.assign(a,S.appEdit.form); S.appEdit=null; toast('Changes saved'); render(); },
-  hire:t=>{ const a=DB.apps.find(x=>x.id===t.dataset.id); a.status='Hired'; a.hiredOn=TODAY; toast(`${a.first} ${a.last} hired · Sent to Ivy to set up`,{label:'Undo',fn:()=>{a.status='New';a.hiredOn='';render();}}); render(); },
+  hire:t=>{ const a=DB.apps.find(x=>x.id===t.dataset.id); a.status='Hired'; a.hiredOn=TODAY; toast(`${a.first} ${a.last} hired · Sent to Ivy to set up`,{label:'Undo',fn:()=>{a.status='New';a.hiredOn='';a.parking='';render();}}); render(); },
   reject:t=>{ const a=DB.apps.find(x=>x.id===t.dataset.id); a.status='Rejected'; toast(`${a.first} ${a.last} rejected.`,{label:'Undo',fn:()=>{a.status='New';render();}}); render(); },
-  undoDecision:t=>{ const a=DB.apps.find(x=>x.id===t.dataset.id); a.status='New'; a.hiredOn=''; toast('Decision undone'); render(); },
+  undoDecision:t=>{ const a=DB.apps.find(x=>x.id===t.dataset.id); a.status='New'; a.hiredOn=''; a.parking=''; toast('Decision undone'); render(); },
   toastAct:t=>{ const x=toasts.find(y=>y.id===t.dataset.id); toasts=toasts.filter(y=>y!==x); renderToasts(); if(x&&x.action.fn) x.action.fn(); },
   addTodo:()=>{ const tx=document.getElementById('todo-text'), du=document.getElementById('todo-due'); if(!tx.value.trim()){ tx.focus(); return; } DB.todos.unshift({id:'t'+Date.now(),owner:S.user,text:tx.value.trim(),due:du.value,done:false}); toast('Task added'); render(); const n=document.getElementById('todo-text'); n&&n.focus(); },
   delTodo:t=>{ const i=DB.todos.findIndex(x=>x.id===t.dataset.id); const [x]=DB.todos.splice(i,1); toast('Task deleted',{label:'Undo',fn:()=>{DB.todos.splice(i,0,x);render();}}); render(); },
   removeCv:()=>{ S.overlay.cv=null; render(); },
   convertHires:()=>{ const o=S.overlay; if(!o.hireDoh){o.errs.hireDoh='Required';render();return;}if(!o.sel.length)return; const added=[];
     o.sel.forEach(id=>{ const a=DB.apps.find(x=>x.id===id), f=formerMatch(a); let e;
-      if(f){ e=f; rehireRecord(e,{doh:o.hireDoh,empNo:'',entity:e.entity,dept:a.dept||e.dept,title:a.position}); e.timeline.push({date:o.hireDoh,kind:'hire',text:`Hired from applicant #${a.id} (received ${fd(a.applied)}).`}); }
-      else { e=mkEmp({first:a.first,last:a.last,dept:a.dept,title:a.position,doh:o.hireDoh,gender:a.gender||'',race:a.race||'',source:a.source||''}); e.setup=blankSetup();
+      if(f){ e=f; rehireRecord(e,{doh:o.hireDoh,empNo:'',entity:e.entity,dept:a.dept||e.dept,title:a.position}); if(a.parking) e.parking=a.parking; e.timeline.push({date:o.hireDoh,kind:'hire',text:`Hired from applicant #${a.id} (received ${fd(a.applied)}).`}); }
+      else { e=mkEmp({first:a.first,last:a.last,dept:a.dept,title:a.position,doh:o.hireDoh,gender:a.gender||'',race:a.race||'',source:a.source||'',parking:a.parking||''}); e.setup=blankSetup();
         e.timeline=[{date:o.hireDoh,kind:'hire',text:`Hired from applicant #${a.id} (received ${fd(a.applied)}).`}]; DB.emps.push(e); }
       e._flash=true; a.converted=true; a.empId=e.id; added.push(e);
       });
@@ -1967,7 +2046,7 @@ const A={
     DB.leaves.push(l); const e=empById(f.empId); e.timeline.push({date:TODAY,kind:'leave',text:`${l.ltype} leave recorded, ${fd(l.from)} to ${fd(l.to)}.`}); S.overlay=null;
     toast(workStatus(e)==='On leave'?`Leave created. ${e.first} ${e.last} now shows as On leave.`:'Leave created.'); render(); },
   saveApp2:()=>{ const o=S.overlay,f=o.form,er={}; ['first','last','position'].forEach(k=>{ if(!String(f[k]||'').trim()) er[k]='Required'; }); o.errs=er; if(Object.keys(er).length){ render(); return; }
-    const id=String(Math.max(...DB.apps.map(a=>+a.id))+1); const a={id,first:f.first.trim(),last:f.last.trim(),position:f.position.trim(),dept:f.dept||'',applied:f.applied||TODAY,source:f.source||'',interview:f.interview||'',gender:f.gender||'',race:f.race||'',codes:[...o.codes].sort(),status:'New',hiredOn:'',directorRehire:'',converted:false,empId:null,cv:o.cv};
+    const id=String(Math.max(...DB.apps.map(a=>+a.id))+1); const a={id,first:f.first.trim(),last:f.last.trim(),position:f.position.trim(),dept:f.dept||'',applied:f.applied||TODAY,source:f.source||'',interview:f.interview||'Not scheduled',gender:f.gender||'',race:f.race||'',codes:[...o.codes].sort(),status:'New',hiredOn:'',directorRehire:'',parking:'',converted:false,empId:null,cv:o.cv};
     DB.apps.push(a); S.overlay=null; S.page='applicants'; S.appFilter='all'; toast(`${a.first} ${a.last} added as applicant #${a.id}.`,{label:'Open profile',fn:()=>A.openApp({dataset:{id:a.id}})}); render(); },
   saveStatus:()=>{
    const md=S.modal,f=md.form,e=empById(md.id);if(!f.eff){md.errs={eff:'Required'};render();return;}
@@ -2083,6 +2162,7 @@ document.addEventListener('change',e=>{
   const t=e.target;
   if(t.closest('td.editing')&&t.tagName==='SELECT'&&!t.closest('.flu-ed')){ commitEdit(); return; }
   if(t.dataset.f&&t.hasAttribute('data-rr')&&t.tagName==='INPUT'){ render(); return; }
+  if(t.dataset.chkf!=null){ const f=getForm(t.dataset.scope); if(f) f[t.dataset.f]=t.checked; if(S.modal&&S.modal.errs) S.modal.errs={}; render(); return; }
   if(t.dataset.switch==='user'){ setUser(t.value); return; }
   // Reports builder controls
   if(t.dataset.a2==='repAddFilter'&&t.value){ const f=fieldIndex(S.rep.def.datasets)[t.value]; S.rep.def.filters.push(f.type==='cat'?{field:t.value,values:[]}:f.type==='text'?{field:t.value,op:'contains',q:''}:{field:t.value}); render(); return; }
